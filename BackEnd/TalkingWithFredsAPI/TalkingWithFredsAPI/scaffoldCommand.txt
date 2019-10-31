@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext "Server=DESKTOP-N7FPIC6;Database=TalkingWithFreds;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -ContextDir "ContextManager"
