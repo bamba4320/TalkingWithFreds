@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TalkingWithFreds.API.BLs;
+using TalkingWithFredsAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,36 +13,31 @@ namespace TalkingWithFreds.API.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        // GET: api/<controller>
+        private UserBL _userBL;
+        public UserController(TalkingWithFredsContext context)
+        {
+            _userBL = new UserBL(context);
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("ttt")]
+        public string TestUser()
         {
-            return new string[] { "value1", "value2" };
+            return _userBL.TestUser();
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        [Route("AddUser")]
+        public async Task<bool> AddUser([FromBody] Users user)
         {
+            return await _userBL.AddUser(user);
         }
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpGet]
+        [Route("GetUser")]
+        public Users GetUser()
         {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return _userBL.GetUser();
         }
     }
 }

@@ -4,11 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 using TalkingWithFreds.API.ExternalModules;
+using TalkingWithFredsAPI.Models;
+using TalkingWithFredsAPI.DBContextManager;
 
 namespace TalkingWithFreds.API.BLs
 {
     public class UserBL
     {
+        private readonly DBContextManager _contextManager;
+        public UserBL(TalkingWithFredsContext context)
+        {
+            _contextManager = new DBContextManager(context);
+        }
 
         /// <summary>
         /// Varify Login inputs vs DataBase
@@ -31,12 +38,8 @@ namespace TalkingWithFreds.API.BLs
         {
             try
             {
-                return SQLCommunicator.Select(
-                    ConstValues.DBUserProperties[ConstValues.UserProperties.ID], 
-                    ConstValues.Tables[ConstValues.TablesNames.USERS], 
-                    $"where {ConstValues.DBUserProperties[ConstValues.UserProperties.EMAIL]} = {email} and {ConstValues.DBUserProperties[ConstValues.UserProperties.PASSWORD]} = {password}")
-                    .Tables[0].Rows.Count > 0;
-         
+                var list = _contextManager.getUsers().Where((u) =>  u.UEmail == email && u.UPassword == password );
+                return list.Count() > 0;
             }
             catch (Exception ex) { throw ex; }
         }
@@ -61,5 +64,20 @@ namespace TalkingWithFreds.API.BLs
             catch (Exception ex) { throw ex; }
         }
 
+    
+        public async Task<bool> AddUser(Users user)
+        {
+           return await _contextManager.AddUser(user);
+        }
+
+        public string TestUser()
+        {
+            return "returning value";
+        }
+
+        public Users GetUser()
+        {
+            return _contextManager.getUsers().FirstOrDefault(u => u.UId == 1);
+        }
     }
 }
