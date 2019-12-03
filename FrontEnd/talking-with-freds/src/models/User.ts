@@ -1,7 +1,7 @@
 export default class User{
-    uId:number;
-    uUsername: string;
-    uPassword:string;
-    uEmail:string;
-    uNickname:string;
+    uId:number = 0;
+    uUsername: string = '';
+    uPassword:string = '';
+    uEmail:string = '';
+    uNickname:string = '';
 }
