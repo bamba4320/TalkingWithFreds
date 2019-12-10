@@ -1,0 +1,13 @@
+@import './swal2.scss';
+@import './accessibility-icon.scss';
+@import './block-ui.scss';
+@import './ie-mixins.scss';
+@import './components/components.scss';
+@import './containers/containers.scss';
+@import '../common/errorHandling/AlertUtils.scss';
+@import '../NextJsComponents/EnvFooter/EnvFooter.scss';
+@import '../NextJsComponents//EnvFooter/JsonPretify.scss';
+
+html {
+	direction: rtl;
+}

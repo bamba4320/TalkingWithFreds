@@ -1,0 +1,83 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+.ui.card {
+    box-shadow: 0px 0px 20px 1px @shadowColor;
+    border-radius: 20px;
+    &[minwidth35] {
+        min-width: 35rem;
+    }
+    &[marginbottom8] {
+        margin-bottom: 8rem;
+    }
+    &[smallershadow] {
+        box-shadow: 0px 0px 10px 0px @shadowColor;
+    }
+    &[automargin] {
+        margin: auto;
+    }
+    &[variant]{
+        box-shadow: 0px 1px 3px 0px #D4D4D5, 0px 0px 0px 1px #D4D4D5;
+        width: 100% !important;
+        border-radius: 0;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        
+    }
+    &[brandsandstorecard]{
+        box-shadow: none !important;
+    }
+}
+.ui.card > .content {
+    &[padding]{
+        padding: 5rem;
+    }
+    &[variantheader]{
+        padding-bottom: 0;
+        padding-right: 30px;
+    }
+    &[variantbootom]{
+        margin-bottom: 25px;
+    }
+    &[brandsandstorecontent]{
+        border-top:none;
+        text-align:center;
+    }
+    &[variantdiv]{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 130px;
+    }
+}
+
+ .ui.card > .content > .description {
+    &[variantdesc]{
+        font-size: 1rem;
+        color:#000000 !important;
+
+    }
+    &[brandsandstoredesc]{
+        font-size:16px;
+        color:#000000;
+    }
+ }
+
+ .ui.card > .content > .header {
+    &[brandsandstoreheader]{
+        font-size: 2rem;
+        font-weight: normal;
+        color:#000000;
+    }
+    &[printstores] {
+        font-family: NofshonitTextFont;
+        font-size: 1rem !important;
+    }
+ }
+
+.ui.card > .image {
+    &[categorycardimage] {
+    	border-top-left-radius: 20px !important;
+		border-top-right-radius: 20px !important;
+    }
+}

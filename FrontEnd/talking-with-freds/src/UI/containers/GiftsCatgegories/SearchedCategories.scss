@@ -1,0 +1,17 @@
+.searched-categories-container {
+	.pagination-segment {
+		margin-bottom: 5rem !important; // to override semantic margin
+		margin-top: 3rem;
+	}
+	.inner-pagination {
+		width: 40rem;
+		margin: auto !important;
+	}
+	.search-grid {
+		margin: 0;
+		@media only screen and(min-width: 1025px) and(max-width: 1400px) {
+			justify-content: space-between;
+			padding: 0 70px;
+		}
+	}
+}

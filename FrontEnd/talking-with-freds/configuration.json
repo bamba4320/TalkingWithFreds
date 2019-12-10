@@ -1,0 +1,30 @@
+{
+	"messagesKeys": [
+		20010,
+		20011,
+		20012,
+		20013,
+		20014,
+		20015,
+		20016,
+		20017,
+		20018,
+		20019,
+		20020,
+		20021,
+		50,
+		20054,
+		20026,
+		10221,
+		20022,
+		10022
+	],
+	"imagesPath": "//pics.k4a.co.il/share/",
+	"faqImplement": 52,
+	"productToMemberAnimationTime": 4000,
+	"headCategoryId": 56267,
+	"homepageCyclicImageSpeed": 700,
+	"giftsToFamilyAndFriendsID": 56267,
+	"numOfBenefitsInGifts": 12,
+	"gtmId": "GTM-PWJSXC7"
+}

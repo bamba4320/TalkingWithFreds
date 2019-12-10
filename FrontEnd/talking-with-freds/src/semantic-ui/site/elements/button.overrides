@@ -1,0 +1,246 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.button {
+    font-size: 25px;
+    text-align: center;
+    padding: 10px 10px 5px 10px;
+    &[navbarmargin] {
+        margin: 0.4em 0.25em 0em 0em;
+        min-width: 190px;
+    }
+    font-weight: 400;
+    &[mainloginbutton] {
+        padding: 10px 10px 5px 10px;
+        height: 1.8em;
+        max-width: 20rem;
+        font-size: 28px;
+    }
+    &[maxwidth15rem] {
+        max-width: 15rem !important;
+    }
+    &[opositebutton] {
+        background-color: transparent;
+        border: 2px solid @primaryColor;
+        color: @primaryColor;
+    }
+    &[normalfont] {
+        font-family: NofshonitTextFont;
+    }
+    &[logoutbutton] {
+        padding: 10px 10px 5px 10px;
+        font-size: 30px;
+        height: 1.7em;
+        width: 7em;
+    }
+    &[letterspacing2] {
+        letter-spacing: 2px;
+    }
+    &[facebookbutton] {
+        background-color: #fff;
+        color: @primaryColor;
+        margin: 10px 0;
+        padding: 6px 7px 5px 6px;
+    }
+    &[primarybutton] {
+        background-color: @primaryColor;
+        color: #fff;
+    }
+    &[whitebackground] {
+        background: #fff;
+    }
+    &[pinkbackground] {
+        background: #f9f2f8;
+    }
+    &[contactbutton] {
+        width: 15rem !important;
+    }
+    &[noletterspacing] {
+        letter-spacing: 0px !important;
+    }
+    &[linkbutton] {
+        color: @primaryColor;
+        text-decoration: underline;
+        font-family: NofshonitTextFont;
+        font-size: 17px;
+        margin: 0;
+        padding: 15px;
+        font-weight: bold;
+    }
+    &[nomargin] {
+        margin: 0 !important;
+    }
+    &[nopadding] {
+        padding: 0 !important;
+    }
+    &[paddingbottom30px] {
+        padding-bottom: 30px
+    }
+    &[leftbtn] {
+        position: absolute;
+        left: 0;
+    }
+    &[variantbtn]{
+        width: 38% !important;
+        float: left;
+        margin-top: 8px;
+        margin-left: 6px;
+    }
+     &[actionbtn]:hover {
+        background-color:@primaryColor;
+        color: white;
+     }
+
+    &[cardactionbtnmobile] {
+        width: 80%;
+        height: 64px;
+        border-radius: 16px;
+        background-color: #ffffff;
+        margin-bottom:20px;
+        color:@primaryColor;
+    }
+    &[cardactionbtnmobile]:hover {
+      background-color:@primaryColor;
+        color: #ffffff;
+     }
+
+    &[mobileactionbtn] {
+        color: white;
+        text-shadow: none;
+        width: 85% !important;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100px !important;
+        border-radius: 20px;
+        padding: 10px 10px 5px 10px;
+        font-size: 30px;
+    }
+    &[musttoknowbtnmobile] {
+        background-color: #FEB4C9;
+    }
+    &[actionbtnmobile]{
+        background-color:#84D7CC;
+    }
+
+    &[mainloginlink] {
+        font-size: 20px;
+        padding-top: 4px;
+    }
+    &[loginorregisterbutton] {
+        color: white;
+        font-family: NofshonitTextFont;
+        width: 11rem;
+        font-size: 1.04rem;
+        font-weight: bold;
+        height: 2.4rem;
+        padding: 0;
+        letter-spacing: 0.5px;
+    }
+    &[newsletterdesktopbtn] {
+        width: 8rem;
+        height: 3.4rem;
+        background: #fff;
+        color: @pink;
+    }
+    &[newslettermobilebtn] {
+        width: 8rem;
+        height: 3.4rem;
+        background: @primaryColor;
+        color: #fff;
+        margin: auto;
+    }
+    &[sliderbutton] {
+        background-color: white;
+	    color: @primaryColor;
+	    border: 1px solid @primaryColor;
+	    border-radius: 50% !important;
+        width: -webkit-fit-content;
+	    width: -moz-fit-content;
+	    width: -o-fit-content;
+	    width: -khtml-fit-content;
+        padding: 14px 14px 13px 14px;
+        position: relative;
+        top: 33%;
+        height: fit-content;
+        height: -webkit-fit-content;
+	    height: -moz-fit-content;
+	    height: -o-fit-content;
+	    height: -khtml-fit-content;
+        display: table !important;
+    }
+    &[sliderbuttonright] {
+        padding: 11px 17px 5px 18px;
+    }
+    &[backbutton] {
+        padding: 0 5px 0 0;
+    }
+    &[largerwidth] {
+        max-width: 19rem !important;
+        width: 8.5em;
+    }
+    &[textoverflow] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+.ui.pink.button {
+    background: @lightPurple;
+    color: @primaryColor;
+}
+.ui.primary.button {
+    padding: 10px 10px 5px 10px;
+    font-size: 30px;
+    letter-spacing: 2px;
+    height: 1.7em;
+    width: 7em;
+    &[showresults] {
+        width: 12rem;
+    }
+    &[resetpasswordbutton] {
+        margin: 80px auto;
+        width: 240px;
+    }
+}
+.ui.facebook.button {
+    height: 1.8em;
+    max-width: 20rem;
+    min-width: 20rem;
+    font-size: 28px;
+    padding: 0;
+
+    i.fa.fa-facebook {
+        margin-left: 5px;
+    }
+}
+
+.ui.google.plus.button {
+    height: 1.8em;
+    max-width: 20rem;
+    min-width: 20rem;
+    font-size: 28px;
+    padding: 0;
+
+    div {
+        display: none;
+    }
+
+    span {
+        padding: 0;
+        width: 100%;
+    }
+
+    i {
+        margin-left: 5px;
+    }
+}
+.ui.button.toggle.active {
+    background-color: @primaryColor !important; // Overrides the green color of semantic
+}
+.ui.button.toggle.active:hover {
+    background-color: @primaryColor !important; // Overrides the green color of semantic
+}
+
+.ui.disabled.button {
+    color: gray;
+    border-color: gray;
+}

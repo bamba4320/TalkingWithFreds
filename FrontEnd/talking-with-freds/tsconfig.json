@@ -1,25 +1,33 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
-  },
-  "include": [
-    "src"
-  ]
+	"compilerOptions": {
+		"experimentalDecorators": true,
+		"allowJs": true,
+		"alwaysStrict": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"lib": ["dom", "es2017"],
+		"module": "esnext",
+		"moduleResolution": "node",
+		"noEmit": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "esnext",
+		"baseUrl": "./",
+		"paths": {
+			"Infrastructure/*": ["src/Infrastructure/*"],
+			"BL/*": ["src/BL/*"],
+			"common/*": ["src/common/*"],
+			"UI/*": ["src/UI/*"],
+			"NextJsComponents/*": ["src/NextJsComponents/*"],
+			"ReactIntlComponents/*": ["src/ReactIntlComponents/*"]
+		}
+	},
+	"exclude": ["node_modules"],
+	"include": ["**/*.ts", "**/*.tsx"]
 }

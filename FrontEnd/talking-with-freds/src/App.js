@@ -1,12 +1,17 @@
-import React from 'react';
-import Index from './pages';
+import React from "react";
+import Index from "./pages";
 
-function App() {
-  return (
-    <div className="App">
-     <Index/>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: <Index />
+    };
+  }
+
+  render() {
+    return <div className="App">{this.state.page}</div>;
+  }
 }
 
 export default App;

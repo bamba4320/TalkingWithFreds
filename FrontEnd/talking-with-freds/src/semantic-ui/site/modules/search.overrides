@@ -1,0 +1,28 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.big.search {
+    &[searchfixed] {
+        position: fixed;
+        top: 6.2rem;
+    }
+}
+.ui.search .prompt {
+    border-radius: 0;
+    background-color: @primaryColor;
+    color: white;
+    border: 0;
+    border-bottom: 1px solid;
+    border-bottom-color: white;
+    
+}
+.ui.search > .results {
+    text-align: right;
+    right: -9%;
+}
+.ui.search > .results > .message .header {
+    font-family: NofshonitTextFont;
+    font-size: 1.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

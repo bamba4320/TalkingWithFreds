@@ -1,0 +1,263 @@
+$primary: #992a84;
+
+.main-send-gifts-form {
+	.div-weapper-500 {
+		width: 500px;
+		padding-right: 84px;
+	}
+
+	.div-weapper-600 {
+		width: 600px;
+		padding-right: 84px;
+	}
+
+	.div-weapper-800 {
+		width: 600px;
+		padding-right: 84px;
+		@media only screen and(min-width: 1300px) {
+			width: 800px;
+		}
+	}
+
+	.margin-auto {
+		margin: auto;
+	}
+
+	.segment-padding {
+		padding: 45px 0 20px !important;
+	}
+
+	.padding-bot-60 {
+		padding-bottom: 60px;
+		.rec-slider-container {
+			@media only screen and(max-width: 1024px) {
+				overflow: visible;
+			}
+		}
+	}
+
+	.form-button {
+		font-size: 1.3rem !important;
+		padding: 12px 13px !important;
+		border-width: 1px !important;
+		margin: 5px 4px 10px !important;
+		@media only screen and(min-width: 335px) {
+			padding: 12px 17px !important;
+		}
+		@media only screen and(min-width: 1025px) {
+			padding: 7px 21px 7px 20px !important;
+		}
+	}
+
+	.check-details-text {
+		color: black;
+		font-size: 1.3em;
+		font-weight: bold;
+		width: fit-content;
+		width: -webkit-fit-content;
+		width: -moz-fit-content;
+		width: -o-fit-content;
+		width: -khtml-fit-content;
+		margin: auto;
+	}
+
+	.submit-div {
+		text-align: center;
+		margin: auto;
+		.submit-button {
+			font-size: 2.3rem;
+			width: 255px;
+			margin: 25px 0px 35px;
+			padding: 16px 0px 8px;
+		}
+	}
+
+	.flex-div {
+		display: flex;
+
+		.inner-div {
+			width: 50%;
+
+			&.other-date {
+				.ui.icon.input > i.icon {
+					opacity: 1 !important;
+				}
+			}
+		}
+	}
+
+	.selected-div {
+		@media only screen and(max-width: 1024px) {
+			max-width: 410px;
+			margin: auto;
+		}
+	}
+
+	.selected-image {
+		margin: auto;
+		border-radius: 20px;
+	}
+
+	.delete-image-button {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	.rec .rec-swipable-null {
+		display: flex;
+		align-items: center;
+	}
+
+	.opacity-icon {
+		opacity: 1 !important;
+	}
+}
+
+.main-desktop-send-gift-page {
+	.submit-card-and-header.submit-card-and-header {
+		padding: 50px 0;
+	}
+	.card-and-header {
+		padding: 50px 84px 50px 0;
+		.submit-header {
+			margin: 10px auto 30px;
+			img {
+				margin-bottom: 25px;
+			}
+		}
+		.submit-header-and-share {
+			text-align: center;
+			margin-top: 55px;
+			.submit-sub-header {
+				margin-top: -50px;
+				margin-bottom: 50px;
+			}
+			.share-div {
+				margin-top: -25px;
+				margin-bottom: 20px;
+			}
+		}
+		.submit-card.submit-card {
+			margin: 10px auto;
+		}
+		.card {
+			display: flex;
+			width: 100%;
+			max-width: 700px;
+			@media only screen and(max-width: 1300px) {
+				width: 105%;
+				margin-right: -50px;
+			}
+			height: 225px;
+			border-radius: 15px;
+			box-shadow: 0px 0px 20px 1px #c7c6c6;
+			img {
+				width: auto;
+				height: 225px;
+				object-fit: cover;
+				border-top-right-radius: 15px;
+				border-bottom-right-radius: 15px;
+			}
+			.header-and-price {
+				width: calc(100% - 315px);
+				.card-header {
+					margin: 12px 12px 5px;
+					padding-top: 10px;
+					font-size: 2.25rem;
+					height: 20%;
+					> p {
+						margin: 0;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
+						width: 90%;
+					}
+				}
+				.des-and-price {
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					height: 70%;
+					.des {
+						margin: 12px 12px 5px;
+						width: fit-content;
+						width: -webkit-fit-content;
+						width: -moz-fit-content;
+						width: -o-fit-content;
+						width: -khtml-fit-content;
+						line-height: 1.5;
+						max-width: 65%;
+					}
+					.price-header {
+						font-size: 3rem;
+						margin: 0 0 0 5px;
+						display: flex;
+						align-items: flex-end;
+						justify-content: flex-end;
+						@media only screen and(min-width: 1250px) {
+							padding-left: 20px;
+						}
+						.coin-text {
+							font-size: 1.3rem;
+							font-family: NofshonitTextFont !important;
+						}
+					}
+				}
+			}
+		}
+	}
+	.sumbit-continue.sumbit-continue.sumbit-continue {
+		margin-bottom: 50px;
+		.sumbit-continue-btn.sumbit-continue-btn.sumbit-continue-btn {
+			letter-spacing: 0.5px;
+			width: 250px;
+			max-width: 250px;
+			background-color: $primary;
+			color: white;
+			font-size: 2rem;
+			height: 50px;
+		}
+	}
+	.bag-img {
+		position: absolute;
+		right: 10%;
+		margin-top: -160px;
+	}
+	.preview-column {
+		padding-top: 0 !important;
+	}
+
+	.image-div {
+		width: fit-content;
+		width: -webkit-fit-content;
+		width: -moz-fit-content;
+		width: -o-fit-content;
+		width: -khtml-fit-content;
+	}
+
+	.top-page-segment {
+		max-width: 100% !important; // for IE
+		flex-flow: row !important;
+		justify-content: flex-start !important;
+		align-items: center !important;
+		padding: 20px !important;
+
+		.breadcrumbs {
+			margin-right: 35px;
+		}
+	}
+
+	.ui.breadcrumb .active.section {
+		color: $primary;
+	}
+
+	.ui.breadcrumb .divider {
+		color: black;
+	}
+
+	.active-arrow {
+		color: $primary !important; // to override the black color
+	}
+}

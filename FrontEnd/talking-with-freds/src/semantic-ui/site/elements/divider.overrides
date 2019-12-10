@@ -1,0 +1,32 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.divider {
+    &[fullwidthdivider] {
+        width: 200%;
+        margin: 0 -15rem 1rem 0rem;
+    }
+    &[topmargindivider] {
+        width: 200%;
+        margin: 1rem -15rem 0 0rem;
+    }
+    &[smallerdivider] {
+        margin: 0.5rem 0rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.15) !important; // In order to cancel Semantic border color for this divider
+    }
+    &[smallprimarydivider] {
+        border-color: @primaryColor !important; // In order to cancel Semantic border color for this divider
+        width: 10rem;
+    }
+    &[nobordertop] {
+        border-top: none !important; // In order to cancel Semantic border on top in the mobile more filters in every menu
+    }
+     &[nomargin] {
+        margin: 0;
+    }
+    &[headerdivider]{
+        width: 10rem;
+        border:1.5px solid @primaryColor !important;
+        margin-top:22px;
+    }
+}   

@@ -1,0 +1,41 @@
+.custom-empty-main-container {
+	margin: 0 auto;
+	padding: 100px;
+	background: url(/static/images/heart.svg);
+	background-repeat: no-repeat;
+	background-position-x: 20%;
+	background-size: 20em;
+	background-position-y: -250%;
+	.favorites-header-desktop {
+		font-size: 4rem !important;
+	}
+	.toGiftsBtn {
+		margin: 0px;
+	}
+}
+.ui.container.custom-mobile-empty-main-container {
+	padding: 80px 0px;
+	width: 100% !important;
+	height: 75vh;
+	font-size: 2rem;
+	margin: 0 !important;
+	.gift-image {
+		width: 100px;
+		height: auto;
+	}
+
+	.mobile-header {
+		font-size: 18px;
+		> h2 {
+			font-size: 4rem;
+			> .sub.header {
+				font-size: 1.32rem;
+			}
+		}
+	}
+
+	.toGiftsBtn {
+		margin: 0px;
+		font-size: 2.5rem;
+	}
+}

@@ -1,0 +1,73 @@
+.mygifts-main-div {
+	@media only screen and(max-width: 1024px) {
+		background-color: #f9f2f8;
+	}
+	.menu-div {
+		background-color: white;
+		margin-bottom: 20px;
+		@media only screen and(min-width: 1025px) {
+			display: flex;
+			margin: 40px 100px 0;
+		}
+		.menu {
+			font-family: NofshonitHeaderFont;
+			font-size: 2rem;
+			letter-spacing: 1.4px;
+			border-bottom-width: 3px !important;
+			display: flex;
+			justify-content: space-around;
+			@media only screen and(max-width: 1024px) {
+				border: none !important;
+				font-family: NofshonitTextFont;
+				font-size: 1rem;
+				font-weight: normal;
+			}
+			.menu-item {
+				opacity: 0.5;
+				padding: 0;
+				margin: 0;
+				text-align: center;
+				@media only screen and(max-width: 1024px) {
+					font-weight: normal !important;
+					margin-left: 8vw;
+					margin-right: 8vw;
+					padding-left: 2vw;
+					padding-right: 2vw;
+				}
+			}
+		}
+		.add-btn {
+			width: 250px;
+			height: 52px;
+			margin-top: 15px;
+			font-size: 2.2rem;
+			position: absolute;
+			left: 100px;
+		}
+	}
+	.btn-container {
+		margin-bottom: -15px;
+		.add-btn {
+			width: 250px;
+			height: 52px;
+			margin-top: 15px;
+			font-size: 2rem;
+		}
+	}
+	.gifts-div {
+		margin-right: 4vw;
+		margin-bottom: 50px;
+		@media only screen and(max-width: 1024px) {
+			text-align: center;
+			margin: 0;
+			padding: 0 0 50px;
+		}
+	}
+	.empty-state-div {
+		text-align: center;
+	}
+
+	.ui.menu:after {
+		content: none;
+	}
+}

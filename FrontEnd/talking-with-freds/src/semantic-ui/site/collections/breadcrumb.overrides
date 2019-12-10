@@ -1,0 +1,13 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.breadcrumb .section {
+     &[whitesection] {
+        color: #fff;
+    }
+}
+.ui.breadcrumb .divider {
+    &[whitedivider] {
+        color: #fff;
+    }
+}

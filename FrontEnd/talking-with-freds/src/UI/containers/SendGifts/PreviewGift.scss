@@ -1,0 +1,103 @@
+$primary: #992a84;
+
+.preview-gift-contianer {
+	background-color: #f7eef6;
+	height: calc(100vh - 71px);
+	width: 100%;
+	@media only screen and(min-width: 1025px) {
+		height: 94vh;
+		display: flex;
+		width: 37.5%;
+		justify-content: center;
+		position: fixed;
+		top: 75px;
+		left: 0;
+	}
+	@media only screen and(min-width: 1750px) {
+		align-items: center;
+	}
+	.overfolw-div {
+		position: relative;
+		bottom: 474px;
+		max-height: 405px;
+		overflow: auto;
+		width: 271px;
+		margin: auto;
+	}
+	.preview-width {
+		width: 350px;
+		max-height: 660px;
+	}
+	.logo-div {
+		width: 170px;
+		margin: 35px auto 0;
+		.ui.image {
+			width: 63px;
+			height: 30px;
+		}
+	}
+	.image-div {
+		width: 90%;
+		margin: 35px auto 0;
+	}
+	.arrow-logo-div {
+		display: flex;
+		margin-bottom: 25px;
+	}
+	.blessing-segment.blessing-segment {
+		width: 100%;
+		margin: 20px auto 0 !important;
+		text-align: center;
+		word-wrap: break-word;
+		white-space: pre-wrap; // this line detect \n characters and display them in html display
+		background-color: transparent !important;
+		border-width: 0 !important;
+		padding: 0 3px 15px !important;
+		color: $primary;
+		box-shadow: none;
+	}
+
+	.ui.sticky.bound.bottom {
+		top: 95px;
+	}
+
+	.ui.sticky.fixed.top {
+		top: 95px !important;
+	}
+
+	.preview-gift-card-container {
+		margin: 15px auto 15px !important;
+		max-width: 210px;
+		min-height: 330px;
+
+		@media screen and (min-width: 1025px) {
+			max-width: 238px;
+			min-height: 358px;
+		}
+		.card-main-content {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			.main-card-header {
+				font-size: 2.2rem !important; // to override semantic font-size
+				color: black;
+				font-family: NofshonitHeaderFont;
+				padding: 5px 0;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				width: 100%;
+				text-align: start;
+				@include ie-text-align-right();
+			}
+			.sub-header {
+				line-height: 1.25;
+				margin-top: 0px;
+				padding-bottom: 10px;
+				text-align: start;
+				@include ie-text-align-right();
+				white-space: pre-wrap;
+			}
+		}
+	}
+}

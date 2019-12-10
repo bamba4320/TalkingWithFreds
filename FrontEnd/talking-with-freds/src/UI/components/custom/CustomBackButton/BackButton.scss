@@ -1,0 +1,16 @@
+$primary: #992a84;
+
+.back-btn-div {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: -o-fit-content;
+	width: -khtml-fit-content;
+	.back-icon {
+		cursor: pointer;
+		font-size: 1.5rem;
+		color: $primary;
+	}
+}

@@ -1,0 +1,44 @@
+$primaryColor: #992a84;
+
+.all-media-modal-container {
+	margin: auto !important;
+	max-width: 100% !important; // for IE
+	.ui.search .prompt {
+		border-radius: 0;
+		background-color: white;
+		color: $primaryColor;
+		border: 0;
+		border-bottom: 2px solid $primaryColor;
+	}
+	.ui.search > .results {
+		right: 0;
+		width: 100%;
+	}
+
+	.search-icon {
+		color: $primaryColor !important;
+		opacity: 1 !important;
+	}
+
+	.search-wrapper-div {
+		height: 85px;
+	}
+
+	.seacrh-container {
+		width: 75%;
+		margin: auto;
+	}
+
+	.ui.input {
+		width: 100%;
+	}
+
+	.x-icon {
+		position: relative;
+		left: 11.8%;
+		font-size: 1.8rem;
+		color: $primaryColor;
+		margin-top: 6px;
+		bottom: 45px;
+	}
+}

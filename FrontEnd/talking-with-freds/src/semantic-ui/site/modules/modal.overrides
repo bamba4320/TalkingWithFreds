@@ -1,0 +1,67 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.modal {
+    &[desktopmodal] {
+        border-radius: 1.5rem;
+        width: 50%;
+        min-width: 640px;
+    }
+    &[recovercodedesktopmodal]{
+        width:85%;
+        @media screen and (min-width:1110px){
+            width:75%;
+        }
+        @media screen and (min-width:1300px){
+            width:65%;
+        }
+        @media screen and (min-width:1400px){
+            width:60%;
+        }
+        @media screen and (min-width:1515px){
+            width:55%;
+        }
+        @media screen and(min-width:1670px){
+            width:50%;
+        }
+    }
+    &[mobilemodal] {
+        border-radius: 0;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+    &[mobilepopupmodal] {
+        border-radius: 1.5rem;
+        width: 87%;
+        height: 95%;
+    }
+    &[widerdesktopmodal] {
+        width: 85%;
+    }
+    &[fitcontentmodal] {
+        width: fit-content !important;
+        width: -moz-fit-content;
+    }
+}
+
+.ui.modal > .content {
+    margin: 0 auto;
+    width: 88.5%;
+    height: 100%;
+    &[fullscreenmobilemodal] {
+        margin: 0;
+        padding: 0 !important;
+        height: 100%;
+        width: 100%;
+        border-radius: 0;
+    }
+    &[overflowscroll] {
+        overflow-y: auto;
+        overflow-x: hidden;
+        // -webkit-overflow-scrolling: touch; // not working well on branches
+    }
+}

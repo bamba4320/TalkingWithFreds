@@ -1,0 +1,30 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.label {
+    &[normallabel] {
+        border-radius: 20px;
+        font-weight: normal;
+        padding: 10px 20px;
+        margin: 0 0 10px 5px;
+        font-size: 1rem;
+    }
+}
+
+.ui.horizontal.label {
+    &[categorycardlabel] {
+        position: relative;
+        bottom: 30px;
+        width: 75px;
+        padding: 6px 0px;
+        border-radius: 20px;
+        margin: 0;
+    }
+}
+
+.ui.purple.label {
+    border: solid 2px;
+    background-color: #fff !important;
+    border-color: @primaryColor !important;
+    color: @primaryColor !important;
+}

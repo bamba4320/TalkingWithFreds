@@ -1,8 +1,8 @@
-import HomePageContainer from "../UI/containers/HomePage.container";
 import React from "react";
+import LogInPage from "./loginPage";
 
 const Index = (props: any) => {
-  return <HomePageContainer />;
+  return <LogInPage />;
 };
 
 export default Index;

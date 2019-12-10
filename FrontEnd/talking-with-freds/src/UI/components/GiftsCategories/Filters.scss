@@ -1,0 +1,23 @@
+.filters-container {
+	padding-bottom: 50px !important;
+	button {
+		display: initial !important;
+		display: -ms-inline-flexbox !important; // for ie
+		margin: 8px 0px 0px 8px !important;
+		height: 2.3rem;
+		padding: 10px 15px !important;
+		min-width: 3.3rem;
+		font-size: 0.9rem !important;
+		border-width: 1.1px !important;
+	}
+	.segment-header {
+		margin-bottom: 0.4rem;
+		margin-right: 0.1rem;
+	}
+	.segment-header::before {
+		height: 0 !important;
+	}
+	.main-div {
+		width: 210px;
+	}
+}

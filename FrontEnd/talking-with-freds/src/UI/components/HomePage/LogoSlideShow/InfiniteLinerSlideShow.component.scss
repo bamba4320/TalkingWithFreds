@@ -1,0 +1,96 @@
+$logo-slider-width: var(--logo-slider-image-width);
+$logo-slider-height: var(--logo-slider-image-height);
+$logo-slider-animation-start: var(--logo-slider-image-start-animation-point);
+$logo-slider-animation-end: var(--logo-slider-image-end-animation-point);
+$logo-slider-left-pos: var(--logo-slider-image-left-position);
+$logo-slider-animation-time: var(--logo-slider-animation-time);
+
+.wrapper {
+	height: 420px; // defualt for ie
+	height: $logo-slider-height;
+	width: 100%;
+	@media only screen and(max-width: 1025px) {
+		margin: 20px 0;
+	}
+	.moving-logo-img-static-div {
+		position: relative;
+		width: 100%;
+		height: 420px; // defualt for ie
+		height: $logo-slider-height;
+		.moving-logo-img-moving-div {
+			height: 100%;
+			width: 14000px; // defualt for ie
+			width: $logo-slider-width;
+			position: absolute;
+			left: 0; // defualt for ie
+			left: $logo-slider-left-pos;
+			top: 0;
+
+			animation: leftToRightToLeft $logo-slider-animation-time linear infinite;
+			-moz-animation: leftToRightToLeft $logo-slider-animation-time linear infinite;
+			-webkit-animation: leftToRightToLeft $logo-slider-animation-time linear infinite;
+			-o-animation: leftToRightToLeft $logo-slider-animation-time linear infinite;
+			-khtml-animation: leftToRightToLeft $logo-slider-animation-time linear infinite;
+			.moving-logo-img {
+				height: 100%;
+				width: 100%;
+			}
+		}
+
+		@keyframes leftToRightToLeft {
+			0% {
+				left: $logo-slider-animation-end;
+			}
+			50% {
+				left: $logo-slider-animation-start;
+			}
+			100% {
+				left: $logo-slider-animation-end;
+			}
+		}
+		@-moz-keyframes leftToRightToLeft {
+			0% {
+				left: $logo-slider-animation-end;
+			}
+			50% {
+				left: $logo-slider-animation-start;
+			}
+			100% {
+				left: $logo-slider-animation-end;
+			}
+		}
+		@-ms-keyframes leftToRightToLeft {
+			0% {
+				left: $logo-slider-animation-end;
+			}
+			50% {
+				left: $logo-slider-animation-start;
+			}
+			100% {
+				left: $logo-slider-animation-end;
+			}
+		}
+		@-webkit-keyframes leftToRightToLeft {
+			0% {
+				left: $logo-slider-animation-end;
+			}
+			50% {
+				left: $logo-slider-animation-start;
+			}
+			100% {
+				left: $logo-slider-animation-end;
+			}
+		}
+		@-o-keyframes leftToRightToLeft {
+			0% {
+				left: $logo-slider-animation-end;
+			}
+			50% {
+				left: $logo-slider-animation-start;
+			}
+			100% {
+				left: $logo-slider-animation-end;
+			}
+		}
+	}
+}

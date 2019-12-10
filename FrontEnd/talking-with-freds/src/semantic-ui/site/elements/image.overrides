@@ -1,0 +1,70 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.image {
+    outline: none;
+    &[navbarlogo] {
+        cursor: pointer;
+        width: 5.3rem;
+    }
+     &[footerlogo] {
+        cursor: pointer;
+        width: 7rem;
+        height: 4rem;
+        padding-bottom: 10px;
+    }
+    &[mobilefooterlogo] {
+        width: 6rem;
+        height: 3.5rem;
+        padding-bottom: 10px;
+    }
+    &[size7rem] {
+        width: 7rem;
+        height: 7rem;
+    }
+    &[roundimage] {
+        border-radius: 50%; // semantic ui circular doesnt work on the categories drop down from the navbar
+    }
+    &[automargin] {
+        margin: auto;
+    }
+    &[grayimage] {
+        filter: grayscale(100%);
+    }
+    &[borderradius20] {
+        border-radius: 20px;
+    }
+     &[borderradius5] {
+        border-radius: 5%;
+    }
+    &[part4img] {
+        width: 100%;
+        height: auto;
+        max-height: 175px;
+    }
+    &[cursorpointer] {
+        cursor: pointer;
+    }
+    &[producttomemberanimation] {
+        z-index:999;
+        width: 240px;
+        height: auto;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+	    object-fit: cover;
+        @media screen and (min-width: 1025px) {
+            width: 10vw;
+		}
+    }
+    &[mediacarouselwidth] {
+        width: 165px;
+        height: auto;
+        min-height: 50px;
+    }
+}
+
+.ui.cards > .card > .image > img, .ui.card > .image > img {
+    height: inherit !important;
+}

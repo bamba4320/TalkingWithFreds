@@ -1,0 +1,15 @@
+export enum VariantTypes {
+	Regular = 0,
+	CashBack = 1,
+	Coupon = 2,
+	ValueCard = 3,
+	CinemaInterfacation = 4,
+	RestaurantMoneyBL = 5,
+	VirtualMoneyUtilizationGift = 6,
+	RelatedProduct_MultipleChoice = 7,
+	RelatedProduct_One = 8,
+	DeepSubsidy = 9,
+	CombinedVariant = 10,
+	GiftCardVerifone = 11,
+	ShowsInterfacation = 12,
+}

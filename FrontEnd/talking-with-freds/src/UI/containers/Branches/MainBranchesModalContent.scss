@@ -1,0 +1,71 @@
+.main-branches-modal-content {
+	text-align: start;
+	@include ie-text-align-right();
+	button {
+		display: initial !important;
+		display: -ms-inline-flexbox !important; // for ie
+		margin: 8px 0px 0px 8px !important;
+		height: 2.3rem;
+		padding: 10px 15px !important;
+		min-width: 3.3rem;
+		font-size: 0.9rem !important;
+		border-width: 1.1px !important;
+	}
+	.segment-header {
+		margin-bottom: 0.4rem;
+		margin-right: 0.1rem;
+	}
+	.segment-header::before {
+		height: 0 !important;
+	}
+	.main-segment {
+		display: block !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		max-width: 230px !important;
+	}
+	.divider {
+		border-right: 1px solid lightgray;
+	}
+	.inner-div {
+		display: flex;
+		align-content: center;
+		justify-content: space-between;
+		.print-container {
+			display: flex;
+			align-items: center;
+			.print-button {
+				height: auto;
+				font-size: 1.2rem !important;
+				margin: 0 !important;
+				padding: 0 !important;
+			}
+		}
+	}
+	.inner-pagination {
+		width: 40rem;
+		margin: auto !important;
+	}
+	.dropdown-menu {
+		width: 100%;
+	}
+}
+
+.mobile-branches-filter-menu {
+	.menu-divider {
+		border-left: 1px solid lightgray;
+	}
+	.pagination-segment {
+		.inner-pagination {
+			margin: auto !important;
+		}
+	}
+	.ui.sticky.bound.bottom {
+		top: 71px;
+	}
+}
+
+.no-branches-mobile-modal-message {
+	text-align: center;
+	@include ie-text-align-right();
+}

@@ -1,0 +1,12 @@
+.price-range-div {
+	font-family: NofshonitHeaderFont !important;
+	font-size: 3.2rem;
+	display: flex;
+	align-items: baseline;
+	width: fit-content;
+	margin-right: auto;
+	.coin-text {
+		font-size: 1.5rem;
+		font-family: NofshonitTextFont !important;
+	}
+}

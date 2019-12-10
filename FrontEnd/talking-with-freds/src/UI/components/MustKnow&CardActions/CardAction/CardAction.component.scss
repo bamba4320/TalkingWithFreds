@@ -1,0 +1,69 @@
+.card-action.card-action {
+	width: 95%;
+	button {
+		width: 150px;
+		margin-bottom: 20px;
+		margin-left: 15px;
+		height: 50px;
+		font-size: 2rem;
+		@media only screen and(min-width: 1380px) {
+			width: 170px;
+		}
+		@media only screen and(min-width: 1550px) {
+			width: 200px;
+		}
+	}
+	button:hover {
+		background-color: #992a84 !important;
+		color: white !important;
+	}
+}
+.card-action-mobile.card-action-mobile {
+	background-color: #f8f1f7;
+	padding-bottom: 0px !important ;
+	height: 100vh;
+	.back-btn {
+		color: white;
+		position: relative;
+		bottom: 200px;
+		left: 90%;
+	}
+	.z-img {
+		position: relative !important;
+		bottom: 228px;
+		right: calc(100vw - 60px);
+		width: 65px;
+		height: 88px;
+		padding: 0;
+		z-index: 9;
+	}
+	.angle-left-icon {
+		margin-top: 10px;
+		float: left;
+	}
+	.btn-mobile-container {
+		margin-top: -100px !important;
+		.cardactionbtnmobile {
+			width: 80%;
+			height: 64px;
+			border-radius: 16px;
+			background-color: #ffffff;
+			margin-bottom: 20px;
+			color: #992a84;
+			font-size: 25px;
+			text-align: center;
+			padding: 10px 10px 5px 10px;
+			font-weight: 400;
+			cursor: pointer;
+			display: inline-block;
+			min-height: 1em;
+			outline: none;
+			border: none;
+			vertical-align: baseline;
+		}
+		.cardactionbtnmobile:hover {
+			background-color: #992a84;
+			color: #ffffff;
+		}
+	}
+}

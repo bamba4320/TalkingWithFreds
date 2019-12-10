@@ -1,0 +1,31 @@
+.condition-error-div {
+	color: black;
+	font-size: 17px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+.newsletter-checkbox {
+	label {
+		padding-left: 20px !important;
+	}
+	label:before {
+		background: none !important;
+		width: 24px !important;
+		height: 24px !important;
+		border: 3px solid #992a84 !important;
+	}
+	label:after {
+		width: 24px !important;
+		height: 24px !important;
+		padding-top: 0 !important;
+		border: 3px solid #992a84 !important;
+	}
+}
+
+.register-user-mail-disabled {
+	border-bottom: 2px solid #992a84;
+	padding: 10px;
+	margin-bottom: 10px;
+	font-size: 1.3em;
+	color: #cfcfcf;
+}

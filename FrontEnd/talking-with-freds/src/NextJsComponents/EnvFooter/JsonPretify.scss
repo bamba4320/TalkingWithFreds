@@ -1,0 +1,14 @@
+.pretify-container {
+	padding: 10px;
+	text-align: left;
+	pre {
+		border-radius: 5px;
+		padding: 0 10px;
+		margin: 0;
+		overflow: auto;
+		text-align: left;
+		background: #ccc;
+		color: black;
+		font-size: 16px;
+	}
+}

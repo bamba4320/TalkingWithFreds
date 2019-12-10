@@ -1,0 +1,55 @@
+.brands-and-store {
+	width: 100%;
+	padding-top: 25px !important;
+	.brands-grid.brands-grid {
+		width: 95%;
+		margin: 0 auto;
+		@media screen and (min-width: 650px) and (max-width: 1024px) {
+			width: 93%;
+			margin-right: 6.25%;
+		}
+		@media screen and (min-width: 1400px) {
+			width: 93%;
+			margin-right: 6.25%;
+		}
+		.brands-and-store-card {
+			&:hover {
+				transform: scale(1.1, 1.1);
+			}
+			.card-img.card-img.card-img {
+				border-radius: 50% !important;
+				width: 125px;
+				height: 125px;
+				object-fit: cover;
+				margin: 15px auto;
+				@media screen and (min-width: 1025px) {
+					width: 160px;
+					height: 160px;
+					object-fit: cover;
+				}
+			}
+			.print-img {
+				border-radius: 50% !important;
+				width: 90px;
+				height: 90px;
+				margin: auto;
+			}
+			.print-header-div {
+				padding: 10px 0 0 !important;
+				.print-header {
+					padding: 0 !important;
+				}
+			}
+		}
+		.print-div {
+			width: 130px;
+			height: 150px;
+			a {
+				cursor: initial !important;
+				&:hover {
+					transform: none !important;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,72 @@
+.submit-card-div {
+	margin: 10px auto 50px;
+	@media only screen and(min-width: 1025px) {
+		width: 30%;
+		min-width: 400px;
+		border-radius: 15px;
+		box-shadow: 0px 0px 20px 1px #8080806b;
+	}
+	.submit-card-grid {
+		font-size: 1.2rem;
+		.flex-div {
+			display: flex;
+			padding-left: 30px;
+			justify-content: center;
+			@media screen and (max-width: 1300px) and (min-width: 1025px) {
+				padding-left: 0;
+			}
+			@media screen and (max-width: 550px) {
+				padding-left: 0;
+			}
+		}
+		.first-row-flex {
+			display: flex;
+			justify-content: center;
+			@media screen and (max-width: 1600px) and (min-width: 1025px) {
+				justify-content: space-between;
+				flex-direction: column;
+				white-space: pre-wrap;
+			}
+			@media screen and (max-width: 800px) {
+				flex-direction: column;
+				white-space: pre-wrap;
+			}
+		}
+		.from-or-to-div {
+			font-weight: bold;
+		}
+		.div-padding {
+			padding: 20px;
+		}
+	}
+	.send-with-div {
+		display: flex;
+		justify-content: center;
+		span {
+			font-weight: bold;
+			padding-left: 10px;
+		}
+		.details-div {
+			text-align: left;
+			white-space: pre-wrap;
+		}
+		@media screen and (max-width: 1300px) and (min-width: 1025px) {
+			text-align: center;
+			flex-direction: column;
+			white-space: pre-wrap;
+			.details-div {
+				text-align: center;
+				white-space: pre-wrap;
+			}
+		}
+		@media screen and (max-width: 550px) {
+			text-align: center;
+			flex-direction: column;
+			white-space: pre-wrap;
+			.details-div {
+				text-align: center;
+				white-space: pre-wrap;
+			}
+		}
+	}
+}

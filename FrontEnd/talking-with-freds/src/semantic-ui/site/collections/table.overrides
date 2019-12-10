@@ -1,0 +1,27 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.table[class*="center aligned"] {
+    thead th {
+        color: @primaryColor;
+        background: #fff;
+    }
+    td {
+        padding: 0.585714em;
+        outline: 0 !important;
+        padding-bottom: 15px;
+        border-left: 0 !important;
+        border-top: 0 !important;
+    }
+    td.active {
+        min-width: 2em;
+        margin-top: 0.5em !important;
+        padding: .5em 0;
+        border-radius: 500rem;
+        background-color: @primaryColor!important;
+        color: #fff!important;
+        font-size: 1rem;
+        display: inline-block;
+        line-height: 1;
+    }
+}

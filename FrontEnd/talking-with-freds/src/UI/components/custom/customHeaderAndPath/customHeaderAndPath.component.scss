@@ -1,0 +1,40 @@
+$primary: #992a84;
+
+.header-and-path-main-div {
+	width: fit-content;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: -o-fit-content;
+	width: -khtml-fit-content;
+	color: $primary;
+	.main-header.main-header.main-header {
+		font-size: 5rem !important;
+		font-family: NofshonitHeaderFont;
+		color: $primary !important;
+		margin: 0px 0px;
+
+		&.benefit-page-line-break {
+			width: 450px;
+			white-space: pre-wrap;
+		}
+	}
+
+	.main-sub-header {
+		font-family: NofshonitTextFont;
+		margin-top: -20px;
+		color: $primary;
+	}
+	.crumb-divider {
+		color: $primary;
+		margin: 1.5px 0px 1px 0px !important;
+	}
+	.cramb-wraper {
+		.crumb-part {
+			color: $primary;
+			display: inline-block;
+		}
+		.crumb-divider-arrow {
+			color: $primary !important;
+		}
+	}
+}

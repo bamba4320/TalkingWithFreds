@@ -1,0 +1,16 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+.ui.list > .item a{
+    color: white !important;
+}
+.ui.list > .item {
+    &[paddingbottom10] {
+        padding-bottom: 10px;
+    }
+}
+.ui.list {
+    &[margin0] {
+        margin: 0 !important;
+    }
+}

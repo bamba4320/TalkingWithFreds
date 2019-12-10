@@ -1,0 +1,64 @@
+$primary: #992a84;
+.card-image-placeholder {
+	width: 100%;
+	height: inherit;
+}
+.gift-category-container {
+	display: inline-block !important;
+	margin: 10px 0 !important;
+	text-align: right !important;
+	text-align-last: right !important;
+
+	.card-image {
+		> img {
+			border-radius: 20px 20px 0 0;
+			width: 100%;
+			height: inherit;
+			object-fit: cover;
+		}
+	}
+
+	.main-card-header {
+		font-size: 2.2rem !important; // to override semantic font-size
+		color: black;
+		font-family: NofshonitHeaderFont;
+		padding-top: 10px;
+		padding-bottom: 5px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 100%;
+	}
+
+	.card-small-text {
+		line-height: 1.5;
+	}
+
+	.favorite-indicator {
+		float: left;
+		margin-top: -37px;
+		margin-left: 4px !important;
+		position: relative;
+	}
+
+	.card-meta {
+		min-height: 80px;
+		max-height: 80px;
+		line-height: 1.5;
+		overflow: hidden;
+		font-size: 1.1rem !important; // to override semantic font-size
+	}
+
+	.lower-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.price-header {
+		font-size: 3rem;
+		color: $primary;
+		margin: 0 !important;
+		line-height: 1;
+	}
+}

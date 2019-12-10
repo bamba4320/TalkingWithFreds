@@ -1,0 +1,18 @@
+{
+	"presets": [
+		[
+			"next/babel",
+			{
+				"class-properties": {
+					"loose": true // Without this, Decorating 👉🏻class👈🏻 property failed
+				},
+				// From https://stackoverflow.com/questions/53492923/the-babel-configuration-of-next-js-for-the-latest-browsers
+				"preset-env": {
+					"useBuiltIns": "entry" // tells the preset to look for browserslist config source
+				}
+			}
+		],
+		"@zeit/next-typescript/babel"
+	],
+	"plugins": [["@babel/plugin-proposal-decorators", {"legacy": true}]]
+}

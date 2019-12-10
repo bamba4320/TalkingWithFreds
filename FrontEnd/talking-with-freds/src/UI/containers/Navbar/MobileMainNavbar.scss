@@ -1,0 +1,28 @@
+.mobile-main-navbar-container {
+	.mobile-sticky-navbar-filler {
+		display: block;
+	}
+
+	.mobile-sticky-navbar-container {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 999;
+	}
+
+	.iphone-sticky-navbar-filler-not-logged-in {
+		height: 67px;
+	}
+
+	.iphone-sticky-navbar-filler-logged-in {
+		height: 114px;
+	}
+
+	.not-iphoe-sticky-navbar-filler-not-logged-in {
+		height: 80px;
+	}
+
+	.not-iphoe-sticky-navbar-filler-logged-in {
+		height: 129px;
+	}
+}

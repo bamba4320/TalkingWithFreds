@@ -1,0 +1,19 @@
+.custom-text-area-container {
+	.custom-text-area {
+		height: 128px;
+	}
+	.width-100-percent {
+		width: 100%;
+	}
+	.tavim-container {
+		padding: 3px 15px 10px;
+		.tavim-header {
+			color: #7f7f7f;
+			padding: 0 0 5px 5px;
+		}
+	}
+}
+
+.diabled-text-area-container {
+	border-color: lightgray !important;
+}

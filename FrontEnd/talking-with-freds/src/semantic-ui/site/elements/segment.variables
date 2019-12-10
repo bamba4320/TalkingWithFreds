@@ -1,0 +1,7 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+@placeholderBorderColor: #fff;
+@placeholderMinHeight: auto;
+@placeholderBoxShadow: 0px 2px 25px 0 #fff;
+@placeholderBackground: #fff;

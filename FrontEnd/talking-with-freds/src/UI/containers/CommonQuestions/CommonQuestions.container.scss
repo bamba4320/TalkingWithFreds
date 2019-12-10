@@ -1,0 +1,136 @@
+.common-div {
+	.mobile-header {
+		margin: auto !important;
+	}
+	.fixed.top {
+		padding-top: 20px;
+	}
+	.subjects-grid {
+		.column {
+			width: 90% !important;
+			@media only screen and(min-width: 1025px) {
+				width: 50% !important;
+			}
+		}
+		.subjects-div {
+			padding-right: 5vw;
+			padding-top: 25px;
+			width: 100% !important;
+			@media only screen and(max-width: 1024px) {
+				background: #f8f1f7 !important;
+				padding-right: 0;
+				padding-top: 0;
+			}
+			.headers-div {
+				text-align: center;
+				padding: 4rem 0 1rem 0;
+				@media only screen and(min-width: 1025px) {
+					display: none;
+				}
+			}
+			.subject-header {
+				width: 100% !important;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			.btn-div {
+				text-align: center;
+				padding-bottom: 1rem;
+				.subjects-btn {
+					border-radius: 1rem;
+					width: 90%;
+					height: 5rem;
+					margin: auto;
+					font-size: 1.5rem;
+					background: white;
+					color: #992a84;
+				}
+			}
+		}
+	}
+	.questions-div {
+		text-align: start;
+		@media only screen and(max-width: 1024px) {
+			margin: auto;
+		}
+		.question-header {
+			padding-top: 120px;
+			margin-top: -70px;
+			color: black;
+			font-size: 2.3rem;
+			@media only screen and(min-width: 1025px) {
+				color: #992a84;
+				font-size: 3.5rem;
+				margin-top: 0;
+				padding-top: 2rem;
+			}
+		}
+		.accordion {
+			.accordion-title {
+				padding: 0 !important;
+				display: flex;
+				align-items: center;
+				@media only screen and(min-width: 1025px) {
+					font-size: 1.2rem !important;
+					color: #992a84 !important;
+					font-weight: bold;
+					padding: 0.5em 0em !important;
+				}
+				.accordion-icon {
+					margin-top: 0 !important;
+					left: 1rem;
+					width: auto;
+					height: auto;
+				}
+				.accordion-text {
+					width: 95%;
+					margin-left: 4%;
+					font-weight: bold;
+				}
+			}
+			.accordion-content {
+				width: 90%;
+				@media only screen and(min-width: 1025px) {
+					width: 70%;
+				}
+			}
+			.accordion-divider {
+				border-bottom: 0;
+				@media only screen and(min-width: 1025px) {
+					border-color: #992a84;
+				}
+			}
+		}
+	}
+	.contact-div {
+		.contact-divider {
+			border-bottom: 0;
+			@media only screen and(min-width: 1025px) {
+				display: none;
+			}
+		}
+		.contact-segment {
+			margin: auto;
+			padding-bottom: 40px;
+			@media only screen and(min-width: 1025px) {
+				padding-bottom: 5rem;
+			}
+			.contact-btn {
+				width: 13rem;
+			}
+		}
+	}
+	.responsive-wrapper-mobile {
+		width: 100%;
+	}
+	.ui.right.rail {
+		width: 25vw !important;
+		left: 50vw !important;
+	}
+	.bound.bound.bound {
+		position: absolute;
+		top: auto;
+		bottom: 0 !important;
+	}
+}

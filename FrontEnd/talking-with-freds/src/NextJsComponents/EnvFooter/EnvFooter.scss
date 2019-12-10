@@ -1,0 +1,12 @@
+.envfooter-container {
+	direction: ltr;
+	width: 100%;
+	background: #eee;
+	text-align: center;
+	font-size: 13px;
+	.apiUrl-container {
+		&.server {
+			display: none;
+		}
+	}
+}

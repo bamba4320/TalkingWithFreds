@@ -1,0 +1,5 @@
+.desktop-main-gifts-container {
+	.for-ie-divider {
+		@include ie-width-100-vw();
+	}
+}
