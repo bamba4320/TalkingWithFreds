@@ -138,7 +138,7 @@ module.exports = withPlugins([withTypescript, withLess, withSass, withCss], {
 		return config;
 	},
 	generateBuildId: async () => {
-		return '0.9.22';
+		return '0.1.0';
 	},
 	env: {
 		/**
