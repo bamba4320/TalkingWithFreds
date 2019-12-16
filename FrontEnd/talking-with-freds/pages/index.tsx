@@ -1,15 +1,12 @@
-import UserAgentDetecor from 'common/utils/processUtils/UserAgentDetecor';
-import { NextContext } from 'next';
+import {ApplicationPageOptions} from 'common/generalconsts/pageOptions.enums';
+import {NextContext} from 'next';
 import * as React from 'react';
-import { InjectedIntl } from 'react-intl';
+import {InjectedIntl} from 'react-intl';
 import withIntl from 'ReactIntlComponents/withIntl';
-import { ApplicationPageOptions } from 'common/generalconsts/pageOptions.enums';
 
 const Index = (props: any) => {
 	const intl = props.intl as InjectedIntl;
-	return (
-		<div/>
-	);
+	return <div />;
 };
 
 Index.getInitialProps = async (ctx: NextContext) => {

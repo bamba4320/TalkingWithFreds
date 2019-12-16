@@ -1,19 +1,10 @@
-import {
-	CONFIGURATION_STORE,
-	CURRENT_USER_STORE,
-	initializeStores,
-	MESSAGES_STORE,
-	MODAL_STORE,
-	UI_STORE,
-} from 'BL/stores';
+import {CONFIGURATION_STORE, CURRENT_USER_STORE, initializeStores, MODAL_STORE, UI_STORE} from 'BL/stores';
 import ConfigurationStore from 'BL/stores/Configuration.store';
 import CurrentUserStore from 'BL/stores/CurrentUser.store';
-import MessagesStore from 'BL/stores/Messages.store';
 import ModalStore, {MODAL_HASHTAG} from 'BL/stores/Modal.store';
 import UiStore from 'BL/stores/Ui.store';
-import {ApplicationPageOptions, LayoutPageOptions, MessagesPageOptions} from 'common/generalconsts/pageOptions.enums';
+import {ApplicationPageOptions, LayoutPageOptions} from 'common/generalconsts/pageOptions.enums';
 import {Width} from 'common/generalconsts/width.const';
-import Logger from 'common/utils/logger/logger';
 import MobileDetectUtils from 'common/utils/processUtils/MobileDetectUtils';
 import NextjsProcessUtils from 'common/utils/processUtils/NextjsProcessUtils';
 import UserAgentDetecor from 'common/utils/processUtils/UserAgentDetecor';
@@ -62,7 +53,6 @@ class NofshonitApp extends App {
 		const mobxStores = initializeStores(isServer);
 
 		// Only in server side we load the configuration
-		const messagesStore = mobxStores[MESSAGES_STORE] as MessagesStore;
 		const currentUserStore = mobxStores[CURRENT_USER_STORE] as CurrentUserStore;
 
 		if (isServer) {
@@ -71,12 +61,9 @@ class NofshonitApp extends App {
 
 			try {
 				// Load messages, current User and Favorites
-				await Promise.all([
-					currentUserStore.initCurrentUserFromApi(appContext.ctx),
-					messagesStore.loadMessagesFromConfiguration(isServer),
-				]);
+				await currentUserStore.initCurrentUserFromApi(appContext.ctx);
 			} catch (err) {
-				Logger.error('error in init CurrentUser & Messages', err);
+				console.log('error in init CurrentUser & Messages', err);
 			}
 		}
 
@@ -93,12 +80,6 @@ class NofshonitApp extends App {
 
 		/** AppProps */
 		const appProps: DefaultAppIProps = await App.getInitialProps(appContext);
-
-		// Check if the page provided any messages context
-		// If so, we load those messages before the page is loaded
-		if (appProps && appProps.pageProps && appProps.pageProps[MessagesPageOptions.Context]) {
-			await messagesStore.loadMessagesByContext(appProps.pageProps[MessagesPageOptions.Context]);
-		}
 
 		// Get the `locale` and `messages` from the request object on the server.
 		// In the browser, use the same values that the server serialized.

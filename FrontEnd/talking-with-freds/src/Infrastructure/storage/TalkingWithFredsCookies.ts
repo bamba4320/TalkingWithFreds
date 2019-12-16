@@ -6,10 +6,9 @@ import nookies from 'nookies';
 
 enum CookiesKeys {
 	userToken = 'userToken',
-	purchase = 'purchase',
 }
 
-class NofhonitCookies {
+class TalkingWithFredsCookies {
 	/**
 	 * Saves the token of the user in cookies
 	 * The token should be saved
@@ -26,29 +25,6 @@ class NofhonitCookies {
 		}
 
 		return token;
-	}
-
-	/**
-	 * Saves the category in cookies
-	 * @param categoryId The category
-	 */
-	public savePurchase(categoryId: string) {
-		this.setCookie(CookiesKeys.purchase, categoryId);
-		return categoryId;
-	}
-	/**
-	 * Clear the category form purchase from cookies
-	 */
-	public clearPurchase() {
-		this.removeCookie(CookiesKeys.purchase);
-	}
-	public getPurchase(ctx?: NextContext): string | null {
-		const categoryId = this.getCookie(CookiesKeys.purchase, ctx);
-		if (categoryId && categoryId.length > 0) {
-			return categoryId;
-		}
-
-		return null;
 	}
 
 	/**
@@ -120,4 +96,4 @@ class NofhonitCookies {
 	}
 }
 
-export default new NofhonitCookies();
+export default new TalkingWithFredsCookies();
