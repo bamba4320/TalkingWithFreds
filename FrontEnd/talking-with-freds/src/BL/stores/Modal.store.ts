@@ -1,7 +1,5 @@
 import {Width} from 'common/generalconsts/width.const';
 import {pushUrl} from 'common/routes/historyUtils';
-import PurchaseUtils from 'common/utils/purchase/PurchaseUtils';
-import Lang from 'Infrastructure/Language/Language';
 import {action, computed, IObservableArray, observable} from 'mobx';
 import Router from 'next/router';
 import {isNullOrUndefined} from 'util';
@@ -178,7 +176,7 @@ export default class ModalStore {
 		isFromPurchase?: boolean
 	) => {
 		const modalItem: ModalItem = new ModalItem(
-			Lang.format(options.title || ''),
+			'',
 			component,
 			options.fullScreen !== undefined ? options.fullScreen : true,
 			options.closeFromOutsideModal !== undefined ? options.closeFromOutsideModal : true,
@@ -207,10 +205,6 @@ export default class ModalStore {
 			this.historyModal = {modal: modalItem, isFromPurchase};
 			this.lastScrollTopPosition = window.pageYOffset;
 		}
-		// because the #modal and back event we need to add cookie to stay in purchse
-		if (ismobile && isFromPurchase) {
-			PurchaseUtils.addPurchaseCookie();
-		}
 		this._modalIsOpen = true;
 		this._modalStack.push(modalItem);
 	};
@@ -219,9 +213,6 @@ export default class ModalStore {
 	public pushHistory = () => {
 		if (this.historyModal && this.historyModal.modal) {
 			this._modalStack.push(this.historyModal.modal);
-			if (this.historyModal.isFromPurchase) {
-				PurchaseUtils.addPurchaseCookie();
-			}
 			this._modalIsOpen = true;
 		}
 	};

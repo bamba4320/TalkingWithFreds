@@ -1,5 +1,4 @@
-import {CONFIGURATION_STORE, CURRENT_USER_STORE, initializeStores, MODAL_STORE, UI_STORE} from 'BL/stores';
-import ConfigurationStore from 'BL/stores/Configuration.store';
+import {CURRENT_USER_STORE, initializeStores, MODAL_STORE, UI_STORE} from 'BL/stores';
 import CurrentUserStore from 'BL/stores/CurrentUser.store';
 import ModalStore, {MODAL_HASHTAG} from 'BL/stores/Modal.store';
 import UiStore from 'BL/stores/Ui.store';
@@ -12,25 +11,13 @@ import MobileDetect from 'mobile-detect';
 import {Provider} from 'mobx-react';
 import App, {Container, DefaultAppIProps, NextAppContext} from 'next/app';
 import Router from 'next/router';
-import EnvFooter from 'NextJsComponents/EnvFooter/EnvFooter';
 import Layout from 'NextJsComponents/Layout/Layout';
 import React from 'react';
 import 'react-block-ui/style.css';
-import {addLocaleData, IntlProvider} from 'react-intl';
 import 'semantic-ui-less/semantic.less';
 import 'UI/index.scss';
 
-// Register React Intl's locale data for the user's locale in the browser. This
-// locale data was added to the page by `pages/_document.js`. This only happens
-// once, on initial page load in the browser.
-if (NextjsProcessUtils.isBrowser() && (window as any).ReactIntlLocaleData) {
-	const reactIntlLocaleData = (window as any).ReactIntlLocaleData;
-	Object.keys(reactIntlLocaleData).forEach((lang) => {
-		addLocaleData(reactIntlLocaleData[lang]);
-	});
-}
-
-class NofshonitApp extends App {
+class TalkingWithFredsApp extends App {
 	public static async getInitialProps(appContext: NextAppContext) {
 		// In case of error, we don't need to do all the initialize of the App (including MobX)
 		if (NextjsProcessUtils.isErrorPage(appContext)) {
@@ -56,15 +43,12 @@ class NofshonitApp extends App {
 		const currentUserStore = mobxStores[CURRENT_USER_STORE] as CurrentUserStore;
 
 		if (isServer) {
-			const configurationStore = mobxStores[CONFIGURATION_STORE] as ConfigurationStore;
-			await configurationStore.loadConfiguration((appContext.ctx.req as any).configuration);
-
-			try {
-				// Load messages, current User and Favorites
-				await currentUserStore.initCurrentUserFromApi(appContext.ctx);
-			} catch (err) {
-				console.log('error in init CurrentUser & Messages', err);
-			}
+			// try {
+			// 	// Load messages, current User and Favorites
+			// 	await currentUserStore.initCurrentUserFromApi(appContext.ctx);
+			// } catch (err) {
+			// 	console.log('error in init CurrentUser & Messages', err);
+			// }
 		}
 
 		/** Inject infos to application context (can be used in `getInitialProps` in pages) */
@@ -84,7 +68,6 @@ class NofshonitApp extends App {
 		// Get the `locale` and `messages` from the request object on the server.
 		// In the browser, use the same values that the server serialized.
 		const {req} = appContext.ctx;
-		const {locale, messages} = req || (window as any).__NEXT_DATA__.props;
 		const initialNow = Date.now();
 
 		// props only for `_app`
@@ -92,8 +75,6 @@ class NofshonitApp extends App {
 			...appProps,
 			initialMobxState: mobxStores,
 			initialMobileDetect: mobileDetect,
-			locale,
-			messages,
 			initialNow,
 		};
 	}
@@ -116,7 +97,6 @@ class NofshonitApp extends App {
 	public render() {
 		const {Component, pageProps} = this.props;
 		const initialMobileDetect: MobileDetect = (this.props as any).initialMobileDetect;
-		const {locale, messages, initialNow} = this.props as any;
 
 		// In case of error, we only send back the Container And the Component
 		if (pageProps[LayoutPageOptions.hasError]) {
@@ -129,22 +109,11 @@ class NofshonitApp extends App {
 
 		return (
 			<Container>
-				<IntlProvider locale={locale} messages={messages} initialNow={initialNow}>
-					<Provider {...this.mobxStores}>
-						<>
-							<Layout pageProps={pageProps} mobileDetect={initialMobileDetect}>
-								<Component {...pageProps} />
-							</Layout>
-							{/* // * shows the current env variables */}
-							{/* // * Only in production, we won't show the EnvFooter at all */}
-							{/* // !!! Change this when we deploy to production */}
-							{/* {EnvConfig.getAppEnv() !== 'production' && (
-								<EnvFooter pageProps={pageProps} initialMobileDetect={initialMobileDetect} />
-							)} */}
-							<EnvFooter pageProps={pageProps} initialMobileDetect={initialMobileDetect} />
-						</>
-					</Provider>
-				</IntlProvider>
+				<Provider {...this.mobxStores}>
+					<Layout pageProps={pageProps} mobileDetect={initialMobileDetect}>
+						<Component {...pageProps} />
+					</Layout>
+				</Provider>
 			</Container>
 		);
 	}
@@ -223,4 +192,4 @@ class NofshonitApp extends App {
 	};
 }
 
-export default NofshonitApp;
+export default TalkingWithFredsApp;
