@@ -15,6 +15,10 @@ class App extends React.Component<IProps, IState>{
     this.state={
       content:<MainLobbyContainer/>
     };
+
+    this.initStores();
+
+
   }
 
   public render(){
@@ -23,6 +27,10 @@ class App extends React.Component<IProps, IState>{
         {this.state.content}
       </div>
     );
+  }
+
+  public initStores(){
+
   }
 }
 

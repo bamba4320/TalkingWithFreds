@@ -1,14 +1,33 @@
-.conversation-wrapper{
-    padding: 5px 10px;
-    width: 100%;
-    overflow: scroll;
-    height: 80px;
+.conversation-wrapper {
+    position: relative;
+	padding: 5px 10px;
+	width: 100%;
+	overflow: scroll;
+	height: 80px;
 
-    .conv-profile-img-wrapper{
+	.conv-profile-img-wrapper {
+        position: relative;
         padding: 5px;
-        
-        .conv-profile-img{
-            
+        float: left;
+        width:30%;
+        height: 100%;
+		.circular-image-wrapper {
+            border-radius: 50%;
+            overflow: hidden;
+			.conv-profile-img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+			}
+		}
+    }
+    .conv-details-wrapper{
+        position: relative;
+        width:70%;
+        height:100%;
+        float: right;
+        .conv-name-and-last-message{
+
         }
     }
 }
