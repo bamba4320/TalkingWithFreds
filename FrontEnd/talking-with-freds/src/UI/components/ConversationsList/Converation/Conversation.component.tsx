@@ -19,7 +19,8 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 				{/* conversation profile image */}
 				<div className='conv-profile-img-wrapper'>
 					<div className='circular-image-wrapper'>
-						<Image className='conv-profile-img' src={this.props.convDits.profileImg} />
+						<Image className='conv-profile-img' src={require('../../../../static/images/appaProfilePicture.jpg')} />
+						{/* <Image className='conv-profile-img' src={require(this.props.convDits.profileImg.toString())} /> */}
 					</div>
 				</div>
 				{/* the conversation details */}

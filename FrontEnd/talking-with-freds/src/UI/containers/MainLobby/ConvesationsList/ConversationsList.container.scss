@@ -1,4 +1,24 @@
-.conversations-list-wrapper{
+.left-sidebar-wrapper {
+	overflow: auto;
+	.user-profile-wrapper {
+		position: relative;
+		display: flex;
+		padding-right: 20px;
+	}
 
+	.conv-search-wrapper {
+		padding: 5px 10px;
+		background-color: #969696;
+		.ui.input {
+			> input {
+				border-radius: 16px;
+			}
+		}
+	}
+
+	.conversations-list-wrapper {
+		position: relative;
+		overflow-y: scroll;
+		padding-right: 20px;
+	}
 }
-

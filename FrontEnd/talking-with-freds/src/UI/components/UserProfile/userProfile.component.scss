@@ -1,0 +1,21 @@
+.user-profile-inner-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	.user-profile-img-wrapper {
+		position: relative;
+		padding: 3% 0;
+		float: left;
+		width: 10%;
+		height: 80%;
+		.circular-image-wrapper {
+			border-radius: 50%;
+			overflow: hidden;
+			.user-profile-img {
+				width: 100%;
+				height: auto;
+				object-fit: contain;
+			}
+		}
+	}
+}
