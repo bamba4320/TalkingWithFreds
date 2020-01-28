@@ -18,8 +18,6 @@ export default class UserProfileComponent extends React.Component<IProps, IState
 						<Image className='user-profile-img' src={require('../../../static/images/appaProfilePicture.jpg')} />
 					</div>
 				</div>
-				{/* the conversation details */}
-				<div className='user-name'>{'user name'}</div>
 			</div>
 		);
 	}

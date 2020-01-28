@@ -1,13 +1,14 @@
 .user-profile-inner-wrapper {
 	position: relative;
-	height: 100%;
+	display: flex;
 	width: 100%;
+	padding: 0 10px;
+	background-color: #c4c3c3;
 	.user-profile-img-wrapper {
 		position: relative;
-		padding: 3% 0;
-		float: left;
-		width: 10%;
-		height: 80%;
+		padding: 1% 0;
+		width: 8%;
+		height: auto;
 		.circular-image-wrapper {
 			border-radius: 50%;
 			overflow: hidden;
