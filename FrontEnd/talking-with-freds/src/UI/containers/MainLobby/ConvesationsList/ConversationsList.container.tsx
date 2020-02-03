@@ -8,9 +8,17 @@ import UserProfileComponent from '../../../components/UserProfile/userProfile.co
 import {Input} from 'semantic-ui-react';
 
 interface IProps {}
-interface IState {}
+interface IState {
+	selectedConv: string | null;
+}
 
 export default class ConversationsListContainer extends React.Component<IProps, IState> {
+	constructor(props: IProps) {
+		super(props);
+		this.state = {
+			selectedConv: null,
+		};
+	}
 	public render() {
 		return (
 			<div className='left-sidebar-wrapper'>
@@ -21,11 +29,27 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 					<Input fluid placeholder={'Search...'} />
 				</div>
 				<div className='conversations-list-wrapper'>
-					{ConversationStore.getUserConversations().map((conversarion: ConversationModel) => {
-						return <ConversationComponent convDits={conversarion} />;
-					})}
+					{ConversationStore.getUserConversations().map((conversarion: ConversationModel) => (
+						<ConversationComponent
+							convDits={conversarion}
+							onConvSelect={this.onConvSelect}
+							isSelected={this.isSelected}
+						/>
+					))}
 				</div>
 			</div>
 		);
 	}
+
+	public onConvSelect = (convId: string) => {
+		if (this.state.selectedConv !== convId) {
+			this.setState({selectedConv: convId});
+		}
+	};
+
+	public isSelected = (convId: string) => {
+		if (this.state.selectedConv && convId) {
+			return this.state.selectedConv === convId;
+		}
+	};
 }

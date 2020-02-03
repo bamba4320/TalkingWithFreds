@@ -5,6 +5,8 @@ import ConversationModel from '../../../../common/models/Conversation.model';
 
 interface IProps {
 	convDits: ConversationModel;
+	onConvSelect:any;
+	isSelected:any;
 }
 interface IState {}
 
@@ -15,7 +17,7 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 
 	public render() {
 		return (
-			<div className='conversation-wrapper'>
+			<div className={`conversation-wrapper ${this.props.isSelected(this.props.convDits.convId)? 'selected' : ''}`}>
 				{/* conversation profile image */}
 				<div className='conv-profile-img-wrapper'>
 					<div className='circular-image-wrapper'>
