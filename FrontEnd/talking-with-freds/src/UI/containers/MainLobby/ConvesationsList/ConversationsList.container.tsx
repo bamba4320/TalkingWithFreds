@@ -6,18 +6,26 @@ import ConversationComponent from '../../../components/ConversationsList/Convera
 import './ConversationsList.container.scss';
 import UserProfileComponent from '../../../components/UserProfile/userProfile.component';
 import {Input} from 'semantic-ui-react';
+import {observer} from 'mobx-react';
 
-interface IProps {}
+interface IProps {
+	conversationStore: ConversationStore;
+}
 interface IState {
 	selectedConv: string | null;
+	filter: string;
 }
 
+@observer
 export default class ConversationsListContainer extends React.Component<IProps, IState> {
+	private conversationStore: ConversationStore;
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
 			selectedConv: null,
+			filter: '',
 		};
+		this.conversationStore = this.props.conversationStore;
 	}
 	public render() {
 		return (
@@ -26,16 +34,16 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 					<UserProfileComponent />
 				</div>
 				<div className='conv-search-wrapper'>
-					<Input fluid placeholder={'Search...'} />
+					<Input fluid placeholder={'Search...'} onChange={(e) => this.setState({filter: e.target.value})} />
 				</div>
 				<div className='conversations-list-wrapper'>
-					{ConversationStore.getUserConversations().map((conversarion: ConversationModel) => (
-						<ConversationComponent
-							convDits={conversarion}
-							onConvSelect={this.onConvSelect}
-							isSelected={this.isSelected}
-						/>
-					))}
+					{this.conversationStore.getUserConversations.map((conv) => {
+						if (conv.convName.includes(this.state.filter)) {
+							return (
+								<ConversationComponent convDits={conv} isSelected={this.isSelected} onConvSelect={this.onConvSelect} />
+							);
+						}
+					})}
 				</div>
 			</div>
 		);

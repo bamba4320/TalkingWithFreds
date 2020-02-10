@@ -1,7 +1,10 @@
 import React from 'react';
 import './ChatWindow.container.scss';
+import MessagesStore from '../../../../BL/stores/MessagesStore.store';
 
-interface IProps {}
+interface IProps {
+	messagesStore:MessagesStore;
+}
 interface IState {}
 
 export default class ChatWindowContainer extends React.Component<IProps, IState> {
