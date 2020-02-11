@@ -12,7 +12,7 @@ interface IProps {
 	conversationStore: ConversationStore;
 }
 interface IState {
-	selectedConv: string | null;
+	selectedConv: number | null;
 	filter: string;
 }
 
@@ -49,13 +49,14 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 		);
 	}
 
-	public onConvSelect = (convId: string) => {
-		if (this.state.selectedConv !== convId) {
-			this.setState({selectedConv: convId});
+	public onConvSelect = (convDits: ConversationModel) => {
+		if (this.state.selectedConv !== convDits.convId) {
+			this.conversationStore.selectConversation(convDits);
+			this.setState({selectedConv: convDits.convId});
 		}
 	};
 
-	public isSelected = (convId: string) => {
+	public isSelected = (convId: number) => {
 		if (this.state.selectedConv && convId) {
 			return this.state.selectedConv === convId;
 		}

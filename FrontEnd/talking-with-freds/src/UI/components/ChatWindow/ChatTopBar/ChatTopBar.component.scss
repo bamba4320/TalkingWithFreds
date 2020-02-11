@@ -1,0 +1,23 @@
+.top-bar-wrapper{
+    position: relative;
+	display: flex;
+	width: 100%;
+	padding: 0 10px;
+    background-color: #c4c3c3;
+    
+    .chat-img-wrapper {
+		position: relative;
+		padding: 1% 0;
+		width: 8%;
+		height: auto;
+		.circular-image-wrapper {
+			border-radius: 50%;
+			overflow: hidden;
+			.chat-img{
+				width: 100%;
+				height: auto;
+				object-fit: contain;
+			}
+		}
+	}
+}

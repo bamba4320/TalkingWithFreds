@@ -7,9 +7,13 @@ export default class ConversationStore{
 
     @observable
     private currentUserConversations:ConversationModel[];
+
+    @observable
+    private currentSelectedConversation:ConversationModel | null;
     
     constructor(){
         this.currentUserConversations = [];
+        this.currentSelectedConversation = null;
     }
 
     @action
@@ -17,8 +21,18 @@ export default class ConversationStore{
         this.currentUserConversations = await ConversationFetcher.getUserConversations();
     }
 
+    @action
+    public selectConversation(conv:ConversationModel){
+        this.currentSelectedConversation = conv;
+    }
+
     @computed
     get getUserConversations(){
         return this.currentUserConversations;
+    }
+
+    @computed
+    get getCurrentSelectedConversation(){
+        return this.currentSelectedConversation;
     }
 }
