@@ -10,7 +10,7 @@ export default class CurrentUserStore{
     }
 
     @computed
-    public isUserLoggedIn(){
+    public get isUserLoggedIn(){
         return this.currentUser !== null;
     }
 }
