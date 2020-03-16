@@ -1,6 +1,7 @@
 import React from 'react';
 import CurrentUserStore from '../../../BL/stores/CurrentUserStore.store';
 import AuthStore from '../../../BL/stores/Auth.store';
+import './Login.container.scss';
 
 interface IProps {
 	authStore: AuthStore;
