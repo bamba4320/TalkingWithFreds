@@ -26,7 +26,6 @@ class App extends React.Component<IProps, IState>{
       <div className='App'>
         <Switch>
           <Route exact={true} path='/Login'>
-
           </Route>
           <Route exact={true} path='/MainLobby'>
             <MainLobbyContainer 
