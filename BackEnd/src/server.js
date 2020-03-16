@@ -36,8 +36,8 @@ app.use((err, req, res, next) => {
 
 // mongoDB database url
 const dbURL = 'mongodb://localhost:27017/TalkingWithFredsLocal';
-const mongoose = require('mongoose')
-	.connect(dbURL)
+require('mongoose')
+	.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true})
 	.then(() => {
 		app.listen(4320, () => {
 			console.log('Server is ready and listening on port 4320');
