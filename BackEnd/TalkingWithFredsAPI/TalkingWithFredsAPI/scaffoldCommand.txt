@@ -1,7 +1,0 @@
-﻿Scaffold-DbContext "Server=DESKTOP-N7FPIC6;Database=TalkingWithFreds;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -ContextDir "ContextManager"
-
-
- var path = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\netcoreapp2.1", "");
-
-                IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(path).AddJsonFile("appsettings.json").Build();
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
