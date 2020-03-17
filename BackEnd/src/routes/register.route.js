@@ -3,13 +3,15 @@ const router = require('express').Router();
 const userController = require('../BL/Controllers/User.controller');
 // base route
 router.get('/', (req, res) => {
-	res.status(200).send('Welcome to Login route!');
+	res.status(200).send('Welcome to Register route!');
 });
 
-router.post('/authenticateLogin', (req, res) => {
+// Add new user
+router.post('/', (req, res) => {
 	try {
-		userController.authenticateLogin(req.body.email, req.body.password).then((token) => {
-			res.status(200).json({token: token});
+		console.log(req.body.password);
+		userController.addNewUser(req.body.username, req.body.email, req.body.password).then(() => {
+			res.sendStatus(200);
 		});
 	} catch (err) {
 		console.error(err);
@@ -21,5 +23,4 @@ router.post('/authenticateLogin', (req, res) => {
 	}
 });
 
-// export route
 module.exports = router;

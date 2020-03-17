@@ -23,7 +23,7 @@ class App extends React.Component<IProps, IState> {
 		// TODO: add init current user from api
 		this.conversationStore = new ConversationStore();
 		this.messagesStore = new MessagesStore();
-		this.authStore = new AuthStore();
+		this.authStore = new AuthStore(this.currentUserStore);
 	}
 
 	public render() {

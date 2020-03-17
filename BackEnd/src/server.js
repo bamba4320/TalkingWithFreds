@@ -4,16 +4,37 @@ const app = express();
 
 // import all routes
 const loginRoute = require('./routes/login.route');
+const registerRoute = require('./routes/register.route');
+
+// body parser is used to decode http/s post body.
+const bodyParser = require('body-parser');
+
+// enable access from all origins
+const cors = require('cors');
+
+app.use(cors());
+// apply body parser to requests recived
+app.use(bodyParser.json());
+
+/**
+ * extended points to the ability to post nested objects.
+ * if false, you can not post those.
+ * if true, you can post whatever and however you like to.
+ */
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // * server routes:
 // * base url: http://localhost:4320/api/
+
+// login route
+app.use('/api/login', loginRoute);
+// register route
+app.use('/api/register', registerRoute);
 
 // base route
 app.use('/api', (req, res) => {
 	res.status(200).send("Welcome to Talkin' With Freds main route!");
 });
-// login route
-app.use('/api/login', loginRoute);
 
 //handle errors:
 app.use((err, req, res, next) => {
