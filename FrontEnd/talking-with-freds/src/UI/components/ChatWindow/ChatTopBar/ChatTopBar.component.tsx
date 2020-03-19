@@ -16,7 +16,7 @@ export default class ChatTopBarComponent extends React.Component<IProps, IState>
 			<div className='top-bar-wrapper'>
 				<div className='chat-img-wrapper'>
 					<div className='circular-image-wrapper'>
-						<Image className='chat-img' src={require(this.props.chatImage)} />
+						<Image className='chat-img' src={this.props.chatImage} />
 					</div>
 				</div>
 			</div>

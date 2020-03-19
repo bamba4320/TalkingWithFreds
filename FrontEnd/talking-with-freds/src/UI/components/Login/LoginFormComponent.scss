@@ -1,0 +1,30 @@
+.login-form-wrapper {
+	position: relative;
+	width: 45%;
+	margin: auto;
+	padding-top: 10%;
+
+	.login-form {
+		.form-field-wrapper {
+			margin-bottom: 50px;
+			.login-input {
+				font-size: 2rem;
+				input {
+					background-color: transparent !important;
+					color: wheat !important;
+					border: solid 1px #8dc8f8;
+					border-radius: 15px;
+				}
+			}
+		}
+
+		.submit-btn-wrapper {
+			padding: 10px;
+			text-align: center;
+			.submit-btn {
+				width: 50%;
+				font-size: 2rem;
+			}
+		}
+	}
+}

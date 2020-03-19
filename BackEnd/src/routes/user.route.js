@@ -1,17 +1,22 @@
-// start router
 const router = require('express').Router();
 const userController = require('../BL/Controllers/User.controller');
+
 // base route
 router.get('/', (req, res) => {
-	res.status(200).send('Welcome to Register route!');
+	res.status(200).send('Welcome to User Route!');
 });
 
-// Add new user
-router.post('/', (req, res) => {
+// get user deatails
+router.get('/getUser', (req, res) => {
 	try {
-		userController.addNewUser(req.body.username, req.body.email, req.body.password).then(() => {
-			res.sendStatus(200);
-		});
+		userController
+			.getUserDetailsFromToken(req.token)
+			.then((user) => {
+				res.status(200).json(user);
+			})
+			.catch((err) => {
+				throw err;
+			});
 	} catch (err) {
 		console.error(err);
 		if (err.message === 'Not Found') {

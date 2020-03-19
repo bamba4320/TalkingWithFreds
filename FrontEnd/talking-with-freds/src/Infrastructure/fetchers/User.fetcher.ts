@@ -6,4 +6,8 @@ export default class UserFetcher extends BaseFetcher {
     public static async authenticateLogin(email:string, password:string){
         return await (await this.post('/login/authenticateLogin', {email:email, password:password})).data;
     }
+
+    public static async getUserFromAPI(){
+        return await(await this.get(this.routeBaseURL+'/getUser')).data;
+    }
 }

@@ -7,10 +7,13 @@ import MessagesStore from './BL/stores/MessagesStore.store';
 import CurrentUserStore from './BL/stores/CurrentUserStore.store';
 import LoginContainer from './UI/containers/Login/Login.container';
 import AuthStore from './BL/stores/Auth.store';
+import {observer} from 'mobx-react';
+import TalkingWithFredsLocalStorage from './Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
 
 interface IProps {}
 interface IState {}
 
+@observer
 class App extends React.Component<IProps, IState> {
 	private conversationStore: ConversationStore;
 	private messagesStore: MessagesStore;
@@ -20,10 +23,17 @@ class App extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.currentUserStore = new CurrentUserStore();
-		// TODO: add init current user from api
 		this.conversationStore = new ConversationStore();
 		this.messagesStore = new MessagesStore();
 		this.authStore = new AuthStore(this.currentUserStore);
+	}
+
+	public componentDidMount(){
+		TalkingWithFredsLocalStorage.getTokenFromLocalStorage().then((token) => {
+			if (token) {
+				this.currentUserStore.initUserFromAPI();
+			}
+		}).catch((err)=>{console.error(err)});
 	}
 
 	public render() {
