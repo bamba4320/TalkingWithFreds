@@ -6,10 +6,6 @@ interface IProps {}
 interface IState {}
 
 export default class UserProfileComponent extends React.Component<IProps, IState> {
-	constructor(props: IProps) {
-		super(props);
-	}
-
 	public render() {
 		return (
 			<div className='user-profile-inner-wrapper'>

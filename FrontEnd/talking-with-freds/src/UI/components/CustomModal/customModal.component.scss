@@ -1,0 +1,87 @@
+// * All the '!important' statments are for overriding the Semantic-Ui defaults
+
+.ui.modal.main-modal-wrapper {
+	border-radius: 16px;
+	width: 50%;
+	min-width: 640px;
+	background-color: #202020 !important;
+	border: solid 1px white !important;
+	border-radius: 16px;
+	color: white !important;
+	padding: 0 !important;
+	overflow: hidden;
+
+	&.fitcontentmodal {
+		width: fit-content !important;
+		width: -moz-fit-content;
+	}
+
+	&.widerdesktopmodal {
+		width: 85%;
+	}
+
+	.close-icon {
+		color: white !important;
+		cursor: pointer !important;
+		padding-top: 2% !important;
+		padding-left: 2% !important;
+		padding-bottom: 2% !important;
+	}
+
+	.content {
+		padding: 0 !important;
+		height: 100% !important;
+		background-color: #202020;
+
+		&.overflowscroll {
+			overflow-y: auto !important;
+			overflow-x: hidden !important;
+		}
+
+		.ui.container {
+			background-color: transparent;
+			min-height: 50vh;
+
+			&.paddingbottom75 {
+				padding-bottom: 75px !important;
+			}
+
+			.modal-header-segment {
+				background-color: #042531 !important;
+				max-width: 100% !important;
+				color: white !important;
+				margin-top: -40px;
+				padding: 15px 0;
+
+				.modal-header {
+					color: white;
+					background-color: transparent;
+					width: auto !important;
+					text-align: center !important;
+					margin: auto !important;
+				}
+			}
+			.inner-content-wrapper {
+				padding: 20px 20%;
+				text-align: center;
+
+				input {
+					padding: 10px;
+					color: white !important ;
+					background-color: #202020 !important;
+					border: none !important;
+					width: 80%;
+					border-bottom: solid white 2px !important;
+					font-size: 18px;
+				}
+
+				button {
+					font-size: 22px;
+					padding: 10px 30px;
+					border-radius: 25px;
+					width: 40%;
+				}
+			}
+		}
+	}
+}

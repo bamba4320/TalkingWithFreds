@@ -11,17 +11,14 @@ interface IProps {
 interface IState {}
 
 export default class ConversationComponent extends React.Component<IProps, IState> {
-	constructor(props: IProps) {
-		super(props);
-	}
-
 	public render() {
 		return (
-			<div className={`conversation-wrapper ${this.props.isSelected(this.props.convDits.convId) ? 'selected' : ''}`} onClick={this.props.onConvSelect(this.props.convDits)}>
+			<div
+				className={`conversation-wrapper ${this.props.isSelected(this.props.convDits.convId) ? 'selected' : ''}`}
+				onClick={this.props.onConvSelect(this.props.convDits)}>
 				{/* conversation profile image */}
 				<div className='conv-profile-img-wrapper'>
 					<div className='circular-image-wrapper'>
-						
 						<Image className='conv-profile-img' src={require('../../../../static/images/appaProfilePicture.jpg')} />
 						{/* // TODO: start apache / iis web server (site) and use it to get images convs and users  */}
 						{/* <Image className='conv-profile-img' src={require(this.props.convDits.profileImg.toString())} /> */}

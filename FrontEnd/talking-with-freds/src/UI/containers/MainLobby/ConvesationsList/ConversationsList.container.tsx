@@ -42,6 +42,8 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 							return (
 								<ConversationComponent convDits={conv} isSelected={this.isSelected} onConvSelect={this.onConvSelect} />
 							);
+						}else{
+							return <div/>
 						}
 					})}
 				</div>

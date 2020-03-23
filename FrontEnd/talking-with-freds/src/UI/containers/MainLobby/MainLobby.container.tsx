@@ -1,34 +1,29 @@
 import React from 'react';
-import './MainLobby.container.scss';
-import ConversationsListContainer from './ConvesationsList/ConversationsList.container';
+import rootStores from '../../../BL/stores';
+import { CONVERSATION_STORE, MESSAGES_STORE } from '../../../BL/stores/storesKeys';
 import ChatWindowContainer from './ChatWindow/ChatWindow.container';
-import ConversationStore from '../../../BL/stores/Conversation.store';
-import MessagesStore from '../../../BL/stores/MessagesStore.store';
+import ConversationsListContainer from './ConvesationsList/ConversationsList.container';
+import './MainLobby.container.scss';
 
 interface IProps{
-    conversationStore:ConversationStore;
-    messagesStore:MessagesStore;
 }
 interface IState{}
 
+const conversationStore = rootStores[CONVERSATION_STORE];
+const messagesStore = rootStores[MESSAGES_STORE];
 
 export default class MainLobbyContainer extends React.Component<IProps, IState>{
-
-    constructor(props:IProps){
-        super(props);
-    }
-
     public render(){
         return( 
             <div className='main-lobby-super-wrapper'>
                 {/* conversation list part */}
                 <div className='conversations-lobby-wrapper'>
-                    <ConversationsListContainer conversationStore={this.props.conversationStore}/>
+                    <ConversationsListContainer conversationStore={conversationStore}/>
                 </div>
 
                 {/* chat part  */}
                 <div className='chat-window-lobby-wrapper'>
-                    <ChatWindowContainer messagesStore={this.props.messagesStore}/>
+                    <ChatWindowContainer messagesStore={messagesStore}/>
                 </div>
             </div>
         );

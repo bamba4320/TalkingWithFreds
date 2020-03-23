@@ -1,64 +1,58 @@
+import {observer, Provider} from 'mobx-react';
 import React from 'react';
+import BlockUi from 'react-block-ui';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import './App.css';
-import MainLobbyContainer from './UI/containers/MainLobby/MainLobby.container';
-import {Router, Switch, Route, Redirect} from 'react-router-dom';
-import ConversationStore from './BL/stores/Conversation.store';
-import MessagesStore from './BL/stores/MessagesStore.store';
-import CurrentUserStore from './BL/stores/CurrentUserStore.store';
-import LoginContainer from './UI/containers/Login/Login.container';
-import AuthStore from './BL/stores/Auth.store';
-import {observer} from 'mobx-react';
+import rootStores from './BL/stores';
+import {CURRENT_USER_STORE, UI_STORE} from './BL/stores/storesKeys';
 import TalkingWithFredsLocalStorage from './Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
+import LoginContainer from './UI/containers/Login/Login.container';
+import MainLobbyContainer from './UI/containers/MainLobby/MainLobby.container';
+import MainModalContainer from './UI/containers/MainModal/MainModal.container';
 
 interface IProps {}
 interface IState {}
 
+const currentUserStore = rootStores[CURRENT_USER_STORE];
+const uiStore = rootStores[UI_STORE];
 @observer
 class App extends React.Component<IProps, IState> {
-	private conversationStore: ConversationStore;
-	private messagesStore: MessagesStore;
-	private currentUserStore: CurrentUserStore;
-	private authStore: AuthStore;
-
-	constructor(props: IProps) {
-		super(props);
-		this.currentUserStore = new CurrentUserStore();
-		this.conversationStore = new ConversationStore();
-		this.messagesStore = new MessagesStore();
-		this.authStore = new AuthStore(this.currentUserStore);
-	}
-
-	public componentDidMount(){
-		TalkingWithFredsLocalStorage.getTokenFromLocalStorage().then((token) => {
-			if (token) {
-				this.currentUserStore.initUserFromAPI();
-			}
-		}).catch((err)=>{console.error(err)});
+	
+	public componentDidMount() {
+		TalkingWithFredsLocalStorage.getTokenFromLocalStorage()
+			.then((token) => {
+				if (token) {
+					currentUserStore.initUserFromAPI();
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	public render() {
+		const shouldBlockUiSite = uiStore.shouldBlockUiSite;
 		return (
-			<div className='App'>
-				<Switch>
-					<Route exact={true} path='/Login'>
-						{!this.currentUserStore.isUserLoggedIn ? (
-							<LoginContainer authStore={this.authStore} />
-						) : (
-							<Redirect to='/MainLobby' />
-						)}
-					</Route>
-					<Route exact={true} path='/MainLobby'>
-						{this.currentUserStore.isUserLoggedIn ? (
-							<MainLobbyContainer conversationStore={this.conversationStore} messagesStore={this.messagesStore} />
-						) : (
-							<Redirect to='/Login' />
-						)}
-					</Route>
-					<Route exact={true} path='/'>
-						{this.currentUserStore.isUserLoggedIn ? <Redirect to='/MainLobby' /> : <Redirect to='/Login' />}
-					</Route>
-				</Switch>
-			</div>
+			<Provider {...rootStores}>
+				<BlockUi className={'block-ui-container'} blocking={shouldBlockUiSite}>
+					<BrowserRouter>
+						<div className='App'>
+							<MainModalContainer />
+							<Switch>
+								<Route exact={true} path='/Login'>
+									{!currentUserStore.isUserLoggedIn ? <LoginContainer /> : <Redirect to='/MainLobby' />}
+								</Route>
+								<Route exact={true} path='/MainLobby'>
+									{currentUserStore.isUserLoggedIn ? <MainLobbyContainer /> : <Redirect to='/Login' />}
+								</Route>
+								<Route exact={true} path='/'>
+									{currentUserStore.isUserLoggedIn ? <Redirect to='/MainLobby' /> : <Redirect to='/Login' />}
+								</Route>
+							</Switch>
+						</div>
+					</BrowserRouter>
+				</BlockUi>
+			</Provider>
 		);
 	}
 }
