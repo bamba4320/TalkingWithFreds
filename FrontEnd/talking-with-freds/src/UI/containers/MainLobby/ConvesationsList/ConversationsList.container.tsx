@@ -1,16 +1,15 @@
+import {observer} from 'mobx-react';
 import React from 'react';
-import './ConversationsList.container.scss';
-import ConversationStore from '../../../../BL/stores/Conversation.store';
+import {Input} from 'semantic-ui-react';
+import rootStores from '../../../../BL/stores';
+import {CONVERSATION_STORE} from '../../../../BL/stores/storesKeys';
 import ConversationModel from '../../../../common/models/Conversation.model';
 import ConversationComponent from '../../../components/ConversationsList/Converation/Conversation.component';
-import './ConversationsList.container.scss';
 import UserProfileComponent from '../../../components/UserProfile/userProfile.component';
-import {Input} from 'semantic-ui-react';
-import {observer} from 'mobx-react';
+import './ConversationsList.container.scss';
 
-interface IProps {
-	conversationStore: ConversationStore;
-}
+const conversationStore = rootStores[CONVERSATION_STORE];
+interface IProps {}
 interface IState {
 	selectedConv: number | null;
 	filter: string;
@@ -18,14 +17,12 @@ interface IState {
 
 @observer
 export default class ConversationsListContainer extends React.Component<IProps, IState> {
-	private conversationStore: ConversationStore;
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
 			selectedConv: null,
 			filter: '',
 		};
-		this.conversationStore = this.props.conversationStore;
 	}
 	public render() {
 		return (
@@ -37,13 +34,24 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 					<Input fluid placeholder={'Search...'} onChange={(e) => this.setState({filter: e.target.value})} />
 				</div>
 				<div className='conversations-list-wrapper'>
-					{this.conversationStore.getUserConversations.map((conv) => {
-						if (conv.convName.includes(this.state.filter)) {
+					{conversationStore.getUserConversations.map((conv) => {
+						console.log(conv, this.state.filter);
+						if (this.state.filter !== '') {
+							if (conv.convName.includes(this.state.filter)) {
+								return (
+									<ConversationComponent
+										convDits={conv}
+										isSelected={this.isSelected}
+										onConvSelect={this.onConvSelect}
+									/>
+								);
+							} else {
+								return <div />;
+							}
+						} else {
 							return (
 								<ConversationComponent convDits={conv} isSelected={this.isSelected} onConvSelect={this.onConvSelect} />
 							);
-						}else{
-							return <div/>
 						}
 					})}
 				</div>
@@ -53,7 +61,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 
 	public onConvSelect = (convDits: ConversationModel) => {
 		if (this.state.selectedConv !== convDits.convId) {
-			this.conversationStore.selectConversation(convDits);
+			conversationStore.selectConversation(convDits);
 			this.setState({selectedConv: convDits.convId});
 		}
 	};

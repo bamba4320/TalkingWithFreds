@@ -1,21 +1,14 @@
 import React from 'react';
-import './ChatWindow.container.scss';
-import MessagesStore from '../../../../BL/stores/MessagesStore.store';
+import rootStores from '../../../../BL/stores';
+import {MESSAGES_STORE} from '../../../../BL/stores/storesKeys';
 import ChatTopBarComponent from '../../../components/ChatWindow/ChatTopBar/ChatTopBar.component';
+import './ChatWindow.container.scss';
 
-interface IProps {
-	messagesStore: MessagesStore;
-}
+interface IProps {}
 interface IState {}
-
+// eslint-disable-next-line
+const messagesStore = rootStores[MESSAGES_STORE];
 export default class ChatWindowContainer extends React.Component<IProps, IState> {
-	private messageStore: MessagesStore;
-
-	constructor(props: IProps) {
-		super(props);
-		this.messageStore = this.props.messagesStore;
-	}
-
 	public render() {
 		return (
 			<div className='chat-window-super-wrapper'>

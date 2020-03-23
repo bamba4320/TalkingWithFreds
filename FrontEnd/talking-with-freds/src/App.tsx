@@ -2,7 +2,7 @@ import {observer, Provider} from 'mobx-react';
 import React from 'react';
 import BlockUi from 'react-block-ui';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import rootStores from './BL/stores';
 import {CURRENT_USER_STORE, UI_STORE} from './BL/stores/storesKeys';
 import TalkingWithFredsLocalStorage from './Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';

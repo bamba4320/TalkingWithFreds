@@ -10,11 +10,11 @@ import ConversationStore from './Conversation.store';
  * Initiate all stores
  */
 const uiStore = new UiStore();
-const currentUserStore = new CurrentUserStore();
+const conversationStore = new ConversationStore();
+const currentUserStore = new CurrentUserStore(conversationStore);
 const authStore = new AuthStore(currentUserStore);
 const modalStore = new ModalStore();
 const messagesStore = new MessagesStore();
-const conversationStore = new ConversationStore();
 /**
  * Save the instance in global object
  */
@@ -22,9 +22,9 @@ const rootStores = {
 	[UI_STORE]: uiStore,
 	[CURRENT_USER_STORE]: currentUserStore,
 	[AUTH_STORE]: authStore,
-    [MODAL_STORE]: modalStore,
-    [MESSAGES_STORE]:messagesStore,
-    [CONVERSATION_STORE]: conversationStore,
+	[MODAL_STORE]: modalStore,
+	[MESSAGES_STORE]: messagesStore,
+	[CONVERSATION_STORE]: conversationStore,
 };
 
 export default rootStores;

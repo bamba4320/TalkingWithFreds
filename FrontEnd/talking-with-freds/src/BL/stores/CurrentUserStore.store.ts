@@ -1,12 +1,17 @@
 import UserFetcher from "../../Infrastructure/fetchers/User.fetcher";
 import  {observable, computed, action } from "mobx";
 import UserModel from "../../common/models/User.model";
+import ConversationStore from "./Conversation.store";
 
 export default class CurrentUserStore{
     @observable private currentUser:UserModel | null;
 
-    constructor(){
+    private conversationStore:ConversationStore;
+
+
+    constructor(convStore:ConversationStore){
         this.currentUser = null;
+        this.conversationStore = convStore;
     }
 
     @computed
@@ -22,5 +27,8 @@ export default class CurrentUserStore{
         newUser.email = authData.email;
         newUser.username = authData.usename;
         this.currentUser = newUser;
+        this.conversationStore.initUserConversations();
+        
+
     }
 }

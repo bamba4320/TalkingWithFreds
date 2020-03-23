@@ -15,7 +15,7 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 		return (
 			<div
 				className={`conversation-wrapper ${this.props.isSelected(this.props.convDits.convId) ? 'selected' : ''}`}
-				onClick={this.props.onConvSelect(this.props.convDits)}>
+				onClick={() => this.props.onConvSelect(this.props.convDits)}>
 				{/* conversation profile image */}
 				<div className='conv-profile-img-wrapper'>
 					<div className='circular-image-wrapper'>
