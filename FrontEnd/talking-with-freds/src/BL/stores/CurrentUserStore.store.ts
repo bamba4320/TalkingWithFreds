@@ -2,6 +2,7 @@ import UserFetcher from "../../Infrastructure/fetchers/User.fetcher";
 import  {observable, computed, action } from "mobx";
 import UserModel from "../../common/models/User.model";
 import ConversationStore from "./Conversation.store";
+import TalkingWithFredsLocalStorage from "../../Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage";
 
 export default class CurrentUserStore{
     @observable private currentUser:UserModel | null;
@@ -28,7 +29,13 @@ export default class CurrentUserStore{
         newUser.username = authData.usename;
         this.currentUser = newUser;
         this.conversationStore.initUserConversations();
-        
+    }
 
+
+    @action
+    public logout(){
+        this.currentUser = null;
+        TalkingWithFredsLocalStorage.clearAll();
+        this.conversationStore.cleanConversations();
     }
 }

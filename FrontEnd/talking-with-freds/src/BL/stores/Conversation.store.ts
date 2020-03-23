@@ -26,6 +26,13 @@ export default class ConversationStore{
         this.currentSelectedConversation = conv;
     }
 
+    @action
+    public cleanConversations(){
+        this.currentUserConversations = [];
+        this.currentSelectedConversation = null;
+    }
+
+
     @computed
     get getUserConversations(){
         return this.currentUserConversations;

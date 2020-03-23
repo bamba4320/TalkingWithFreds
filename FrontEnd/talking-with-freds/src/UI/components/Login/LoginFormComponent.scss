@@ -21,8 +21,10 @@
 		.submit-btn-wrapper {
 			padding: 10px;
 			text-align: center;
-			.submit-btn {
-				width: 50%;
+			display: flex;
+			justify-content: space-between;
+			.submit-or-registr-btn {
+				width: 45%;
 				font-size: 2rem;
 			}
 		}

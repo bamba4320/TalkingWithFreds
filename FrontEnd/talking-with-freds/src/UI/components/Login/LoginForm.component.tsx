@@ -1,6 +1,7 @@
 import React from 'react';
 import {Form, Button} from 'semantic-ui-react';
 import './LoginFormComponent.scss';
+import {Redirect} from 'react-router-dom';
 
 interface IProps {
 	onSubmit: any;
@@ -39,8 +40,24 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 						/>
 					</div>
 					<div className='submit-btn-wrapper'>
-						<Button type='button' circular inverted color='green' className='submit-btn' onClick={this.handleSubmit}>
+						<Button
+							type='button'
+							circular
+							inverted
+							color='green'
+							className='submit-or-registr-btn'
+							onClick={this.handleSubmit}>
 							Login
+						</Button>
+						<Button
+							inverted
+							color='blue'
+							circular
+							className='submit-or-registr-btn'
+							onClick={() => {
+								this.onRegisterClick();
+							}}>
+							Sign Up
 						</Button>
 					</div>
 				</Form>
@@ -50,5 +67,9 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 
 	private handleSubmit = () => {
 		this.props.onSubmit(this.email, this.password);
+	};
+
+	private onRegisterClick = () => {
+		return <Redirect to='/Register' />;
 	};
 }

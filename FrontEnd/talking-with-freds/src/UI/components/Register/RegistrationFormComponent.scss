@@ -1,0 +1,38 @@
+.registration-form-wrapper {
+	position: relative;
+
+	.form-title {
+		color: wheat;
+		padding-bottom: 40px;
+		margin-bottom: 20px;
+		font-size: 4rem;
+		font-weight: bold;
+		border-bottom: solid 1px #8dc8f8;
+	}
+	.registration-form {
+		width: 70%;
+		padding-left: 25%;
+		margin-right: 0 !important;
+		.form-field-wrapper {
+			margin-bottom: 50px;
+			.registration-input {
+				font-size: 2rem;
+				input {
+					background-color: transparent !important;
+					color: wheat !important;
+					border: solid 1px #8dc8f8;
+					border-radius: 15px;
+				}
+			}
+		}
+	}
+	.submit-btn-wrapper {
+		padding: 10px 100px;
+		width: 100%;
+		.submit-or-registr-btn {
+			width: 30%;
+			font-size: 2rem;
+			float: right;
+		}
+	}
+}

@@ -9,6 +9,7 @@ import TalkingWithFredsLocalStorage from './Infrastructure/Utils/LocalStorage/Ta
 import LoginContainer from './UI/containers/Login/Login.container';
 import MainLobbyContainer from './UI/containers/MainLobby/MainLobby.container';
 import MainModalContainer from './UI/containers/MainModal/MainModal.container';
+import RegisterContainer from './UI/containers/Register/Register.container';
 
 interface IProps {}
 interface IState {}
@@ -44,6 +45,9 @@ class App extends React.Component<IProps, IState> {
 								</Route>
 								<Route exact={true} path='/MainLobby'>
 									{currentUserStore.isUserLoggedIn ? <MainLobbyContainer /> : <Redirect to='/Login' />}
+								</Route>
+								<Route exact={true} path='/Register'>
+									{!currentUserStore.isUserLoggedIn ? <RegisterContainer/> : <Redirect to='/MainLobby'/> }
 								</Route>
 								<Route exact={true} path='/'>
 									{currentUserStore.isUserLoggedIn ? <Redirect to='/MainLobby' /> : <Redirect to='/Login' />}
