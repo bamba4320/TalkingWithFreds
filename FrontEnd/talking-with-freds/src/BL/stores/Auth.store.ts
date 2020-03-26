@@ -2,6 +2,7 @@ import CurrentUserStore from './CurrentUserStore.store';
 import UserFetcher from '../../Infrastructure/fetchers/User.fetcher';
 import {action} from 'mobx';
 import TalkingWithFredsLocalStorage from '../../Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
+import LoginFetcher from '../../Infrastructure/fetchers/Login.fetcher';
 
 export default class AuthStore {
 	private currentUserStore: CurrentUserStore;
@@ -16,9 +17,10 @@ export default class AuthStore {
 	public async authenticateLogin(email: string, password: string) {
 		try {
 			// Get user token from API
-			const res = await UserFetcher.authenticateLogin(email, password);
+			const res = await LoginFetcher.authenticateLogin(email, password);
 			if (res.token !== null) {
 				// verify user login and init user from API
+				console.log(res.token);
 				TalkingWithFredsLocalStorage.setTokenToLocalStorage(res.token).then(() => {
 					this.currentUserStore.initUserFromAPI();
 				});

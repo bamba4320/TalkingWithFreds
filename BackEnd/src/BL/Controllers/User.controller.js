@@ -113,6 +113,7 @@ class UserController {
 				// The data from the token, or HTTP 403 Error
 				jwt.verify(token, 'test-secret-key', (err, authData) => {
 					if (err) {
+						console.error(err);
 						reject(err);
 					} else {
 						// check if token is valid with the user

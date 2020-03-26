@@ -1,10 +1,10 @@
 import React from 'react';
 import {Form, Button} from 'semantic-ui-react';
 import './LoginFormComponent.scss';
-import {Redirect} from 'react-router-dom';
 
 interface IProps {
 	onSubmit: any;
+	onRegisterClick:any;
 }
 interface IState {}
 
@@ -70,6 +70,6 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 	};
 
 	private onRegisterClick = () => {
-		return <Redirect to='/Register' />;
+		this.props.onRegisterClick();
 	};
 }

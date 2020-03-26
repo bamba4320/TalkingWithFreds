@@ -9,11 +9,15 @@ interface IState {}
 
 export default class RegistrationFormComponent extends React.Component<IProps, IState> {
 	private email: string;
+	private username:string;
 	private password: string;
+	private confirmPassword:string;
 	constructor(props: IProps) {
 		super(props);
 		this.email = '';
+		this.username = '';
 		this.password = '';
+		this.confirmPassword = '';
 	}
 
 	public render() {
@@ -36,7 +40,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 							type='text'
 							id='username-input'
 							placeholder='Username'
-							onChange={(e) => (this.email = e.target.value)}
+							onChange={(e) => (this.username = e.target.value)}
 						/>
 					</div>
 					<div className='form-field-wrapper'>
@@ -53,8 +57,8 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 							className='registration-input'
 							type='password'
 							id='password-input'
-							placeholder='Password'
-							onChange={(e) => (this.password = e.target.value)}
+							placeholder='Confirm Password'
+							onChange={(e) => (this.confirmPassword = e.target.value)}
 						/>
 					</div>
 				</Form>
@@ -74,6 +78,6 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 	}
 
 	private handleSubmit = () => {
-		this.props.onSubmit(this.email, this.password);
+		this.props.onSubmit(this.email, this.username, this.password);
 	};
 }

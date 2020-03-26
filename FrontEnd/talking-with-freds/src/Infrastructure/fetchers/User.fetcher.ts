@@ -1,13 +1,9 @@
 import BaseFetcher from './Base.fetcher';
 
-export default class UserFetcher extends BaseFetcher {
-    static routeBaseURL = '/user';
-
-    public static async authenticateLogin(email:string, password:string){
-        return await (await this.post('/login/authenticateLogin', {email:email, password:password})).data;
-    }
-
-    public static async getUserFromAPI(){
-        return await(await this.get(this.routeBaseURL+'/getUser')).data;
+class UserFetcher extends BaseFetcher {
+    public async getUserFromAPI(){
+        return this.get('/getUser');
     }
 }
+
+export default new UserFetcher('user')

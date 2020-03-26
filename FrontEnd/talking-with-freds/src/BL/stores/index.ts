@@ -1,10 +1,11 @@
 import AuthStore from './Auth.store';
 import CurrentUserStore from './CurrentUserStore.store';
 import ModalStore from './Modal.store';
-import {AUTH_STORE, CURRENT_USER_STORE, MODAL_STORE, UI_STORE, MESSAGES_STORE, CONVERSATION_STORE} from './storesKeys';
+import {AUTH_STORE, CURRENT_USER_STORE, MODAL_STORE, UI_STORE, MESSAGES_STORE, CONVERSATION_STORE, REGISTER_STORE} from './storesKeys';
 import UiStore from './ui.store';
 import MessagesStore from './MessagesStore.store';
 import ConversationStore from './Conversation.store';
+import RegisterStore from './Register.store';
 
 /**
  * Initiate all stores
@@ -15,6 +16,7 @@ const currentUserStore = new CurrentUserStore(conversationStore);
 const authStore = new AuthStore(currentUserStore);
 const modalStore = new ModalStore();
 const messagesStore = new MessagesStore();
+const registerStore = new RegisterStore();
 /**
  * Save the instance in global object
  */
@@ -25,6 +27,7 @@ const rootStores = {
 	[MODAL_STORE]: modalStore,
 	[MESSAGES_STORE]: messagesStore,
 	[CONVERSATION_STORE]: conversationStore,
+	[REGISTER_STORE]:registerStore,
 };
 
 export default rootStores;

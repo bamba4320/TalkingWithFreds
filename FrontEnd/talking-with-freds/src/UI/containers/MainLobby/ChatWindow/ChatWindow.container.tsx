@@ -12,7 +12,8 @@ export default class ChatWindowContainer extends React.Component<IProps, IState>
 	public render() {
 		return (
 			<div className='chat-window-super-wrapper'>
-				<ChatTopBarComponent chatImage='../../../../static/images/appaProfilePicture.jpg' convName='' isGroup={false} />
+				<ChatTopBarComponent chatImage={require('../../../../static/images/appaProfilePicture.jpg')} convName='' isGroup={false} />
+				
 			</div>
 		);
 	}

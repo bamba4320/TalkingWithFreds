@@ -10,6 +10,7 @@ import LoginContainer from './UI/containers/Login/Login.container';
 import MainLobbyContainer from './UI/containers/MainLobby/MainLobby.container';
 import MainModalContainer from './UI/containers/MainModal/MainModal.container';
 import RegisterContainer from './UI/containers/Register/Register.container';
+import { isNullOrUndefined } from 'util';
 
 interface IProps {}
 interface IState {}
@@ -22,7 +23,7 @@ class App extends React.Component<IProps, IState> {
 	public componentDidMount() {
 		TalkingWithFredsLocalStorage.getTokenFromLocalStorage()
 			.then((token) => {
-				if (token) {
+				if (!isNullOrUndefined(token)) {
 					currentUserStore.initUserFromAPI();
 				}
 			})
