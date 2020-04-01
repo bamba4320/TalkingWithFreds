@@ -49,4 +49,9 @@ export default class CurrentUserStore {
 		TalkingWithFredsLocalStorage.clearAll();
 		this.conversationStore.cleanConversations();
 	}
+
+	@computed
+	get getCurrentUserId(){
+		return this.currentUser?.id;
+	}
 }

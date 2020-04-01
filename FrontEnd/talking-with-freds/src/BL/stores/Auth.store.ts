@@ -1,8 +1,7 @@
-import CurrentUserStore from './CurrentUser.store';
-import UserFetcher from '../../Infrastructure/fetchers/User.fetcher';
 import {action} from 'mobx';
-import TalkingWithFredsLocalStorage from '../../Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
 import LoginFetcher from '../../Infrastructure/fetchers/Login.fetcher';
+import TalkingWithFredsLocalStorage from '../../Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
+import CurrentUserStore from './CurrentUser.store';
 
 export default class AuthStore {
 	private currentUserStore: CurrentUserStore;

@@ -17,7 +17,7 @@ export default class ChatInputFieldComponent extends React.Component<IProps, ISt
 	}
 
 	private handleKeyDown = (e: any) => {
-		if (e.key == 'Enter') {
+		if (e.key === 'Enter') {
 			this.props.onSendMessage(e.target.value);
 		}
 	};

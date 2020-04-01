@@ -11,7 +11,7 @@ export default class MessagesStore {
 	}
 
 	@action
-	public async getConversationMessagesById(convid: number) {
+	public async getConversationMessagesById(convid: string) {
 		this.currentConversationMessages = await MessagesFetcher.getConversationsMessages(convid);
 	}
 

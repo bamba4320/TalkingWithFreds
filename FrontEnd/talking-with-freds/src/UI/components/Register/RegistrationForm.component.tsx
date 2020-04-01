@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Button, Header} from 'semantic-ui-react';
+import {Button, Form} from 'semantic-ui-react';
 import './RegistrationFormComponent.scss';
 
 interface IProps {
@@ -9,9 +9,9 @@ interface IState {}
 
 export default class RegistrationFormComponent extends React.Component<IProps, IState> {
 	private email: string;
-	private username:string;
+	private username: string;
 	private password: string;
-	private confirmPassword:string;
+	private confirmPassword: string;
 	constructor(props: IProps) {
 		super(props);
 		this.email = '';
