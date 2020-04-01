@@ -2,7 +2,7 @@ import CurrentUserStore from './CurrentUser.store';
 import {clearInterval} from 'timers';
 import TalkingWithFredsLocalStorage from '../../Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
 
-const MINUTES_UNITL_AUTO_LOGOUT = 15; // in mins
+const MINUTES_UNITL_AUTO_LOGOUT = 150; // in mins
 const CHECK_INTERVAL = 10000; // in ms
 
 export default class AutoLogoutStore {
