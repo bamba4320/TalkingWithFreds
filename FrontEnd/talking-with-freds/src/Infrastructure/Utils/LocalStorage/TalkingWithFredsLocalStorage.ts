@@ -1,11 +1,12 @@
 export default class TalkingWithFredsLocalStorage {
 	// local storage keys
-	private static fields = {
+	private static fieldsKeys = {
 		token: 'token',
+		lastAction: 'lastAction',
 	};
 
 	/**
-	 * clear all local storage fields.
+	 * clear all local storage fieldsKeys.
 	 */
 	public static clearAll() {
 		localStorage.clear();
@@ -19,7 +20,7 @@ export default class TalkingWithFredsLocalStorage {
 			try {
 				// get the token value from the local storage
 				// two options: string, or null.
-				const token = localStorage.getItem(this.fields.token);
+				const token = localStorage.getItem(this.fieldsKeys.token);
 				// if token is string or null, we can work with it
 				if (typeof token !== 'undefined') {
 					resolve(token);
@@ -41,11 +42,23 @@ export default class TalkingWithFredsLocalStorage {
 	public static setTokenToLocalStorage(token: string) {
 		return new Promise((resolve, reject) => {
 			try {
-				localStorage.setItem(this.fields.token, token);
+				localStorage.setItem(this.fieldsKeys.token, token);
 				resolve();
 			} catch (err) {
 				reject(err);
 			}
 		});
+	}
+
+	public static savelastActionToLocalStorage(lastAction: number) {
+		localStorage.setItem(this.fieldsKeys.lastAction, String(lastAction));
+	}
+
+	public static getlastActionFromLocalStorage() {
+		return localStorage.getItem(this.fieldsKeys.lastAction) || '0';
+	}
+
+	public static removelastActionFromLocalStorage() {
+		localStorage.removeItem(this.fieldsKeys.lastAction);
 	}
 }

@@ -5,3 +5,4 @@ export const MODAL_STORE = 'modalStore';
 export const MESSAGES_STORE = 'messagesStore';
 export const CONVERSATION_STORE = 'conversationStore';
 export const REGISTER_STORE = 'registerStore';
+export const AUTO_LOGOUT_STORE = 'autoLogoutStore';

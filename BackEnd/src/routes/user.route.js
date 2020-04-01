@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
 // get user deatails
 router.get('/getUser', (req, res) => {
 	try {
-		console.log(req.token);
 		userController
 			.getUserDetailsFromToken(req.token)
 			.then((user) => {

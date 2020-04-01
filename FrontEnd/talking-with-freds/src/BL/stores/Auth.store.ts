@@ -1,4 +1,4 @@
-import CurrentUserStore from './CurrentUserStore.store';
+import CurrentUserStore from './CurrentUser.store';
 import UserFetcher from '../../Infrastructure/fetchers/User.fetcher';
 import {action} from 'mobx';
 import TalkingWithFredsLocalStorage from '../../Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
