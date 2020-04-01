@@ -22,7 +22,6 @@ export default class BaseFetcher {
 			if (isNullOrUndefined(config.headers[TOKEN_HEADER])) {
 				// Set token from storage
 				const tokenFromStorage = await TalkingWithFredsLocalStorage.getTokenFromLocalStorage();
-				console.log('1',tokenFromStorage);
 				if (tokenFromStorage) {
 					config.headers[TOKEN_HEADER] = 'Bearer ' + tokenFromStorage;
 				}

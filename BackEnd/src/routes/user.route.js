@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const userController = require('../BL/Controllers/User.controller');
+const errorController = require('../BL/Controllers/error.controller')
 
 // base route
 router.get('/', (req, res) => {
@@ -16,15 +17,10 @@ router.get('/getUser', (req, res) => {
 				res.status(200).json(user);
 			})
 			.catch((err) => {
-				throw err;
+				errorController.sendError(res, err);
 			});
 	} catch (err) {
-		console.error(err);
-		if (err.message === 'Not Found') {
-			res.status(404).json({Error: err.message});
-		} else {
-			res.status(400).json({Error: err.message});
-		}
+		errorController.sendError(res, err);
 	}
 });
 

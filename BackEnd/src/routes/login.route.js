@@ -8,8 +8,8 @@ router.get('/', (req, res) => {
 
 router.post('/authenticateLogin', (req, res) => {
 	try {
-		userController.authenticateLogin(req.body.email, req.body.password).then((token) => {
-			res.status(200).json({token: token});
+		userController.authenticateLogin(req.body.email, req.body.password).then((user) => {
+			res.status(200).json({user});
 		});
 	} catch (err) {
 		console.error(err);
