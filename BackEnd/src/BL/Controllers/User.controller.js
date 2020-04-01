@@ -36,10 +36,9 @@ class UserController {
 			return new Promise((resolve, reject) => {
 				// decode token and response with two options:
 				// The data from the token, or HTTP 403 Error
-				jwtUtils.verifyToken(token).then((err, authData) => {
-					if (err) {
-						throw err;
-					} else {
+				jwtUtils
+					.verifyToken(token)
+					.then((authData) => {
 						UserSchema.findOne({_id: authData.id})
 							.then((user) => {
 								if (token === user.token) {
@@ -51,8 +50,10 @@ class UserController {
 							.catch((err) => {
 								reject(err.message);
 							});
-					}
-				});
+					})
+					.catch((err) => {
+						reject(err.message);
+					});
 			});
 		} catch (err) {
 			console.error(err);
