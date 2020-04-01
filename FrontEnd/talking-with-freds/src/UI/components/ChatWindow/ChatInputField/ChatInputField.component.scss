@@ -1,0 +1,15 @@
+.chat-input-wrapper {
+	position: absolute;
+	bottom: 15px;
+	width: 100% !important;
+	height: 7%;
+	padding: 15px;
+	background-color: #0d3628;
+	.ui.input {
+		width: 100%;
+	}
+	input {
+		width: 100%;
+		border-radius: 25px !important;
+	}
+}
