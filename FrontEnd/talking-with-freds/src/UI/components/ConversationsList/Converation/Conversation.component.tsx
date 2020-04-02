@@ -2,6 +2,7 @@ import React from 'react';
 import './Conversation.component.scss';
 import {Image} from 'semantic-ui-react';
 import ConversationModel from '../../../../common/models/Conversation.model';
+import { observer } from 'mobx-react';
 
 interface IProps {
 	convDits: ConversationModel;
@@ -10,6 +11,7 @@ interface IProps {
 }
 interface IState {}
 
+@observer
 export default class ConversationComponent extends React.Component<IProps, IState> {
 	public render() {
 		return (

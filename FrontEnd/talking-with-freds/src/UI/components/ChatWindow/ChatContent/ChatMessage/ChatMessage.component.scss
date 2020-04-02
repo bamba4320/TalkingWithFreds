@@ -1,0 +1,30 @@
+.chat-message-wrapper {
+	position: relative;
+	width: 100%;
+	display: block;
+	padding: 15px;
+	height: fit-content;
+
+	.chat-message {
+		display: block;
+		position: relative;
+		max-width: 80%;
+		color: white;
+		text-align: right;
+		border-radius: 16px;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		font-size: 1.5rem;
+		padding: 20px;
+
+		&.other-message {
+			background-color: black;
+			float: left;
+		}
+
+		&.user-message {
+			background-color: #113655;
+			float: right;
+		}
+	}
+}

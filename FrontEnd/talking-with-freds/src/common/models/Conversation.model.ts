@@ -1,6 +1,8 @@
+import MessageModel from './MessageModel.model';
+
 export default class ConversationModel {
-	public convId: number = 0;
-	public convName: string = '';
-	public lastMessage: string = '';
-	public profileImg: string = '';
+	public convId?: string;
+	public convName?: string;
+	public lastMessage?: string;
+	public profileImg?: string;
 }

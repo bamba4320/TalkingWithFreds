@@ -11,7 +11,7 @@ import './ConversationsList.container.scss';
 const conversationStore = rootStores[CONVERSATION_STORE];
 interface IProps {}
 interface IState {
-	selectedConv: number | null;
+	selectedConv?: string;
 	filter: string;
 }
 
@@ -20,7 +20,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			selectedConv: null,
+			selectedConv: undefined,
 			filter: '',
 		};
 	}
@@ -37,7 +37,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 					{conversationStore.getUserConversations.map((conv) => {
 						console.log(conv, this.state.filter);
 						if (this.state.filter !== '') {
-							if (conv.convName.includes(this.state.filter)) {
+							if (conv.convName && conv.convName.includes(this.state.filter)) {
 								return (
 									<ConversationComponent
 										convDits={conv}
@@ -66,7 +66,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 		}
 	};
 
-	public isSelected = (convId: number) => {
+	public isSelected = (convId: string) => {
 		if (this.state.selectedConv && convId) {
 			return this.state.selectedConv === convId;
 		}

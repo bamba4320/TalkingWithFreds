@@ -6,6 +6,8 @@ import './ChatWindow.container.scss';
 import ChatInputFieldComponent from '../../../components/ChatWindow/ChatInputField/ChatInputField.component';
 import ChatContentComponent from '../../../components/ChatWindow/ChatContent/ChatContent.component';
 import MessageModel from '../../../../common/models/MessageModel.model';
+import {isNullOrUndefined} from 'util';
+import { observer } from 'mobx-react';
 
 interface IProps {}
 interface IState {}
@@ -13,20 +15,36 @@ interface IState {}
 const messagesStore = rootStores[MESSAGES_STORE];
 const conversationStore = rootStores[CONVERSATION_STORE];
 const currentUserStore = rootStores[CURRENT_USER_STORE];
+
+@observer
 export default class ChatWindowContainer extends React.Component<IProps, IState> {
 	public render() {
-		return (
-			<div className='chat-window-super-wrapper'>
-				<ChatTopBarComponent chatImage={require('../../../../static/images/appaProfilePicture.jpg')} convName='' isGroup={false} />
-				<ChatContentComponent />
-				<ChatInputFieldComponent onSendMessage={this.onSendMessage}/>
-			</div>
-		);
+		return <div className='chat-window-super-wrapper'>{this.showChat()}</div>;
 	}
 
-	private onSendMessage=(message:string)=>{
+	private showChat() {
+		if (!isNullOrUndefined(conversationStore.getCurrentSelectedConversation)) {
+			return (
+				<div>
+					<ChatTopBarComponent
+						chatImage={require('../../../../static/images/appaProfilePicture.jpg')}
+						convName=''
+						isGroup={false}
+					/>
+					<ChatContentComponent />
+					<ChatInputFieldComponent onSendMessage={this.onSendMessage} />
+				</div>
+			);
+		}
+		return <div></div>;
+	}
+
+	private onSendMessage = (message: string) => {
 		const newMessage = new MessageModel();
 		newMessage.messageContent = message;
-		newMessage.convId = currentUserStore.getCurrentUserId;
-	}
+		newMessage.convId = conversationStore.getCurrentSelectedConversation!.convId;
+		newMessage.messageSendingTime = new Date();
+		newMessage.senderId = currentUserStore.getCurrentUserId;
+		messagesStore.addNewMessage(newMessage);
+	};
 }
