@@ -11,7 +11,7 @@ interface IState {}
 export default class ChatMessageComponent extends React.Component<IProps, IState> {
 	public render() {
 		return (
-			<div className='chat-message-wrapper'>
+			<div className='message-line'>
 				<div className={`chat-message ${this.props.isUserSent ? 'user-message' : 'other-message'} `}>
 					{this.props.messageContent}
 				</div>

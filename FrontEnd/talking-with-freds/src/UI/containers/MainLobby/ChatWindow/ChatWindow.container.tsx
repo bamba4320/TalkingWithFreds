@@ -7,7 +7,7 @@ import ChatInputFieldComponent from '../../../components/ChatWindow/ChatInputFie
 import ChatContentComponent from '../../../components/ChatWindow/ChatContent/ChatContent.component';
 import MessageModel from '../../../../common/models/MessageModel.model';
 import {isNullOrUndefined} from 'util';
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 
 interface IProps {}
 interface IState {}
@@ -18,8 +18,18 @@ const currentUserStore = rootStores[CURRENT_USER_STORE];
 
 @observer
 export default class ChatWindowContainer extends React.Component<IProps, IState> {
+	private scrolled: boolean = false;
+
+	public componentDidMount() {
+		setInterval(() => this.updateScroll(document.getElementById('chat-window-super-wrapper')), 200);
+	}
+
 	public render() {
-		return <div className='chat-window-super-wrapper'>{this.showChat()}</div>;
+		return (
+			<div className='chat-window-super-wrapper' id='chat-window-super-wrapper'>
+				{this.showChat()}
+			</div>
+		);
 	}
 
 	private showChat() {
@@ -40,11 +50,19 @@ export default class ChatWindowContainer extends React.Component<IProps, IState>
 	}
 
 	private onSendMessage = (message: string) => {
-		const newMessage = new MessageModel();
-		newMessage.messageContent = message;
-		newMessage.convId = conversationStore.getCurrentSelectedConversation!.convId;
-		newMessage.messageSendingTime = new Date();
-		newMessage.senderId = currentUserStore.getCurrentUserId;
-		messagesStore.addNewMessage(newMessage);
+		if (!isNullOrUndefined(message) && message !== '') {
+			const newMessage = new MessageModel();
+			newMessage.messageContent = message;
+			newMessage.convId = conversationStore.getCurrentSelectedConversation!.convId;
+			newMessage.messageSendingTime = new Date();
+			newMessage.senderId = currentUserStore.getCurrentUserId;
+			messagesStore.addNewMessage(newMessage);
+		}
 	};
+
+	private updateScroll(windowDiv: HTMLElement | null) {
+		if (!isNullOrUndefined(windowDiv)) {
+			windowDiv.scrollTop = windowDiv.scrollHeight;
+		}
+	}
 }

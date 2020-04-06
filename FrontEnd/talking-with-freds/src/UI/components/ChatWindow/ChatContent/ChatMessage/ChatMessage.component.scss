@@ -1,10 +1,6 @@
-.chat-message-wrapper {
-	position: relative;
+.message-line {
+	display: inline-block;
 	width: 100%;
-	display: block;
-	padding: 15px;
-	height: fit-content;
-
 	.chat-message {
 		display: block;
 		position: relative;

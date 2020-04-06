@@ -61,6 +61,6 @@ export default class BaseFetcher {
 	}
 
 	private getBaseApiUrl() {
-		return 'http://192.168.1.108:4320/api';
+		return 'http://192.168.1.104:4320/api';
 	}
 }
