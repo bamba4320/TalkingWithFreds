@@ -1,8 +1,15 @@
 .left-sidebar-wrapper {
 	overflow: auto;
-	.user-profile-wrapper {
+	.left-sidebar-top-bar-wrapper {
+		background-color: #0d3628;
+		border-right: solid 1px #1852269c;
 		position: relative;
 		display: flex;
+
+		.user-profile-wrapper {
+			position: relative;
+			display: flex;
+		}
 	}
 
 	.conv-search-wrapper {

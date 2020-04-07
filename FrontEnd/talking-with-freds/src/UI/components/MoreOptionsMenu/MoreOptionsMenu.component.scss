@@ -1,0 +1,33 @@
+.dropdown-wrapper {
+	position: relative;
+	i {
+		font-size: 1.5rem;
+		margin: 0;
+		position: absolute;
+		top: 50%;
+		right: 20%;
+		transform: translateY(-50%);
+	}
+
+	.menu.transition {
+		background-color: #18192e;
+		// border-radius: 16px;
+		border: solid 1px #8dc8f8;
+		.item {
+			color: wheat;
+			font-size: 1.3rem;
+			&:hover {
+				color: #8dc8f8;
+			}
+			&.signout-item {
+				color: #f00;
+				&:hover {
+					color: white;
+					background-color: #f00;
+					// border-bottom-left-radius: 16px;
+					// border-bottom-right-radius: 16px;
+				}
+			}
+		}
+	}
+}

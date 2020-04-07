@@ -7,6 +7,7 @@ import ConversationModel from '../../../../common/models/Conversation.model';
 import ConversationComponent from '../../../components/ConversationsList/Converation/Conversation.component';
 import UserProfileComponent from '../../../components/UserProfile/userProfile.component';
 import './ConversationsList.container.scss';
+import MoreOptionsMenuComponent from '../../../components/MoreOptionsMenu/MoreOptionsMenu.component';
 
 const conversationStore = rootStores[CONVERSATION_STORE];
 interface IProps {}
@@ -27,8 +28,11 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 	public render() {
 		return (
 			<div className='left-sidebar-wrapper'>
-				<div className='user-profile-wrapper'>
-					<UserProfileComponent />
+				<div className='left-sidebar-top-bar-wrapper'>
+					<div className='user-profile-wrapper'>
+						<UserProfileComponent />
+					</div>
+					<MoreOptionsMenuComponent/>
 				</div>
 				<div className='conv-search-wrapper'>
 					<Input fluid placeholder={'Search...'} onChange={(e) => this.setState({filter: e.target.value})} />
