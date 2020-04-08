@@ -7,6 +7,7 @@ UserSchema = new Schema({
 	salt: {type: String, require: true},
 	passwordHash: {type: String, require: true},
 	token: {type: String, require: false},
+	profileImage: {type: String, require: false},
 });
 
 module.exports = mongoose.model('Users', UserSchema);

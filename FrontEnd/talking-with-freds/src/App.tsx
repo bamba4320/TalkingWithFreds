@@ -36,10 +36,6 @@ class App extends React.Component<IProps, IState> {
 		autoLogoutStore.initAutoLogout();
 	}
 
-	componentWillUnmount() {
-		autoLogoutStore.clearCheckInterval();
-	}
-
 	public render() {
 		const shouldBlockUiSite = uiStore.shouldBlockUiSite;
 

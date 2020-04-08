@@ -37,9 +37,9 @@ export default class ChatWindowContainer extends React.Component<IProps, IState>
 			return (
 				<div>
 					<ChatTopBarComponent
-						chatImage={require('../../../../static/images/appaProfilePicture.jpg')}
-						convName=''
-						isGroup={false}
+						chatImage={conversationStore.getCurrentSelectedConversation.profileImg}
+						convName={conversationStore.getCurrentSelectedConversation.convName}
+						isGroup={conversationStore.getCurrentSelectedConversation.isGroup}
 					/>
 					<ChatContentComponent />
 					<ChatInputFieldComponent onSendMessage={this.onSendMessage} />

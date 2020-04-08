@@ -178,6 +178,28 @@ class UserController {
 			throw new Error(err.message);
 		}
 	}
+
+	async getFriends(token) {
+		try {
+			return new Promise((resolve, reject) => {
+				jwtUtils
+					.verifyToken(token)
+					.then(async (authData) => {
+						const users = await UserSchema.find({_id: {$not: {$eq: authData.id}}});
+						const sendUsers = users.map((user) => {
+							return {userId: user._id, username: user.username, profileImage: user.profileImage};
+						});
+						resolve(sendUsers);
+					})
+					.catch((err) => {
+						reject(err);
+					});
+			});
+		} catch (err) {
+			console.error(err);
+			throw new Error(err.message);
+		}
+	}
 }
 
 module.exports = new UserController();

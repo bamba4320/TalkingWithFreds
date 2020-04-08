@@ -2,7 +2,7 @@
 	position: absolute;
 	display: flex;
 	width: 100%;
-	padding: 0 10px;
+	padding: 1px 10px;
 	background-color: #0d3628;
 	height: 7%;
 	z-index: 3;
@@ -13,6 +13,11 @@
 		padding: 2px 0 1px 0;
 		width: 5%;
 		height: auto;
+
+		&.default-image{
+			width: 4.8%;
+		}
+
 		.circular-image-wrapper {
 			border-radius: 50%;
 			overflow: hidden;

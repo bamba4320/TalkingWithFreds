@@ -4,13 +4,15 @@
 	width: 100%;
 	padding: 0 10px;
 
-
-
 	.user-profile-img-wrapper {
 		position: relative;
 		padding: 1% 0;
 		width: 8%;
 		height: auto;
+
+		&.default-image{
+			width: 21.8%;
+		}
 		.circular-image-wrapper {
 			border-radius: 50%;
 			overflow: hidden;

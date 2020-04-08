@@ -50,8 +50,14 @@ export default class CurrentUserStore {
 		this.conversationStore.cleanConversations();
 	}
 
+	@action
+	public async getAllOtherUsers() {
+		console.log('sending...');
+		return await UserFetcher.getOtherUsers();
+	}
+
 	@computed
-	get getCurrentUserId(){
+	get getCurrentUserId() {
 		return this.currentUser?.id;
 	}
 }

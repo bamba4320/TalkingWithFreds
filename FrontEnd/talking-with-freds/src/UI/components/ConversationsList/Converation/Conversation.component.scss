@@ -12,6 +12,11 @@
 		float: left;
 		width: 10%;
 		height: 80%;
+
+		&.default-image{
+			width: 10%;
+		}
+
 		.circular-image-wrapper {
 			border-radius: 50%;
 			overflow: hidden;
