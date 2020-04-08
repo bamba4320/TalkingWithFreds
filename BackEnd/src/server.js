@@ -6,6 +6,7 @@ const app = express();
 const loginRoute = require('./routes/login.route');
 const registerRoute = require('./routes/register.route');
 const userRouter = require('./routes/user.route');
+const conversationRouter = require('./routes/conversation.route');
 
 // body parser is used to decode http/s post body.
 const bodyParser = require('body-parser');
@@ -32,8 +33,11 @@ app.use('/api/login', loginRoute);
 // register route
 app.use('/api/register', registerRoute);
 // user route
-// * protected by token varification
+// * protected by token verification
 app.use('/api/user', verifyToken, userRouter);
+// conversation route
+// * protected by token verification
+app.use('/api/conversation', verifyToken, conversationRouter);
 
 // base route
 app.use('/api', (req, res) => {

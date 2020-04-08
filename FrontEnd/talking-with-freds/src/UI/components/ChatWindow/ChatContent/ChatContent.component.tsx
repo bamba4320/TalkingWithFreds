@@ -3,7 +3,7 @@ import './ChatContent.component.scss';
 import {observer} from 'mobx-react';
 import rootStores from '../../../../BL/stores';
 import {MESSAGES_STORE, CURRENT_USER_STORE} from '../../../../BL/stores/storesKeys';
-import MessageModel from '../../../../common/models/MessageModel.model';
+import MessageModel from '../../../../common/models/Message.model';
 import ChatMessageComponent from './ChatMessage/ChatMessage.component';
 
 interface IProps {}

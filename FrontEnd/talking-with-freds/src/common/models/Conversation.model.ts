@@ -1,4 +1,4 @@
-import MessageModel from './MessageModel.model';
+import MessageModel from './Message.model';
 
 export default class ConversationModel {
 	public convId?: string;

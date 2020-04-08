@@ -5,7 +5,7 @@ import ChatTopBarComponent from '../../../components/ChatWindow/ChatTopBar/ChatT
 import './ChatWindow.container.scss';
 import ChatInputFieldComponent from '../../../components/ChatWindow/ChatInputField/ChatInputField.component';
 import ChatContentComponent from '../../../components/ChatWindow/ChatContent/ChatContent.component';
-import MessageModel from '../../../../common/models/MessageModel.model';
+import MessageModel from '../../../../common/models/Message.model';
 import {isNullOrUndefined} from 'util';
 import {observer} from 'mobx-react';
 

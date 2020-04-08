@@ -1,6 +1,6 @@
 import MessagesFetcher from '../../Infrastructure/fetchers/MessagesFetcher.fetcher';
 import {observable, action, computed} from 'mobx';
-import MessageModel from '../../common/models/MessageModel.model';
+import MessageModel from '../../common/models/Message.model';
 
 export default class MessagesStore {
 	@observable
