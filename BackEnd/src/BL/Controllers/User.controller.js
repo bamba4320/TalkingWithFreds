@@ -78,6 +78,7 @@ class UserController {
 				email: email,
 				salt: salt,
 				passwordHash: passwordHash,
+				token: '',
 			});
 			newUser.save();
 		} catch (err) {
@@ -187,7 +188,7 @@ class UserController {
 					.then(async (authData) => {
 						const users = await UserSchema.find({_id: {$not: {$eq: authData.id}}});
 						const sendUsers = users.map((user) => {
-							return {userId: user._id, username: user.username, profileImage: user.profileImage};
+							return {id: user._id, username: user.username, profileImage: user.profileImage};
 						});
 						resolve(sendUsers);
 					})

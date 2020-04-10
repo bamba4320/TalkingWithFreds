@@ -8,6 +8,7 @@ import ConversationComponent from '../../../components/ConversationsList/Convera
 import UserProfileComponent from '../../../components/UserProfile/userProfile.component';
 import './ConversationsList.container.scss';
 import MoreOptionsMenuComponent from '../../../components/MoreOptionsMenu/MoreOptionsMenu.component';
+import {isNullOrUndefined} from 'util';
 
 const conversationStore = rootStores[CONVERSATION_STORE];
 interface IProps {}
@@ -26,41 +27,55 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 		};
 	}
 	public render() {
+		let key = 0;
 		return (
 			<div className='left-sidebar-wrapper'>
 				<div className='left-sidebar-top-bar-wrapper'>
 					<div className='user-profile-wrapper'>
 						<UserProfileComponent />
 					</div>
-					<MoreOptionsMenuComponent/>
+					<MoreOptionsMenuComponent />
 				</div>
 				<div className='conv-search-wrapper'>
 					<Input fluid placeholder={'Search...'} onChange={(e) => this.setState({filter: e.target.value})} />
 				</div>
-				<div className='conversations-list-wrapper'>
-					{conversationStore.getUserConversations.map((conv) => {
-						console.log(conv, this.state.filter);
-						if (this.state.filter !== '') {
-							if (conv.convName && conv.convName.includes(this.state.filter)) {
-								return (
-									<ConversationComponent
-										convDits={conv}
-										isSelected={this.isSelected}
-										onConvSelect={this.onConvSelect}
-									/>
-								);
-							} else {
-								return <div />;
-							}
-						} else {
-							return (
-								<ConversationComponent convDits={conv} isSelected={this.isSelected} onConvSelect={this.onConvSelect} />
-							);
-						}
-					})}
-				</div>
+				<div className='conversations-list-wrapper'>{this.renderConversations()}</div>
 			</div>
 		);
+	}
+
+	private renderConversations() {
+		let key = 0;
+		if (
+			!isNullOrUndefined(conversationStore.getUserConversations) &&
+			conversationStore.getUserConversations.length > 0
+		) {
+			return conversationStore.getUserConversations.map((conv) => {
+				if (this.state.filter !== '') {
+					if (conv.convName && conv.convName.includes(this.state.filter)) {
+						return (
+							<ConversationComponent
+								convDits={conv}
+								isSelected={this.isSelected}
+								onConvSelect={this.onConvSelect}
+								key={key++}
+							/>
+						);
+					} else {
+						return <div key={key++} />;
+					}
+				} else {
+					return (
+						<ConversationComponent
+							convDits={conv}
+							isSelected={this.isSelected}
+							onConvSelect={this.onConvSelect}
+							key={key++}
+						/>
+					);
+				}
+			});
+		}
 	}
 
 	public onConvSelect = (convDits: ConversationModel) => {

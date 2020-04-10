@@ -2,6 +2,7 @@ import React from 'react';
 import rootStores from '../../../BL/stores';
 import {CURRENT_USER_STORE} from '../../../BL/stores/storesKeys';
 import {isNullOrUndefined} from 'util';
+import AddUserToChatComponent from './AddUserToChatComponent/AddUserToChat.component';
 
 interface IProps {}
 interface IState {
@@ -25,17 +26,13 @@ export default class NewChatComponent extends React.Component<IProps, IState> {
 	}
 
 	public render() {
+		let key = 0;
 		return (
 			<div>
 				<input type='text' placeholder='Search...' />
 				{this.users.map((user: any) => {
 					console.log(user);
-					return (
-						<div>
-							<div>{user.profileImage}</div>
-							<div>{user.username}</div>
-						</div>
-					);
+					return <AddUserToChatComponent user={user} key={key++} />;
 				})}
 			</div>
 		);

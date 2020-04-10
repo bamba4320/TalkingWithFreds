@@ -1,9 +1,14 @@
-import MessageModel from './Message.model';
+import {observable} from 'mobx';
 
 export default class ConversationModel {
+	@observable
 	public convId?: string;
+	@observable
 	public convName?: string;
+	@observable
 	public lastMessage?: string;
+	@observable
 	public profileImg?: string;
-	public isGroup:boolean = false;
+	@observable
+	public isGroup: boolean = false;
 }

@@ -11,12 +11,11 @@ export default class ConversationStore {
 
 	constructor() {
 		this.currentUserConversations = [];
-		this.currentSelectedConversation = undefined;
 	}
 
 	@action
 	public async initUserConversations() {
-		this.currentUserConversations = await ConversationFetcher.getUserConversations();
+		this.currentUserConversations = (await (await ConversationFetcher.getUserConversations())).conversations;
 	}
 
 	@action
@@ -28,6 +27,11 @@ export default class ConversationStore {
 	public cleanConversations() {
 		this.currentUserConversations = [];
 		this.currentSelectedConversation = undefined;
+	}
+
+	@action
+	public CreateNewConversation(userId: string) {
+		ConversationFetcher.createNewConversation(userId);
 	}
 
 	@computed
