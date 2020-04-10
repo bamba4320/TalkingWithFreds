@@ -21,11 +21,11 @@ import AutoLogoutStore from './AutoLogout.store';
  * Initiate all stores
  */
 const uiStore = new UiStore();
-const conversationStore = new ConversationStore();
+const messagesStore = new MessagesStore();
+const conversationStore = new ConversationStore(messagesStore);
 const currentUserStore = new CurrentUserStore(conversationStore);
 const authStore = new AuthStore(currentUserStore);
 const modalStore = new ModalStore();
-const messagesStore = new MessagesStore();
 const registerStore = new RegisterStore();
 const autoLogoutStore = new AutoLogoutStore(currentUserStore);
 /**

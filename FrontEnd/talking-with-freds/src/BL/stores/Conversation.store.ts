@@ -3,6 +3,7 @@ import {observable, action, computed} from 'mobx';
 import ConversationModel from '../../common/models/Conversation.model';
 import ConversationDTO from '../../common/dto/conversation.dto';
 import ConversationConverter from '../../common/convertors/conversation.converter';
+import MessagesStore from './Messages.store';
 
 export default class ConversationStore {
 	@observable
@@ -11,8 +12,11 @@ export default class ConversationStore {
 	@observable
 	private currentSelectedConversation?: ConversationModel;
 
-	constructor() {
+	private messageStore:MessagesStore;
+
+	constructor( messageStore:MessagesStore) {
 		this.currentUserConversations = [];
+		this.messageStore = messageStore;
 	}
 
 	@action
@@ -27,6 +31,7 @@ export default class ConversationStore {
 	@action
 	public selectConversation(conv: ConversationModel) {
 		this.currentSelectedConversation = conv;
+		this.messageStore.getConversationMessagesById(conv.convId);
 	}
 
 	@action
