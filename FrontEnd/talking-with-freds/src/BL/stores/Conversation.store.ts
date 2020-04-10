@@ -1,6 +1,8 @@
 import ConversationFetcher from '../../Infrastructure/fetchers/Conversation.fetcher';
 import {observable, action, computed} from 'mobx';
 import ConversationModel from '../../common/models/Conversation.model';
+import ConversationDTO from '../../common/dto/conversation.dto';
+import ConversationConverter from '../../common/convertors/conversation.converter';
 
 export default class ConversationStore {
 	@observable
@@ -15,7 +17,11 @@ export default class ConversationStore {
 
 	@action
 	public async initUserConversations() {
-		this.currentUserConversations = (await (await ConversationFetcher.getUserConversations())).conversations;
+		this.currentUserConversations = (await await ConversationFetcher.getUserConversations()).conversations.map(
+			(conversation: ConversationDTO) => {
+				return ConversationConverter.convertConversationDTOToModel(conversation);
+			}
+		);
 	}
 
 	@action
