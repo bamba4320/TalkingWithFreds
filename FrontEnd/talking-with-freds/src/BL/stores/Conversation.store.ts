@@ -12,9 +12,9 @@ export default class ConversationStore {
 	@observable
 	private currentSelectedConversation?: ConversationModel;
 
-	private messageStore:MessagesStore;
+	private messageStore: MessagesStore;
 
-	constructor( messageStore:MessagesStore) {
+	constructor(messageStore: MessagesStore) {
 		this.currentUserConversations = [];
 		this.messageStore = messageStore;
 	}
@@ -29,9 +29,11 @@ export default class ConversationStore {
 	}
 
 	@action
-	public selectConversation(conv: ConversationModel) {
+	public async selectConversation(conv: ConversationModel) {
 		this.currentSelectedConversation = conv;
-		this.messageStore.getConversationMessagesById(conv.convId);
+		if (conv && conv.convId) {
+			this.messageStore.initCurrentMessages(await ConversationFetcher.getConversationMessages(conv.convId));
+		}
 	}
 
 	@action

@@ -8,6 +8,10 @@ class ConversationFetcher extends BaseFetcher {
 	public createNewConversation(userId: string) {
 		return this.put(`/${userId}`);
 	}
+
+	public getConversationMessages(convId:String){
+		return this.get(`/${convId}`);
+	}
 }
 
 export default new ConversationFetcher('conversation');

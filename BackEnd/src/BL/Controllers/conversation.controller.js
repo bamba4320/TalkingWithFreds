@@ -5,20 +5,18 @@ class ConversationController {
 	// find all the conversations thats the user is part of
 	async getUserConversations(token) {
 		try {
-            return new Promise((resolve, reject) => {
+			return new Promise((resolve, reject) => {
 				// verify the sending user token and extract his id
 				jwtUtils
 					.verifyToken(token)
 					.then(async (authData) => {
 						const conversations = await ConversationSchema.find({participants: authData.id});
-			            console.log(conversations);
 						resolve(conversations);
 					})
 					.catch((err) => {
 						reject(err);
 					});
 			});
-			
 		} catch (err) {
 			console.error(err);
 			throw new Error(err.message);
@@ -48,6 +46,34 @@ class ConversationController {
 			});
 		} catch (err) {
 			console.error(err);
+			throw new Error(err.message);
+		}
+	}
+
+	// get all conversation messages
+	async getConversationMessages(convId) {
+		try {
+			const conv = await ConversationSchema.findById(convId).populate('messages');
+			return conv.messages;
+		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
+
+	// add new message to conversation
+	async addMessageToConversation(convId, messageId) {
+		try {
+			const conv = await ConversationSchema.findById(convId);
+			conv.messages.push(messageId);
+			conv
+				.save()
+				.then(() => {
+					return;
+				})
+				.catch((err) => {
+					throw new Error(err);
+				});
+		} catch (err) {
 			throw new Error(err.message);
 		}
 	}
