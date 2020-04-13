@@ -1,19 +1,28 @@
 import UserFetcher from '../../Infrastructure/fetchers/User.fetcher';
-import {observable, computed, action} from 'mobx';
+import {observable, computed, action, observe} from 'mobx';
 import UserModel from '../../common/models/User.model';
 import ConversationStore from './Conversation.store';
 import TalkingWithFredsLocalStorage from '../../Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
 import UserDTO from '../../common/dto/user.dto';
 import UserConverter from '../../common/convertors/User.converter';
+import WebSocketStore from './webSocket/webSocket.store';
+import {isNullOrUndefined} from 'util';
 
 export default class CurrentUserStore {
 	@observable private currentUser: UserModel | null;
 
 	private conversationStore: ConversationStore;
+	private webSocketStore: WebSocketStore;
 
-	constructor(convStore: ConversationStore) {
+	constructor(convStore: ConversationStore, webSocketStore: WebSocketStore) {
 		this.currentUser = null;
 		this.conversationStore = convStore;
+		this.webSocketStore = webSocketStore;
+		const getUidDesposer = observe(this.webSocketStore.socketEventObserver, (change) => {
+			if (change.name === 'getUid' && !isNullOrUndefined(this.currentUser)) {
+				this.webSocketStore.sendUid(this.currentUser.id!);
+			}
+		});
 	}
 
 	@computed
@@ -41,6 +50,10 @@ export default class CurrentUserStore {
 	public initUser(user: UserModel) {
 		this.currentUser = user;
 		this.conversationStore.initUserConversations();
+		console.log(user, this.currentUser);
+		if (!isNullOrUndefined(user) && !isNullOrUndefined(user.id)) {
+			this.webSocketStore.sendUid(user.id);
+		}
 	}
 
 	@action

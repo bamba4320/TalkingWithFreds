@@ -10,20 +10,23 @@ import {
 	CONVERSATION_STORE,
 	REGISTER_STORE,
 	AUTO_LOGOUT_STORE,
+	WEB_SOCKET_STORE,
 } from './storesKeys';
 import UiStore from './ui.store';
 import MessagesStore from './Messages.store';
 import ConversationStore from './Conversation.store';
 import RegisterStore from './Register.store';
 import AutoLogoutStore from './AutoLogout.store';
+import WebSocketStore from './webSocket/webSocket.store';
 
 /**
  * Initiate all stores
  */
 const uiStore = new UiStore();
+const webSocketStore = new WebSocketStore();
 const messagesStore = new MessagesStore();
-const conversationStore = new ConversationStore(messagesStore);
-const currentUserStore = new CurrentUserStore(conversationStore);
+const conversationStore = new ConversationStore(messagesStore, webSocketStore);
+const currentUserStore = new CurrentUserStore(conversationStore, webSocketStore);
 const authStore = new AuthStore(currentUserStore);
 const modalStore = new ModalStore();
 const registerStore = new RegisterStore();
@@ -40,6 +43,7 @@ const rootStores = {
 	[CONVERSATION_STORE]: conversationStore,
 	[REGISTER_STORE]: registerStore,
 	[AUTO_LOGOUT_STORE]: autoLogoutStore,
+	[WEB_SOCKET_STORE]: webSocketStore,
 };
 
 export default rootStores;

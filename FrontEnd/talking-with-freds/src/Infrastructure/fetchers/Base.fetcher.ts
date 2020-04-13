@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import TalkingWithFredsLocalStorage from '../Utils/LocalStorage/TalkingWithFredsLocalStorage';
+import {apiBaseUrl} from '../../common/generalConsts';
 
 import { isNullOrUndefined } from 'util';
 
@@ -61,6 +62,6 @@ export default class BaseFetcher {
 	}
 
 	private getBaseApiUrl() {
-		return 'http://192.168.1.103:4320/api';
+		return apiBaseUrl;
 	}
 }
