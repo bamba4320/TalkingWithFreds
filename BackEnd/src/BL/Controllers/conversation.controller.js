@@ -77,6 +77,15 @@ class ConversationController {
 			throw new Error(err.message);
 		}
 	}
+
+	// get all conversation participants except for sender
+	async getAllParticipants(convId) {
+		try {
+			return (await ConversationSchema.findById(convId)).participants;
+		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
 }
 
 module.exports = new ConversationController();

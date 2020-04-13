@@ -15,17 +15,19 @@ const currentUserStore = rootStores[CURRENT_USER_STORE];
 @observer
 export default class ChatContentComponent extends React.Component<IProps, IState> {
 	public render() {
+		let key = 0;
 		return (
 			<div className='chat-content-wrapper'>
 				<div className='chat-messages-wrapper'>
-				{messagesStore.getCurrentConvMessages.map((message: MessageModel) => {
-					return (
-						<ChatMessageComponent
-							messageContent={message.messageContent}
-							isUserSent={currentUserStore.getCurrentUserId === message.senderId}
-						/>
-					);
-				})}
+					{messagesStore.getCurrentConvMessages.map((message: MessageModel) => {
+						return (
+							<ChatMessageComponent
+								messageContent={message.messageContent}
+								isUserSent={currentUserStore.getCurrentUserId === message.senderId}
+								key={key++}
+							/>
+						);
+					})}
 				</div>
 			</div>
 		);

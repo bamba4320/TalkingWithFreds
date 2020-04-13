@@ -45,11 +45,11 @@ export default class WebSocketStore {
 	}
 
 	public sendUid(uid: string) {
-		this.socket.emit('uid', {id: uid});
+		this.socket.emit(events.uid, {id: uid});
 	}
 
 	@computed
-	get socketEventObserver() {
+	get getSocketEventsObserver() {
 		return this.socketEventsObserver;
 	}
 }

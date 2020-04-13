@@ -1,10 +1,11 @@
 import ConversationFetcher from '../../Infrastructure/fetchers/Conversation.fetcher';
-import {observable, action, computed, observe} from 'mobx';
+import {observable, action, computed, observe, reaction, IReactionPublic} from 'mobx';
 import ConversationModel from '../../common/models/Conversation.model';
 import ConversationDTO from '../../common/dto/conversation.dto';
 import ConversationConverter from '../../common/convertors/conversation.converter';
 import MessagesStore from './Messages.store';
 import WebSocketStore from './webSocket/webSocket.store';
+import {events} from './webSocket/events';
 
 export default class ConversationStore {
 	@observable
@@ -14,18 +15,28 @@ export default class ConversationStore {
 	private currentSelectedConversation?: ConversationModel;
 
 	private messageStore: MessagesStore;
-	private webSocketStore:WebSocketStore;
+	private webSocketStore: WebSocketStore;
 
-	constructor(messageStore: MessagesStore, webSocketStore:WebSocketStore) {
+	constructor(messageStore: MessagesStore, webSocketStore: WebSocketStore) {
 		this.currentUserConversations = [];
 		this.messageStore = messageStore;
 		this.webSocketStore = webSocketStore;
 
-		const newMessageObserverDisposer = observe(this.webSocketStore.socketEventObserver, (change)=>{
-			if(change.name === 'event' && change.object[change.name] === 'newMessage'){
-				console.log('got new message');
+		// const newMessageObserverDisposer = observe(this.webSocketStore.getSocketEventsObserver, (change) => {
+		// 	console.log(change);
+		// 	if (change.name === 'event' && change.object[change.name] === 'new-message') {
+		// 		console.log('got new message');
+		// 	}
+		// });
+
+		const newMessageObserverDisposer = reaction(
+			() => this.webSocketStore.getSocketEventsObserver,
+			(event) => {
+				if (event.event === events.newMessage) {
+					this.messageStore.pushNewMessage(event.data);
+				}
 			}
-		});
+		);
 	}
 
 	@action

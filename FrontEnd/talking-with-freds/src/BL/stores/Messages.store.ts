@@ -21,6 +21,11 @@ export default class MessagesStore {
 		this.currentConversationMessages.push(message);
 	}
 
+	@action
+	public pushNewMessage(message:MessageModel){
+		this.currentConversationMessages.push(message);
+	}
+
 	@computed
 	get getCurrentConvMessages() {
 		return this.currentConversationMessages;

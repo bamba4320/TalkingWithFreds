@@ -7,6 +7,7 @@ import UserDTO from '../../common/dto/user.dto';
 import UserConverter from '../../common/convertors/User.converter';
 import WebSocketStore from './webSocket/webSocket.store';
 import {isNullOrUndefined} from 'util';
+import {events} from './webSocket/events';
 
 export default class CurrentUserStore {
 	@observable private currentUser: UserModel | null;
@@ -18,8 +19,9 @@ export default class CurrentUserStore {
 		this.currentUser = null;
 		this.conversationStore = convStore;
 		this.webSocketStore = webSocketStore;
-		const getUidDesposer = observe(this.webSocketStore.socketEventObserver, (change) => {
-			if (change.name === 'getUid' && !isNullOrUndefined(this.currentUser)) {
+		const getUidDesposer = observe(this.webSocketStore.getSocketEventsObserver, (change) => {
+			console.log(change);
+			if (change.name === events.uid && !isNullOrUndefined(this.currentUser)) {
 				this.webSocketStore.sendUid(this.currentUser.id!);
 			}
 		});
@@ -50,7 +52,6 @@ export default class CurrentUserStore {
 	public initUser(user: UserModel) {
 		this.currentUser = user;
 		this.conversationStore.initUserConversations();
-		console.log(user, this.currentUser);
 		if (!isNullOrUndefined(user) && !isNullOrUndefined(user.id)) {
 			this.webSocketStore.sendUid(user.id);
 		}

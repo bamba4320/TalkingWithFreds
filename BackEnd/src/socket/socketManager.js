@@ -14,7 +14,13 @@ class socketManager {
 	// check if the user already has a soket connected
 	findSocketById(uid) {
 		console.log(`looking for socket with id: ${uid}`);
-		const find = _.find(this.socketCache, {uid});
+		// const find = _.find(this.socketCache, {uid});
+		let find = null;
+		this.socketCache.forEach((obj) => {
+			if (obj.uid == uid) {
+				find = obj;
+			}
+		});
 		if (find) {
 			console.log(`socket with id of ${uid} has been found`);
 			return find;
@@ -43,7 +49,7 @@ class socketManager {
 		if (userSocket) {
 			if (userSocket.sockets) {
 				console.log(`emitting ${event} with content: ${content}`);
-				userSocket.sockets.foreach((socket) => {
+				userSocket.sockets.forEach((socket) => {
 					socket.emit(event, content);
 				});
 				return true;
@@ -61,7 +67,7 @@ class socketManager {
 	clearCacheSocket(socketId) {
 		let socketIndex = -1;
 		const socketObjectIndex = _.findIndex(this.socketCache, function (obj) {
-			for (let i = 0; i < obj.socket.length; i++) {
+			for (let i = 0; i < obj.sockets.length; i++) {
 				if (obj.sockets[i].id === socketId) {
 					socketIndex = i;
 					return true;
