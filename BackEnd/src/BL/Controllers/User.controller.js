@@ -180,6 +180,7 @@ class UserController {
 		}
 	}
 
+	// get all users from db part of the requesting user.
 	async getFriends(token) {
 		try {
 			return new Promise((resolve, reject) => {
@@ -198,6 +199,14 @@ class UserController {
 			});
 		} catch (err) {
 			console.error(err);
+			throw new Error(err.message);
+		}
+	}
+
+	async getUserById(uid) {
+		try {
+			return await UserSchema.findById(uid);
+		} catch (err) {
 			throw new Error(err.message);
 		}
 	}
