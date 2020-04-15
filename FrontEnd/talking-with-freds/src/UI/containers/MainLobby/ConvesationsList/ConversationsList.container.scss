@@ -1,8 +1,10 @@
 .left-sidebar-wrapper {
 	overflow: auto;
+	height: 100%;
 	.left-sidebar-top-bar-wrapper {
-		background-color: #0d3628;
-		border-right: solid 1px #1852269c;
+		background-color: #18192e;
+		border-right: solid 1px #91ccfd4d;
+		border-bottom:solid 1px #91ccfd4d ;
 		position: relative;
 		display: flex;
 		justify-content: space-between;
@@ -18,7 +20,10 @@
 		background-color: #18192e;
 		.ui.input {
 			> input {
+				background-color: #18192e;
+				color: white;
 				border-radius: 16px;
+				border: solid 1px #91cdfd;
 			}
 		}
 	}

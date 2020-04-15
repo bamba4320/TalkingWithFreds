@@ -18,12 +18,6 @@ const currentUserStore = rootStores[CURRENT_USER_STORE];
 
 @observer
 export default class ChatWindowContainer extends React.Component<IProps, IState> {
-	private scrolled: boolean = false;
-
-	public componentDidMount() {
-		setInterval(() => this.updateScroll(document.getElementById('chat-window-super-wrapper')), 200);
-	}
-
 	public render() {
 		return (
 			<div className='chat-window-super-wrapper' id='chat-window-super-wrapper'>
@@ -59,10 +53,4 @@ export default class ChatWindowContainer extends React.Component<IProps, IState>
 			messagesStore.addNewMessage(newMessage);
 		}
 	};
-
-	private updateScroll(windowDiv: HTMLElement | null) {
-		if (!isNullOrUndefined(windowDiv)) {
-			windowDiv.scrollTop = windowDiv.scrollHeight;
-		}
-	}
 }

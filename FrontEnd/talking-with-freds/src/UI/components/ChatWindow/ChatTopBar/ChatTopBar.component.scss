@@ -3,7 +3,7 @@
 	display: flex;
 	width: 100%;
 	padding: 1px 10px;
-	background-color: #0d3628;
+	background-color: #18192e;
 	height: 7%;
 	z-index: 3;
 	top: 0;
@@ -14,7 +14,7 @@
 		width: 5%;
 		height: auto;
 
-		&.default-image{
+		&.default-image {
 			width: 4.8%;
 		}
 
@@ -27,5 +27,10 @@
 				object-fit: contain;
 			}
 		}
+	}
+	.conv-name-wrapper {
+		padding: 5px;
+		font-size: 1.3em;
+		color: #8dc8f8;
 	}
 }

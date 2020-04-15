@@ -5,6 +5,7 @@ import rootStores from '../../../../BL/stores';
 import {MESSAGES_STORE, CURRENT_USER_STORE} from '../../../../BL/stores/storesKeys';
 import MessageModel from '../../../../common/models/Message.model';
 import ChatMessageComponent from './ChatMessage/ChatMessage.component';
+import {isNullOrUndefined} from 'util';
 
 interface IProps {}
 interface IState {}
@@ -16,6 +17,9 @@ const currentUserStore = rootStores[CURRENT_USER_STORE];
 export default class ChatContentComponent extends React.Component<IProps, IState> {
 	public render() {
 		let key = 0;
+		setTimeout(() => {
+			this.updateScroll(document.getElementById('chat-window-super-wrapper'));
+		}, 10);
 		return (
 			<div className='chat-content-wrapper'>
 				<div className='chat-messages-wrapper'>
@@ -31,5 +35,11 @@ export default class ChatContentComponent extends React.Component<IProps, IState
 				</div>
 			</div>
 		);
+	}
+
+	private updateScroll(windowDiv: HTMLElement | null) {
+		if (!isNullOrUndefined(windowDiv)) {
+			windowDiv.scrollTop = windowDiv.scrollHeight;
+		}
 	}
 }

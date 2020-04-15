@@ -26,7 +26,7 @@ export default class ChatTopBarComponent extends React.Component<IProps, IState>
 						/>
 					</div>
 				</div>
-				<div>{this.props.convName}</div>
+				<div className='conv-name-wrapper'>{this.props.convName}</div>
 			</div>
 		);
 	}
