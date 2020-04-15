@@ -48,6 +48,8 @@ app.use('/api', (req, res) => {
 	res.status(200).send("Welcome to Talkin' With Freds main route!");
 });
 
+app.use(express.static(__dirname+'/static'));
+
 //handle errors:
 app.use((err, req, res, next) => {
 	const errorStatus = err.status || 500;

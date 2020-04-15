@@ -2,5 +2,6 @@ export default class UserDTO {
 	public id?: string;
 	public token?: string;
 	public username?: string;
-    public email?: string;
+	public email?: string;
+	public profileImage?: string;
 }
