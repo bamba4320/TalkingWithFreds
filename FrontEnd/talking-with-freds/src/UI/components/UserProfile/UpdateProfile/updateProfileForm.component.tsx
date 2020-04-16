@@ -3,6 +3,7 @@ import {Form, Button} from 'semantic-ui-react';
 import rootStores from '../../../../BL/stores';
 import {CURRENT_USER_STORE} from '../../../../BL/stores/storesKeys';
 import {isNullOrUndefined} from 'util';
+import './updateProfileForm.component.scss';
 
 interface IProps {
 	onSubmit: any;
@@ -25,8 +26,8 @@ export default class UpdateProfileFormComponent extends React.Component<IProps, 
 
 	public render() {
 		return (
-			<Form>
-				<Form.Field>
+			<Form className='form-wrapper'>
+				<Form.Field >
 					<Form.Input
 						type='text'
 						placeholder='Username'

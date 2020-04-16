@@ -33,7 +33,7 @@ export default class MoreOptionsMenuComponent extends React.Component {
 				onSubmit={this.onProfileUpdateSubmit}
 				onChangePassword={this.onChangePasswordClick}
 			/>,
-			{title: 'Profile', closeFromOutsideModal: true}
+			{title: 'Edit Profile', closeFromOutsideModal: true}
 		);
 	};
 
