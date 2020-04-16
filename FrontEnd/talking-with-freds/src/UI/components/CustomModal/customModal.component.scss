@@ -62,11 +62,15 @@
 			}
 			.inner-content-wrapper {
 				text-align: center;
+				padding: 0 6%;
+				height: 100%;
+				overflow: auto;
 
 				input {
 					padding: 10px;
 					border-radius: 25px;
 					font-size: 18px;
+					width: 100%
 				}
 
 				button {

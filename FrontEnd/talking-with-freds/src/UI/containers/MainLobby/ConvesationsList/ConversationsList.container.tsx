@@ -52,7 +52,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 		) {
 			return conversationStore.getUserConversations.map((conv) => {
 				if (this.state.filter !== '') {
-					if (conv.convName && conv.convName.includes(this.state.filter)) {
+					if (conv.convName && conv.convName.toLowerCase().includes(this.state.filter.toLowerCase())) {
 						return (
 							<ConversationComponent
 								convDits={conv}

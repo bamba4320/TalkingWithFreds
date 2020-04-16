@@ -7,6 +7,7 @@ import AddUserToChatComponent from './AddUserToChatComponent/AddUserToChat.compo
 interface IProps {}
 interface IState {
 	loading: boolean;
+	filter: '';
 }
 
 const currentUserStore = rootStores[CURRENT_USER_STORE];
@@ -17,7 +18,7 @@ export default class NewChatComponent extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.users = [];
-		this.state = {loading: true};
+		this.state = {loading: true, filter: ''};
 	}
 
 	public async componentDidMount() {
@@ -29,12 +30,23 @@ export default class NewChatComponent extends React.Component<IProps, IState> {
 		let key = 0;
 		return (
 			<div>
-				<input type='text' placeholder='Search...' />
+				<input type='text' placeholder='Search...' onChange={(e) => this.onSearch(e)} />
 				{this.users.map((user: any) => {
-					console.log(user);
-					return <AddUserToChatComponent user={user} key={key++} />;
+					if (!isNullOrUndefined(user)) {
+						if (this.state.filter !== '') {
+							if (user.username.toLowerCase().includes(this.state.filter)) {
+								return <AddUserToChatComponent user={user} key={key++} />;
+							}
+						} else {
+							return <AddUserToChatComponent user={user} key={key++} />;
+						}
+					}
 				})}
 			</div>
 		);
 	}
+
+	private onSearch = (e: any) => {
+		this.setState({filter: e.target.value.toLowerCase()});
+	};
 }

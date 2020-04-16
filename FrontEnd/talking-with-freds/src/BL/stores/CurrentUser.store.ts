@@ -66,7 +66,6 @@ export default class CurrentUserStore {
 
 	@action
 	public async getAllOtherUsers() {
-		console.log('sending...');
 		return await UserFetcher.getOtherUsers();
 	}
 

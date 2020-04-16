@@ -202,7 +202,8 @@ class UserController {
 			throw new Error(err.message);
 		}
 	}
-
+	
+	// get user document by id 
 	async getUserById(uid) {
 		try {
 			return await UserSchema.findById(uid);

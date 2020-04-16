@@ -4,6 +4,8 @@ import './AddUserToChat.component.scss';
 import rootStores from '../../../../BL/stores';
 import {CONVERSATION_STORE, MODAL_STORE} from '../../../../BL/stores/storesKeys';
 import {isNullOrUndefined} from 'util';
+import {Image} from 'semantic-ui-react';
+import { imagePreURL } from '../../../../common/generalConsts';
 
 interface IProps {
 	user: UserModel;
@@ -17,7 +19,21 @@ export default class AddUserToChatComponent extends React.Component<IProps, ISta
 	public render() {
 		return (
 			<div className='add-user-wrapper' onClick={this.handleClick}>
-				<div className='profile-picture-wrapper'>{this.props.user.profileImage}</div>
+				<div className='profile-picture-wrapper'>
+					<div
+						className={`user-profile-img-wrapper ${
+							!isNullOrUndefined(this.props.user.profileImage) && this.props.user.profileImage !== ''
+								? ''
+								: 'default-image'
+						}`}>
+						<div className='circular-image-wrapper'>
+							<Image
+								className='user-profile-img'
+								src={imagePreURL + this.props.user.profileImage || require('../../../../static/images/blank_user_profile_image.jfif')}
+							/>
+						</div>
+					</div>
+				</div>
 				<div className='username'>{this.props.user.username}</div>
 			</div>
 		);

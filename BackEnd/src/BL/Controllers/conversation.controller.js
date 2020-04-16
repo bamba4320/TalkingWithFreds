@@ -54,14 +54,21 @@ class ConversationController {
 				jwtUtils
 					.verifyToken(token)
 					.then((authData) => {
-						const newConversation = new ConversationSchema({
-							convName: 'test Name',
-							isGroup: false,
-							messages: [],
-							participants: [authData.id, uid2],
+						// check if already has private chat
+						this.checkPrivateChat(authData.id, uid2).then((result) => {
+							if (result) {
+								const newConversation = new ConversationSchema({
+									convName: ' ',
+									isGroup: false,
+									messages: [],
+									participants: [authData.id, uid2],
+								});
+								newConversation.save();
+								resolve();
+							} else {
+								reject(new Error('private chat already exists'));
+							}
 						});
-						newConversation.save();
-						resolve();
 					})
 					.catch((err) => {
 						reject(err);
@@ -105,6 +112,23 @@ class ConversationController {
 	async getAllParticipants(convId) {
 		try {
 			return (await ConversationSchema.findById(convId)).participants;
+		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
+
+	// check if users has already private chat
+	async checkPrivateChat(uid1, uid2) {
+		try {
+			// find all conversations with those two users and if
+			// one participants length is two return true
+			const sharedConvs = await ConversationSchema.find({participants: [uid1, uid2]});
+			sharedConvs.forEach((conv) => {
+				if (conv.participants.length === 2) {
+					return true;
+				}
+			});
+			return false;
 		} catch (err) {
 			throw new Error(err.message);
 		}
