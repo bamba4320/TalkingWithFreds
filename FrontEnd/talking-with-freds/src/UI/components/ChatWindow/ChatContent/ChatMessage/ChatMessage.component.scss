@@ -22,5 +22,15 @@
 			background-color: #113655;
 			float: right;
 		}
+
+		&.rtl-message {
+			direction: rtl;
+			text-align: right;
+		}
+
+		&.ltr-message {
+			direction: ltr;
+			text-align: left;
+		}
 	}
 }

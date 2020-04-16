@@ -4,7 +4,7 @@
 	width: 100% !important;
 	height: 7%;
 	padding: 8px;
-	background-color:#18192e;
+	background-color: #18192e;
 	border-left: solid 1px #191b46;
 	.ui.input {
 		width: 100%;
@@ -14,6 +14,19 @@
 			background-color: #18192e;
 			color: wheat;
 			border: solid 1px #8dc8f8;
+		}
+
+		&.rtl-input {
+			input {
+				direction: rtl;
+				text-align: right;
+			}
+		}
+		&.ltr-input {
+			input {
+				direction: ltr;
+				text-align: left;
+			}
 		}
 	}
 }

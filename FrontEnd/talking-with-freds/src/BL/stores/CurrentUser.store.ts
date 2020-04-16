@@ -74,4 +74,9 @@ export default class CurrentUserStore {
 	get getCurrentUserId() {
 		return this.currentUser?.id;
 	}
+
+	@computed
+	get getCurrentUserUsername(){
+		return this.currentUser?.username;
+	}
 }
