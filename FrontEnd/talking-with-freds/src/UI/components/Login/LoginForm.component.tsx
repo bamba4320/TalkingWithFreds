@@ -4,7 +4,7 @@ import './LoginFormComponent.scss';
 
 interface IProps {
 	onSubmit: any;
-	onRegisterClick:any;
+	onRegisterClick: any;
 }
 interface IState {}
 
@@ -37,6 +37,11 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 							id='password-input'
 							placeholder='Password'
 							onChange={(e) => (this.password = e.target.value)}
+							onKeyDown={(e: any) => {
+								if (e.key === 'Enter') {
+									this.handleSubmit();
+								}
+							}}
 						/>
 					</div>
 					<div className='submit-btn-wrapper'>
