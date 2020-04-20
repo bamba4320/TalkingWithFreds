@@ -1,6 +1,6 @@
 const UserSchema = require('../../common/models/User.model');
-const jwtUtils = require('../../common/utils/jwt.utils');
-const encryptionUtils = require('../../common/utils/encryption.utils');
+const jwtUtils = require('../../Infrustructure/utils/jwt.utils');
+const encryptionUtils = require('../../Infrustructure/utils/encryption.utils');
 
 class UserController {
 	/**

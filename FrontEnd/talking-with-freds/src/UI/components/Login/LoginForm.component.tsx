@@ -40,6 +40,7 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 							onKeyDown={(e: any) => {
 								if (e.key === 'Enter') {
 									this.handleSubmit();
+									return false;
 								}
 							}}
 						/>

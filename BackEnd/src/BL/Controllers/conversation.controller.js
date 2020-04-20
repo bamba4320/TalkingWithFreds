@@ -1,5 +1,5 @@
 const ConversationSchema = require('../../common/models/conversation.model');
-const jwtUtils = require('../../common/utils/jwt.utils');
+const jwtUtils = require('../../Infrustructure/utils/jwt.utils');
 const userController = require('./User.controller');
 
 class ConversationController {
