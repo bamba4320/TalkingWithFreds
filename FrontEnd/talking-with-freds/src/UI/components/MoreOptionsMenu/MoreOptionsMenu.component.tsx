@@ -5,6 +5,7 @@ import rootStores from '../../../BL/stores';
 import {CURRENT_USER_STORE, MODAL_STORE} from '../../../BL/stores/storesKeys';
 import NewChatComponent from '../NewChatModal/NewChatWindow.component';
 import UpdateProfileFormComponent from '../UserProfile/UpdateProfile/updateProfileForm.component';
+import ChangePasswordComponent from '../ChangePassword/ChangePassword.component';
 
 const currentUserStore = rootStores[CURRENT_USER_STORE];
 const modalStore = rootStores[MODAL_STORE];
@@ -40,6 +41,11 @@ export default class MoreOptionsMenuComponent extends React.Component {
 	private onProfileUpdateSubmit = (username: string) => {};
 
 	private onChangePasswordClick = () => {
-		modalStore.openModal(<NewChatComponent />, {title: 'Start New Chat', closeFromOutsideModal: true});
+		modalStore.openModal(<ChangePasswordComponent onSubmit={this.onChangePasswordSubmit} />, {
+			title: 'Change Password',
+			closeFromOutsideModal: true,
+		});
 	};
+
+	private onChangePasswordSubmit = (oldPassword: string, newPassword: string) => {};
 }
