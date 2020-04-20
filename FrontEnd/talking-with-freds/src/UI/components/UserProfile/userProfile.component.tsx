@@ -23,6 +23,7 @@ export default class UserProfileComponent extends React.Component<IProps, IState
 						<Image className='user-profile-img' src={this.props.src || require('../../../static/images/blank_user_profile_image.jfif')} />
 					</div>
 				</div>
+				<div className='user-username'>Hello, {currentUserStore.getCurrentUserUsername} </div>
 			</div>
 		);
 	}

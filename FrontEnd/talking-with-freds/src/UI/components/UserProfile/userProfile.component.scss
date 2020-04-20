@@ -10,8 +10,8 @@
 		width: 8%;
 		height: auto;
 
-		&.default-image{
-			width: 21.8%;
+		&.default-image {
+			width: 12%;
 		}
 		.circular-image-wrapper {
 			border-radius: 50%;
@@ -22,5 +22,12 @@
 				object-fit: contain;
 			}
 		}
+	}
+
+	.user-username {
+		padding-left: 15px;
+		color: #8dc8f8;
+		font-size: 1.5rem;
+		padding-top: 18px;
 	}
 }
