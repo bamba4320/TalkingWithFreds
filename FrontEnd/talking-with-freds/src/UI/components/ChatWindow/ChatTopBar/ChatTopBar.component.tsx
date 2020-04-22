@@ -15,17 +15,10 @@ export default class ChatTopBarComponent extends React.Component<IProps, IState>
 	public render() {
 		return (
 			<div className='top-bar-wrapper'>
-				<div
-					className={`chat-img-wrapper ${
-						!isNullOrUndefined(this.props.chatImage) && this.props.chatImage !== '' ? '' : 'default-image'
-					}`}>
-					<div className='circular-image-wrapper'>
-						<Image
-							className='chat-img'
-							src={this.props.chatImage || require('../../../../static/images/blank_user_profile_image.jfif')}
-						/>
-					</div>
-				</div>
+				<Image
+					avatar
+					src={this.props.chatImage || require('../../../../static/images/blank_user_profile_image.jfif')}
+				/>
 				<div className='conv-name-wrapper'>{this.props.convName}</div>
 			</div>
 		);

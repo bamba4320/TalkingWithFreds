@@ -4,24 +4,10 @@
 	width: 100%;
 	padding: 0 10px;
 
-	.user-profile-img-wrapper {
-		position: relative;
-		padding: 1% 0;
-		width: 8%;
-		height: auto;
-
-		&.default-image {
-			width: 12%;
-		}
-		.circular-image-wrapper {
-			border-radius: 50%;
-			overflow: hidden;
-			.user-profile-img {
-				width: 100%;
-				height: auto;
-				object-fit: contain;
-			}
-		}
+	.ui.avatar {
+		margin: 0.3em;
+		width: 3.2em;
+		height: 3.2em;
 	}
 
 	.user-username {

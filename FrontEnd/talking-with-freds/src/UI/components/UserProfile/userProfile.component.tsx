@@ -18,11 +18,7 @@ export default class UserProfileComponent extends React.Component<IProps, IState
 		return (
 			<div className='user-profile-inner-wrapper'>
 				{/* profile picture */}
-				<div className={`user-profile-img-wrapper ${!isNullOrUndefined(this.props.src) && this.props.src !== '' ? '' : 'default-image'}`}>
-					<div className='circular-image-wrapper'>
-						<Image className='user-profile-img' src={this.props.src || require('../../../static/images/blank_user_profile_image.jfif')} />
-					</div>
-				</div>
+						<Image avatar src={this.props.src || require('../../../static/images/blank_user_profile_image.jfif')} />
 				<div className='user-username'>Hello, {currentUserStore.getCurrentUserUsername} </div>
 			</div>
 		);

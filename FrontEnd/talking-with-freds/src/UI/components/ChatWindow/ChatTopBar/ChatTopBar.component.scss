@@ -1,6 +1,6 @@
 .top-bar-wrapper {
 	position: absolute;
-	display: flex;
+	display: inline-flex;
 	width: 100%;
 	padding: 1px 10px;
 	background-color: #18192e;
@@ -8,25 +8,10 @@
 	z-index: 3;
 	top: 0;
 
-	.chat-img-wrapper {
-		position: relative;
-		padding: 2px 0 1px 0;
-		width: 5%;
-		height: auto;
-
-		&.default-image {
-			width: 4.8%;
-		}
-
-		.circular-image-wrapper {
-			border-radius: 50%;
-			overflow: hidden;
-			.chat-img {
-				width: 100%;
-				height: auto;
-				object-fit: contain;
-			}
-		}
+	.ui.avatar {
+		margin: 0.3em;
+		width: 3.2em;
+		height: 3.2em;
 	}
 	.conv-name-wrapper {
 		padding: 10px 15px;

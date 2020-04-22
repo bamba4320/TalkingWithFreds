@@ -3,34 +3,14 @@
 	display: flex;
 	padding: 10px 0;
 	margin-top: 10px;
-	.profile-picture-wrapper {
-		position: relative;
-		display: flex;
-		width: 10%;
-		padding: 0 10px;
-		.user-profile-img-wrapper {
-			position: relative;
-			padding: 1% 0;
-			width: 100%;
-			height: auto;
 
-			&.default-image {
-				width: 21.8%;
-			}
-			.circular-image-wrapper {
-				border-radius: 50%;
-				overflow: hidden;
-				.user-profile-img {
-					width: 100%;
-					height: auto;
-					object-fit: contain;
-				}
-			}
-		}
+	.ui.avatar {
+		width: 3.5em;
+		height: 3.5em;
 	}
 
 	.username {
-		padding: 10px 0;
+		padding: 10px 5px;
 		font-size: 1.2rem;
 		color: #8dc8f8;
 	}
