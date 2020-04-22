@@ -1,11 +1,11 @@
 import React from 'react';
 import './ChatMessage.component.scss';
-import {threadId} from 'worker_threads';
 import LanguageDetector from '../../../../../Infrastructure/Utils/LanguageDetector/languageDetector';
 import {isNullOrUndefined} from 'util';
 
 interface IProps {
 	messageContent?: string;
+	messageTime?: string;
 	isUserSent: boolean;
 }
 
@@ -15,10 +15,9 @@ export default class ChatMessageComponent extends React.Component<IProps, IState
 	public render() {
 		return (
 			<div className='message-line'>
-				<div
-					className={`chat-message ${this.props.isUserSent ? 'user-message' : 'other-message'} ${
-						this.setLangDirection() ? 'rtl-message' : 'ltr-message'
-					} `}>
+				<div className={`chat-message ${this.props.isUserSent ? 'user-message' : 'other-message'} `}>
+					<div className='message-time'>{this.props.messageTime}</div>
+					<div className={`message-wrapper  ${this.setLangDirection() ? 'rtl-message' : 'ltr-message'}`}></div>
 					{this.props.messageContent}
 				</div>
 			</div>
@@ -31,8 +30,8 @@ export default class ChatMessageComponent extends React.Component<IProps, IState
 			// const nonSpecialCharIndex = LanguageDetector.findFirstNonSpecialChar(this.props.messageContent);
 			// console.log(nonSpecialCharIndex);
 			// if (nonSpecialCharIndex !== -1) {
-				// console.log(LanguageDetector.isRTL(this.props.messageContent[nonSpecialCharIndex]));
-				return LanguageDetector.isRTL(this.props.messageContent[0]);
+			// console.log(LanguageDetector.isRTL(this.props.messageContent[nonSpecialCharIndex]));
+			return LanguageDetector.isRTL(this.props.messageContent[0]);
 			// } else {
 			// 	console.log('false');
 			// 	return false;

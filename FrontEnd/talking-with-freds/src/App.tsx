@@ -2,16 +2,14 @@ import {observer, Provider} from 'mobx-react';
 import React from 'react';
 import BlockUi from 'react-block-ui';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {Container, Loader} from 'semantic-ui-react';
 import './App.scss';
 import rootStores from './BL/stores';
-import {CURRENT_USER_STORE, UI_STORE, AUTO_LOGOUT_STORE} from './BL/stores/storesKeys';
-import TalkingWithFredsLocalStorage from './Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
+import {AUTO_LOGOUT_STORE, CURRENT_USER_STORE, UI_STORE} from './BL/stores/storesKeys';
 import LoginContainer from './UI/containers/Login/Login.container';
 import MainLobbyContainer from './UI/containers/MainLobby/MainLobby.container';
 import MainModalContainer from './UI/containers/MainModal/MainModal.container';
 import RegisterContainer from './UI/containers/Register/Register.container';
-import {isNullOrUndefined} from 'util';
-import {Container, Loader} from 'semantic-ui-react';
 
 interface IProps {}
 interface IState {

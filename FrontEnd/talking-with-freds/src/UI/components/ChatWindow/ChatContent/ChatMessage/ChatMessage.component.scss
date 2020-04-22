@@ -23,14 +23,22 @@
 			float: right;
 		}
 
-		&.rtl-message {
-			direction: rtl;
-			text-align: right;
-		}
+		.message-wrapper {
+			display: inline-flex;
 
-		&.ltr-message {
-			direction: ltr;
-			text-align: left;
+			&.rtl-message {
+				direction: rtl;
+				text-align: right;
+			}
+
+			&.ltr-message {
+				direction: ltr;
+				text-align: left;
+			}
+		}
+		.message-time {
+			color: #c9c9c9;
+			font-size: 0.9rem;
 		}
 	}
 }

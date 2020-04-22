@@ -1,11 +1,11 @@
 import React from 'react';
-import './MoreOptionsMenu.component.scss';
-import {Dropdown, Button} from 'semantic-ui-react';
+import {Dropdown} from 'semantic-ui-react';
 import rootStores from '../../../BL/stores';
 import {CURRENT_USER_STORE, MODAL_STORE} from '../../../BL/stores/storesKeys';
+import ChangePasswordComponent from '../ChangePassword/ChangePassword.component';
 import NewChatComponent from '../NewChatModal/NewChatWindow.component';
 import UpdateProfileFormComponent from '../UserProfile/UpdateProfile/updateProfileForm.component';
-import ChangePasswordComponent from '../ChangePassword/ChangePassword.component';
+import './MoreOptionsMenu.component.scss';
 
 const currentUserStore = rootStores[CURRENT_USER_STORE];
 const modalStore = rootStores[MODAL_STORE];

@@ -28,6 +28,7 @@ export default class ChatContentComponent extends React.Component<IProps, IState
 							<ChatMessageComponent
 								messageContent={message.messageContent}
 								isUserSent={currentUserStore.getCurrentUserId === message.senderId}
+								messageTime={this.getTime(message.messageSendingTime)}
 								key={key++}
 							/>
 						);
@@ -41,5 +42,16 @@ export default class ChatContentComponent extends React.Component<IProps, IState
 		if (!isNullOrUndefined(windowDiv)) {
 			windowDiv.scrollTop = windowDiv.scrollHeight;
 		}
+	}
+
+	private getTime(dateTime: Date | string | undefined) {
+		console.log(dateTime);
+		if (!isNullOrUndefined(dateTime)) {
+			let dateTimeTemp: string = dateTime.toString();
+			dateTimeTemp = dateTimeTemp.split('T')[1];
+			dateTimeTemp = dateTimeTemp.slice(0, 5);
+			return dateTimeTemp;
+		}
+		return '';
 	}
 }

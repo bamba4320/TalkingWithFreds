@@ -1,9 +1,8 @@
+import {observer} from 'mobx-react';
 import React from 'react';
-import './Conversation.component.scss';
 import {Image} from 'semantic-ui-react';
 import ConversationModel from '../../../../common/models/Conversation.model';
-import {observer} from 'mobx-react';
-import {isNullOrUndefined} from 'util';
+import './Conversation.component.scss';
 
 interface IProps {
 	convDits: ConversationModel;

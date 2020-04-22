@@ -1,7 +1,6 @@
 import React from 'react';
-import './ChatTopBar.component.scss';
 import {Image} from 'semantic-ui-react';
-import {isNullOrUndefined} from 'util';
+import './ChatTopBar.component.scss';
 
 interface IProps {
 	convName?: string;
