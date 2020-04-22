@@ -91,10 +91,12 @@ class ConversationController {
 	}
 
 	// add new message to conversation
-	async addMessageToConversation(convId, messageId) {
+	async addMessageToConversation(convId, messageId, content, sendTime) {
 		try {
 			const conv = await ConversationSchema.findById(convId);
 			conv.messages.push(messageId);
+			conv.lastMessage = content;
+			conv.lastMessageTime = sendTime;
 			conv
 				.save()
 				.then(() => {

@@ -9,6 +9,7 @@ export default class ConversationConverter {
 		conversation.convId = conversationDTO._id;
 		conversation.convName = conversationDTO.convName;
 		conversation.lastMessage = conversationDTO.lastMessage;
+		conversation.lastMessageTime = conversationDTO.lastMessageTime;
 		conversation.isGroup = conversationDTO.isGroup;
 		if (!isNullOrUndefined(conversationDTO.profileImg)) {
 			conversation.profileImg = imagePreURL + conversationDTO.profileImg;

@@ -45,12 +45,17 @@ export default class ChatContentComponent extends React.Component<IProps, IState
 	}
 
 	private getTime(dateTime: Date | string | undefined) {
-		console.log(dateTime);
 		if (!isNullOrUndefined(dateTime)) {
 			let dateTimeTemp: string = dateTime.toString();
 			dateTimeTemp = dateTimeTemp.split('T')[1];
 			dateTimeTemp = dateTimeTemp.slice(0, 5);
-			return dateTimeTemp;
+			// find timezone offset and transform it to hours
+			const offset = (new Date().getTimezoneOffset() / 60) * -1;
+			let hours = Number.parseInt(dateTimeTemp.slice(0, 2));
+			hours = hours + offset > 23 ? 24 - (hours + offset) : hours + offset;
+			const prenum = hours < 10 ? '0' : '';
+			let returnedDateTime = prenum + hours.toString() + ':' + dateTimeTemp.split(':')[1];
+			return returnedDateTime;
 		}
 		return '';
 	}

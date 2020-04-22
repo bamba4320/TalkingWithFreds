@@ -6,6 +6,8 @@ import ConversationConverter from '../../common/convertors/conversation.converte
 import MessagesStore from './Messages.store';
 import WebSocketStore from './webSocket/webSocket.store';
 import {events} from './webSocket/events';
+import {isNullOrUndefined} from 'util';
+import MessageModel from '../../common/models/Message.model';
 
 export default class ConversationStore {
 	@observable
@@ -32,9 +34,27 @@ export default class ConversationStore {
 		const newMessageObserverDisposer = reaction(
 			() => this.webSocketStore.getSocketEventsObserver,
 			(event) => {
+				// verify that the event is new message
 				if (event.event === events.newMessage) {
-					this.messageStore.pushNewMessage(event.data);
+					// find the message's conversation and set the
+					// message as new last message there
+					this.setNewLastMessageToConv(event.data);
+
+					// if the message is sent to the current conversation
+					// also push the message in the UI
+					if (!isNullOrUndefined(this.getCurrentSelectedConversation)) {
+						if (event.data.convId === this.getCurrentSelectedConversation.convId) {
+							this.messageStore.pushNewMessage(event.data);
+						}
+					}
 				}
+			}
+		);
+
+		const setNewLastMessageDisposer = reaction(
+			() => this.messageStore.getCurrentConvMessages,
+			(currentMessagesShown: MessageModel[]) => {
+				this.setNewLastMessageToConv(currentMessagesShown[currentMessagesShown.length - 1]);
 			}
 		);
 	}
@@ -75,5 +95,16 @@ export default class ConversationStore {
 	@computed
 	get getCurrentSelectedConversation() {
 		return this.currentSelectedConversation;
+	}
+
+	private setNewLastMessageToConv(message: MessageModel) {
+		const convIndex = this.currentUserConversations.findIndex((conv) => {
+			return conv.convId == message.convId;
+		});
+		console.log(convIndex);
+		console.log(this.currentUserConversations[convIndex]);
+		this.currentUserConversations[convIndex].lastMessage = message.messageContent;
+		this.currentUserConversations[convIndex].lastMessageTime = message.messageSendingTime;
+		console.log(this.currentUserConversations[convIndex]);
 	}
 }

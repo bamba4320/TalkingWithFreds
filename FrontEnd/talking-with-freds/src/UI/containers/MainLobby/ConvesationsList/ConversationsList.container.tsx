@@ -79,7 +79,6 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 	}
 
 	public onConvSelect = (convDits: ConversationModel) => {
-		console.log(convDits, 'selected');
 		if (this.state.selectedConv !== convDits.convId) {
 			conversationStore.selectConversation(convDits);
 			this.setState({selectedConv: convDits.convId});

@@ -15,7 +15,7 @@ class MessagesController {
 				message
 					.save()
 					.then(async (message) => {
-						await conversationController.addMessageToConversation(convId, message._id);
+						await conversationController.addMessageToConversation(convId, message._id, content, sendTime);
 						// get all participants
 						const participants = await conversationController.getAllParticipants(convId);
 						// for each on of them, if not the sender user, send new message event

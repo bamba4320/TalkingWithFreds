@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
 		conversationController
 			.getUserConversations(req.token)
 			.then((conversations) => {
-				console.log(conversations);
 				res.status(200).json({conversations});
 			})
 			.catch((err) => {

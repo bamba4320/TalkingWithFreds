@@ -17,8 +17,9 @@ export default class ChatMessageComponent extends React.Component<IProps, IState
 			<div className='message-line'>
 				<div className={`chat-message ${this.props.isUserSent ? 'user-message' : 'other-message'} `}>
 					<div className='message-time'>{this.props.messageTime}</div>
-					<div className={`message-wrapper  ${this.setLangDirection() ? 'rtl-message' : 'ltr-message'}`}></div>
-					{this.props.messageContent}
+					<div className={`message-wrapper  ${this.setLangDirection() ? 'rtl-message' : 'ltr-message'}`}>
+						{this.props.messageContent}
+					</div>
 				</div>
 			</div>
 		);
