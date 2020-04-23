@@ -51,6 +51,7 @@ export default class ChatWindowContainer extends React.Component<IProps, IState>
 			newMessage.messageSendingTime = new Date().toISOString();
 			newMessage.senderId = currentUserStore.getCurrentUserId;
 			messagesStore.addNewMessage(newMessage);
+			conversationStore.setNewLastMessageToConv(newMessage);
 		}
 	};
 }

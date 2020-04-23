@@ -98,7 +98,7 @@ export default class ConversationStore {
 	}
 
 	@action
-	private setNewLastMessageToConv(message: MessageModel) {
+	public setNewLastMessageToConv(message: MessageModel) {
 		console.log(message.messageContent);
 		const convIndex = this.currentUserConversations.findIndex((conv) => {
 			return conv.convId == message.convId;
