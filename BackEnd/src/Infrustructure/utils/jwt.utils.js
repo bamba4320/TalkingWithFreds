@@ -12,12 +12,13 @@ async function saveUserToken(user) {
 					id: user._id,
 					email: user.email,
 					username: user.username,
+					profileImage: user.profileImage,
 				},
 				secretKey,
 				{expiresIn: '5h'},
-				async function(err, token) {
+				async function (err, token) {
 					if (err) {
-            console.error(err);
+						console.error(err);
 						reject(err);
 					}
 					user.token = token;
@@ -32,10 +33,10 @@ async function saveUserToken(user) {
 }
 
 async function verifyToken(token) {
-;	return new Promise((resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		jwt.verify(token, secretKey, (err, authData) => {
 			if (err) {
-        console.error(err);
+				console.error(err);
 				reject(err);
 			} else {
 				resolve(authData);

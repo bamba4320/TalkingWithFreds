@@ -28,11 +28,9 @@ class ConversationController {
 									// set the conversation values.
 									conv.convName = user.username;
 									conv.profileImg = user.profileImage;
-									console.log(conv);
 									return conv;
 								}
 							}
-							console.log(conv);
 							return conv;
 						})
 					);

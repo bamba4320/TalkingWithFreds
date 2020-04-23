@@ -17,7 +17,7 @@ class UserController {
 			if (user.passwordHash === hasedPassword) {
 				// if passwords matches, generate and return user token.
 				const token = await jwtUtils.saveUserToken(user);
-				return {id: user._id, username: user.username, email: user.email, token};
+				return {id: user._id, username: user.username, email: user.email, profileImage: user.profileImage, token};
 			} else {
 				throw new Error('Authentication Failed');
 			}
@@ -120,7 +120,6 @@ class UserController {
 				if (err) {
 					console.error(err.message);
 				} else {
-					console.log(user);
 				}
 			});
 		} catch (err) {
@@ -202,8 +201,8 @@ class UserController {
 			throw new Error(err.message);
 		}
 	}
-	
-	// get user document by id 
+
+	// get user document by id
 	async getUserById(uid) {
 		try {
 			return await UserSchema.findById(uid);

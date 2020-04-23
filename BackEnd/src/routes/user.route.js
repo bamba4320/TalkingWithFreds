@@ -26,7 +26,6 @@ router.get('/getUser', (req, res) => {
 // get all other users
 router.get('/getFriends', (req, res) => {
 	try {
-		console.log('in get friends');
 		userController
 			.getFriends(req.token)
 			.then((users) => {

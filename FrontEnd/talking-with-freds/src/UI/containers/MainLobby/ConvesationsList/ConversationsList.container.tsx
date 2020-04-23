@@ -27,7 +27,6 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 		};
 	}
 	public render() {
-		let key = 0;
 		return (
 			<div className='left-sidebar-wrapper'>
 				<div className='left-sidebar-top-bar-wrapper'>

@@ -78,4 +78,9 @@ export default class CurrentUserStore {
 	get getCurrentUserUsername(){
 		return this.currentUser?.username;
 	}
+
+	@computed
+	get geCurrentUserProfilePicture(){
+		return this.currentUser?.profileImage;
+	}
 }
