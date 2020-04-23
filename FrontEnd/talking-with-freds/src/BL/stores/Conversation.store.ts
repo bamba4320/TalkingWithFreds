@@ -97,14 +97,13 @@ export default class ConversationStore {
 		return this.currentSelectedConversation;
 	}
 
+	@action
 	private setNewLastMessageToConv(message: MessageModel) {
+		console.log(message.messageContent);
 		const convIndex = this.currentUserConversations.findIndex((conv) => {
 			return conv.convId == message.convId;
 		});
-		console.log(convIndex);
-		console.log(this.currentUserConversations[convIndex]);
 		this.currentUserConversations[convIndex].lastMessage = message.messageContent;
 		this.currentUserConversations[convIndex].lastMessageTime = message.messageSendingTime;
-		console.log(this.currentUserConversations[convIndex]);
 	}
 }
