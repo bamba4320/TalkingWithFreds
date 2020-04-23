@@ -12,6 +12,7 @@ interface IState {
 	loading: boolean;
 	filter: string;
 	selectedUsers: UserModel[];
+	groupName: string;
 }
 
 const currentUserStore = rootStores[CURRENT_USER_STORE];
@@ -22,7 +23,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.users = [];
-		this.state = {loading: true, filter: '', selectedUsers: []};
+		this.state = {loading: true, filter: '', selectedUsers: [], groupName: ''};
 	}
 
 	public async componentDidMount() {
@@ -63,9 +64,15 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 							}
 						})}
 					</div>
-					<Form.Input placeholder='Group Name' type='text' />
+					<Form.Input
+						placeholder='Group Name'
+						type='text'
+						onChange={(e) => {
+							this.setState({groupName: e.target.value});
+						}}
+					/>
 					<Form.Input type='file' accept='.jpg,.jpeg,.png,.jfif' />
-					<Button inverted color='purple' content='Done' />
+					<Button inverted color='purple' content='Done' disabled={this.isValidToSubmit()} />
 				</Form>
 			</div>
 		);
@@ -101,5 +108,13 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 			return testUser.id == user.id;
 		});
 		return found !== -1;
+	};
+
+	private isValidToSubmit = (): boolean | undefined => {
+		return !(
+			this.state.selectedUsers.length >= 2 &&
+			this.state.groupName !== '' &&
+			!isNullOrUndefined(this.state.groupName)
+		);
 	};
 }
