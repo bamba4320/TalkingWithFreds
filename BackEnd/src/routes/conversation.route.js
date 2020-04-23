@@ -23,7 +23,21 @@ router.put('/:uid', (req, res) => {
 	try {
 		conversationController
 			.addNewConversation(req.token, req.params.uid)
-			.then(() => {
+			.then((newConv) => {
+				res.sendStatus(200);
+			})
+			.catch((err) => errorController.sendError(res, err));
+	} catch (err) {
+		errorController.sendError(res, err);
+	}
+});
+
+// add new group conversation
+router.post('/group', (req, res) => {
+	try {
+		conversationController
+			.addNewGroupConversation(req.token, req.body.users, req.body.groupName, req.body.groupPicture)
+			.then((newConv) => {
 				res.sendStatus(200);
 			})
 			.catch((err) => errorController.sendError(res, err));

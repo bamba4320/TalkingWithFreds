@@ -9,7 +9,11 @@ class ConversationFetcher extends BaseFetcher {
 		return this.put(`/${userId}`);
 	}
 
-	public getConversationMessages(convId:String){
+	public createNewGroupConversation(users: string[], groupName: string, groupPicture: any) {
+		return this.post(`/group`, {users, groupName, groupPicture});
+	}
+
+	public getConversationMessages(convId: String) {
 		return this.get(`/${convId}`);
 	}
 }

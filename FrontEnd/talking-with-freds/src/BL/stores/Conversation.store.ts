@@ -87,6 +87,11 @@ export default class ConversationStore {
 		ConversationFetcher.createNewConversation(userId);
 	}
 
+	@action
+	public CreateNewGroupConversation(users: string[], groupName:string, groupPicture:any) {
+		ConversationFetcher.createNewGroupConversation(users, groupName, groupPicture);
+	}
+
 	@computed
 	get getUserConversations() {
 		return this.currentUserConversations;

@@ -28,7 +28,7 @@ export default class AddUserToGroupComponent extends React.Component<IProps, ISt
 	}
 
 	private handleClick = () => {
-		this.props.onSelect(this.props.user);
+		this.props.onSelect(this.props.user.id);
 	};
 
 	// if the user has profile picture return it, else return null

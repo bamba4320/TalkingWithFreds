@@ -1,7 +1,7 @@
 import React from 'react';
 import {isNullOrUndefined} from 'util';
 import rootStores from '../../../BL/stores';
-import {CURRENT_USER_STORE} from '../../../BL/stores/storesKeys';
+import {CURRENT_USER_STORE, CONVERSATION_STORE, MODAL_STORE} from '../../../BL/stores/storesKeys';
 import AddUserToGroupComponent from './AddUserToGroup/AddUserToGroup.component';
 import UserModel from '../../../common/models/User.model';
 import {Button, Form} from 'semantic-ui-react';
@@ -11,11 +11,13 @@ interface IProps {}
 interface IState {
 	loading: boolean;
 	filter: string;
-	selectedUsers: UserModel[];
+	selectedUsers: string[];
 	groupName: string;
 }
 
 const currentUserStore = rootStores[CURRENT_USER_STORE];
+const conversationStore = rootStores[CONVERSATION_STORE];
+const modalStore = rootStores[MODAL_STORE];
 
 export default class NewGroupComponent extends React.Component<IProps, IState> {
 	private users: any[];
@@ -47,7 +49,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 												user={user}
 												key={key++}
 												onSelect={this.onUserClick}
-												isSelected={this.isUserSelected(user)}
+												isSelected={this.isUserSelected(user.id)}
 											/>
 										);
 									}
@@ -72,7 +74,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 						}}
 					/>
 					<Form.Input type='file' accept='.jpg,.jpeg,.png,.jfif' />
-					<Button inverted color='purple' content='Done' disabled={this.isValidToSubmit()} />
+					<Button inverted color='purple' content='Done' disabled={this.isValidToSubmit()} onClick={this.onDoneClick} />
 				</Form>
 			</div>
 		);
@@ -82,15 +84,15 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 		this.setState({filter: e.target.value.toLowerCase()});
 	};
 
-	private onUserClick = (user: UserModel) => {
+	private onUserClick = (userId: string) => {
 		console.log(this.state.selectedUsers);
 		const tempSelected = this.state.selectedUsers;
-		if (!this.isUserSelected(user)) {
+		if (!this.isUserSelected(userId)) {
 			console.log('pused');
-			tempSelected.push(user);
+			tempSelected.push(userId);
 		} else {
 			const deleteIndex = tempSelected.findIndex((deleteUser) => {
-				return deleteUser.id == user.id;
+				return deleteUser == userId;
 			});
 			if (deleteIndex !== -1) {
 				tempSelected.splice(deleteIndex, 1);
@@ -103,9 +105,9 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 		console.log(this.state.selectedUsers);
 	};
 
-	private isUserSelected = (user: UserModel) => {
+	private isUserSelected = (userId: string) => {
 		const found = this.state.selectedUsers.findIndex((testUser) => {
-			return testUser.id == user.id;
+			return testUser == userId;
 		});
 		return found !== -1;
 	};
@@ -116,5 +118,10 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 			this.state.groupName !== '' &&
 			!isNullOrUndefined(this.state.groupName)
 		);
+	};
+
+	private onDoneClick = () => {
+		conversationStore.CreateNewGroupConversation(this.state.selectedUsers, this.state.groupName, undefined);
+		modalStore.closeModal();
 	};
 }

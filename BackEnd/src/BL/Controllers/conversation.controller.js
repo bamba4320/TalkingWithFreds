@@ -61,11 +61,47 @@ class ConversationController {
 									messages: [],
 									participants: [authData.id, uid2],
 								});
-								newConversation.save();
-								resolve();
+								newConversation.save().then((newConv) => {
+									resolve(newConv);
+								});
 							} else {
 								reject(new Error('private chat already exists'));
 							}
+						});
+					})
+					.catch((err) => {
+						reject(err);
+					});
+			});
+		} catch (err) {
+			console.error(err);
+			throw new Error(err.message);
+		}
+	}
+
+	// add new group converastion
+	async addNewGroupConversation(token, users, groupName, groupPicture) {
+		console.log('>>>>>>>>>> 1 in new group');
+		try {
+			return new Promise((resolve, reject) => {
+				// verify the sending user token and extract his id
+				jwtUtils
+					.verifyToken(token)
+					.then((authData) => {
+						console.log('>>>>>>>>>> 2', users);
+						users.push(authData.id);
+						console.log('>>>>>>>>>> 3', users);
+						const newConversation = new ConversationSchema({
+							convName: groupName,
+							isGroup: true,
+							messages: [],
+							participants: users,
+							groupPicture: groupPicture,
+						});
+						console.log('>>>>>>>>>> saving...');
+						newConversation.save().then((newConv) => {
+							console.log('>>>>>>>>>> saved!', newConv);
+							resolve(newConv);
 						});
 					})
 					.catch((err) => {
