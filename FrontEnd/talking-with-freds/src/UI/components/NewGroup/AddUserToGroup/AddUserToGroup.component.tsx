@@ -1,24 +1,21 @@
 import React from 'react';
-import UserModel from '../../../../common/models/User.model';
-import './AddUserToChat.component.scss';
-import rootStores from '../../../../BL/stores';
-import {CONVERSATION_STORE, MODAL_STORE} from '../../../../BL/stores/storesKeys';
-import {isNullOrUndefined} from 'util';
 import {Image} from 'semantic-ui-react';
+import {isNullOrUndefined} from 'util';
 import {imagePreURL} from '../../../../common/generalConsts';
+import UserModel from '../../../../common/models/User.model';
+import './AddUserToGroup.component.scss';
 
 interface IProps {
 	user: UserModel;
+	onSelect: any;
+	isSelected: boolean;
 }
 interface IState {}
 
-const conversationStore = rootStores[CONVERSATION_STORE];
-const modalStore = rootStores[MODAL_STORE];
-
-export default class AddUserToChatComponent extends React.Component<IProps, IState> {
+export default class AddUserToGroupComponent extends React.Component<IProps, IState> {
 	public render() {
 		return (
-			<div className='add-user-wrapper' onClick={this.handleClick}>
+			<div className={`add-user-wrapper ${this.props.isSelected ? 'selected' : ''}`} onClick={this.handleClick}>
 				<div>
 					<Image
 						avatar
@@ -31,10 +28,7 @@ export default class AddUserToChatComponent extends React.Component<IProps, ISta
 	}
 
 	private handleClick = () => {
-		if (!isNullOrUndefined(this.props.user) && !isNullOrUndefined(this.props.user.id) && this.props.user.id !== '') {
-			conversationStore.CreateNewConversation(this.props.user.id);
-			modalStore.closeModal();
-		}
+		this.props.onSelect(this.props.user);
 	};
 
 	// if the user has profile picture return it, else return null

@@ -1,0 +1,23 @@
+.new-group-wrapper {
+	.ui.input {
+		padding: 5px 0;
+		input {
+			width: 100%;
+			border-radius: 25px !important;
+			background-color: transparent !important;
+			color: wheat !important;
+			border: solid 1px #8dc8f8;
+		}
+	}
+
+	.ui.button {
+		margin: 0 0 5px 0 !important;
+	}
+	.user-selection-wrapper {
+		max-height: 300px;
+		overflow: auto;
+        padding: 10px;
+		border: solid 1px #8dc8f848;
+        
+	}
+}

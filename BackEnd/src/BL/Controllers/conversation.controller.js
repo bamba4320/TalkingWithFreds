@@ -54,7 +54,7 @@ class ConversationController {
 					.then((authData) => {
 						// check if already has private chat
 						this.checkPrivateChat(authData.id, uid2).then((result) => {
-							if (result) {
+							if (!result) {
 								const newConversation = new ConversationSchema({
 									convName: ' ',
 									isGroup: false,
@@ -122,10 +122,15 @@ class ConversationController {
 		try {
 			// find all conversations with those two users and if
 			// one participants length is two return true
-			const sharedConvs = await ConversationSchema.find({participants: [uid1, uid2]});
+			console.log(uid1, uid2);
+			const sharedConvs = await ConversationSchema.find({participants: [uid1]});
+			console.log(sharedConvs);
 			sharedConvs.forEach((conv) => {
+				console.log(conv.participants, conv.participants.length);
 				if (conv.participants.length === 2) {
-					return true;
+					if (conv.participants[0] === uid2 || conv.participants[1] === uid2) {
+						return true;
+					}
 				}
 			});
 			return false;
