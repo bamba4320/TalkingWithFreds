@@ -7,7 +7,7 @@ class MessagesFetcher extends BaseFetcher {
 	}
 
 	public async addNewMessage(message:MessageModel){
-		return this.put('/', {senderId:message.senderId, convId:message.convId,content:message.messageContent, sendTime:message.messageSendingTime});
+		return this.put('/', {senderId:message.senderId, convId:message.convId,content:message.messageContent, sendTime:message.messageSendingTime, senderUsername:message.senderUsername});
 	}
 }
 export default new MessagesFetcher('messages');

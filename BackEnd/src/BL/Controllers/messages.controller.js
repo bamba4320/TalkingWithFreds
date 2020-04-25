@@ -3,7 +3,7 @@ const conversationController = require('./conversation.controller');
 const socketManager = require('../../socket/socketManager');
 
 class MessagesController {
-	async addNewMessage(senderId, convId, content, sendTime) {
+	async addNewMessage(senderId, convId, content, sendTime, senderUsername) {
 		return new Promise((reslove, reject) => {
 			try {
 				const message = new MessageSchema({
@@ -11,6 +11,7 @@ class MessagesController {
 					convId: convId,
 					messageContent: content,
 					messageSendingTime: sendTime,
+					senderUsername:senderUsername,
 				});
 				message
 					.save()

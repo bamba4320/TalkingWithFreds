@@ -30,6 +30,7 @@ export default class ChatContentComponent extends React.Component<IProps, IState
 								isUserSent={currentUserStore.getCurrentUserId === message.senderId}
 								messageTime={this.getTime(message.messageSendingTime)}
 								messageDate={this.getDate(message.messageSendingTime)}
+								username={!isNullOrUndefined(message.senderUsername) ? message.senderUsername : ''}
 								key={key++}
 							/>
 						);

@@ -6,7 +6,7 @@ const messageController = require('../BL/Controllers/messages.controller');
 router.put('/', (req, res) => {
 	try {
 		messageController
-			.addNewMessage(req.body.senderId, req.body.convId, req.body.content, req.body.sendTime)
+			.addNewMessage(req.body.senderId, req.body.convId, req.body.content, req.body.sendTime, req.body.senderUsername)
 			.then(() => {
 				res.sendStatus(200);
 			})

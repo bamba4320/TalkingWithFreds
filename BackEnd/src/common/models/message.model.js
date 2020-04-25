@@ -6,6 +6,7 @@ const MessageSchema = new Schema({
 	convId: {type: Schema.Types.ObjectId, ref: 'conversation', required: true},
 	messageSendingTime: {type: Date, required: true},
 	messageContent: {type: String, required: true},
+	senderUsername:{type:String, required:false},
 });
 
 module.exports = mongoose.model('message', MessageSchema);

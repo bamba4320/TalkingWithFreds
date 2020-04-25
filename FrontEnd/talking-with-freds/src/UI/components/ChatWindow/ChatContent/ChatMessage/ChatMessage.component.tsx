@@ -2,6 +2,8 @@ import React from 'react';
 import './ChatMessage.component.scss';
 import LanguageDetector from '../../../../../Infrastructure/Utils/LanguageDetector/languageDetector';
 import {isNullOrUndefined} from 'util';
+import rootStores from '../../../../../BL/stores';
+import {CONVERSATION_STORE} from '../../../../../BL/stores/storesKeys';
 
 interface IProps {
 	messageContent?: string;
@@ -13,6 +15,8 @@ interface IProps {
 
 interface IState {}
 
+const conversationStore = rootStores[CONVERSATION_STORE];
+
 export default class ChatMessageComponent extends React.Component<IProps, IState> {
 	public render() {
 		return (
@@ -21,7 +25,7 @@ export default class ChatMessageComponent extends React.Component<IProps, IState
 					<div className='message-time'>{this.props.messageDate}</div>
 					<div className='message-time'>
 						{this.props.messageTime}
-						<div className='username'>{this.props.username}</div>
+						<div className='username'>{this.showUsername()}</div>
 					</div>
 					<div className={`message-wrapper  ${this.setLangDirection() ? 'rtl-message' : 'ltr-message'}`}>
 						{this.props.messageContent}
@@ -46,6 +50,23 @@ export default class ChatMessageComponent extends React.Component<IProps, IState
 		} else {
 			console.log('false');
 			return false;
+		}
+	}
+
+	private showUsername() {
+		// if not in group, don't show username
+		if (
+			!isNullOrUndefined(conversationStore.getCurrentSelectedConversation) &&
+			conversationStore.getCurrentSelectedConversation.isGroup
+		) {
+			// if the current user send, dont show username
+			if (!this.props.isUserSent) {
+				return this.props.username;
+			} else {
+				return '';
+			}
+		} else {
+			return '';
 		}
 	}
 }
