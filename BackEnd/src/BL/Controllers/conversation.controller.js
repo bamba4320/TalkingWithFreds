@@ -1,6 +1,7 @@
 const ConversationSchema = require('../../common/models/conversation.model');
 const jwtUtils = require('../../Infrustructure/utils/jwt.utils');
 const userController = require('./User.controller');
+const socketManager = require('../../socket/socketManager');
 
 class ConversationController {
 	// find all the conversations thats the user is part of
@@ -62,7 +63,8 @@ class ConversationController {
 									participants: [authData.id, uid2],
 								});
 								newConversation.save().then((newConv) => {
-									resolve(newConv);
+									this.sendNewConversationViaSocket(newConv);
+									resolve();
 								});
 							} else {
 								reject(new Error('private chat already exists'));
@@ -81,16 +83,13 @@ class ConversationController {
 
 	// add new group converastion
 	async addNewGroupConversation(token, users, groupName, groupPicture) {
-		console.log('>>>>>>>>>> 1 in new group');
 		try {
 			return new Promise((resolve, reject) => {
 				// verify the sending user token and extract his id
 				jwtUtils
 					.verifyToken(token)
 					.then((authData) => {
-						console.log('>>>>>>>>>> 2', users);
 						users.push(authData.id);
-						console.log('>>>>>>>>>> 3', users);
 						const newConversation = new ConversationSchema({
 							convName: groupName,
 							isGroup: true,
@@ -98,10 +97,9 @@ class ConversationController {
 							participants: users,
 							groupPicture: groupPicture,
 						});
-						console.log('>>>>>>>>>> saving...');
 						newConversation.save().then((newConv) => {
-							console.log('>>>>>>>>>> saved!', newConv);
-							resolve(newConv);
+							this.sendNewConversationViaSocket(newConv);
+							resolve();
 						});
 					})
 					.catch((err) => {
@@ -171,6 +169,21 @@ class ConversationController {
 			});
 			return false;
 		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
+
+	/**
+	 * after create new conversation send it to all
+	 * participants
+	 * @param {newConv} Conversation created conversation
+	 */
+	sendNewConversationViaSocket(newConv) {
+		try{
+			newConv.participants.forEach((userId)=>{
+				socketManager.emit(userId, 'new-conversation', newConv);
+			});
+		}catch(err){
 			throw new Error(err.message);
 		}
 	}

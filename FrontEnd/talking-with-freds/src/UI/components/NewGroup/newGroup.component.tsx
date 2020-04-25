@@ -59,7 +59,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 											user={user}
 											key={key++}
 											onSelect={this.onUserClick}
-											isSelected={this.isUserSelected(user)}
+											isSelected={this.isUserSelected(user.id)}
 										/>
 									);
 								}
@@ -80,29 +80,29 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 		);
 	}
 
+	// filter users in display
 	private onSearch = (e: any) => {
 		this.setState({filter: e.target.value.toLowerCase()});
 	};
 
+	// no click - select or unselect user
 	private onUserClick = (userId: string) => {
-		console.log(this.state.selectedUsers);
 		const tempSelected = this.state.selectedUsers;
+		// if the user has not been selected, select him
 		if (!this.isUserSelected(userId)) {
-			console.log('pused');
 			tempSelected.push(userId);
 		} else {
+			// if the user has been selected, unselect him
 			const deleteIndex = tempSelected.findIndex((deleteUser) => {
-				return deleteUser == userId;
+				return deleteUser === userId;
 			});
 			if (deleteIndex !== -1) {
 				tempSelected.splice(deleteIndex, 1);
-				console.log('removed', deleteIndex, tempSelected);
 			} else {
 				throw new Error('User Not Found In Selected');
 			}
 		}
 		this.setState({selectedUsers: tempSelected});
-		console.log(this.state.selectedUsers);
 	};
 
 	private isUserSelected = (userId: string) => {

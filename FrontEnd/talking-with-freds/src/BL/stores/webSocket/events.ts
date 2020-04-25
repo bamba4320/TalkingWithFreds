@@ -5,4 +5,5 @@ export const events = {
 	convRead: 'convRead',
 	logEvent: 'logEvent',
 	getUid: 'getUid',
+	newConversation: 'new-conversation',
 };

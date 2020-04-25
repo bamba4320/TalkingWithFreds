@@ -38,6 +38,11 @@ export default class WebSocketStore {
 			this.socketEventsObserver = {event: events.convRead, data};
 		});
 
+		this.socket.on(events.newConversation, (data:any)=>{
+			console.debug('on new conversation in websocket store');
+			this.socketEventsObserver = {event: events.newConversation, data};
+		});
+
 		return () => {
 			console.debug('disconnecting from socket');
 			this.socket.disconnect();

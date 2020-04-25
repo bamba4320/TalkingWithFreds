@@ -31,7 +31,7 @@ export default class ConversationStore {
 		// 	}
 		// });
 
-		const newMessageObserverDisposer = reaction(
+		const socketEventObserverDisposer = reaction(
 			() => this.webSocketStore.getSocketEventsObserver,
 			(event) => {
 				// verify that the event is new message
@@ -48,6 +48,15 @@ export default class ConversationStore {
 						}
 					}
 				}
+
+				// for new conversation event
+				if(event.event === events.newConversation){
+					// make sure the data is in conversation model format 
+					const conv = ConversationConverter.convertConversationDTOToModel(event.data);
+					// move it to front
+					this.moveConvercationToTop(conv);
+				}
+
 			}
 		);
 
@@ -104,11 +113,34 @@ export default class ConversationStore {
 
 	@action
 	public setNewLastMessageToConv(message: MessageModel) {
-		console.log(message.messageContent);
 		const convIndex = this.currentUserConversations.findIndex((conv) => {
 			return conv.convId == message.convId;
 		});
 		this.currentUserConversations[convIndex].lastMessage = message.messageContent;
 		this.currentUserConversations[convIndex].lastMessageTime = message.messageSendingTime;
+
+		// also, move the conversation to top
+		this.moveConvercationToTop(this.currentUserConversations[convIndex]); 
+	}
+
+	@action
+	public moveConvercationToTop(conversation:ConversationModel){
+		// find conversation location. 
+		// if it's a new one, the index would be -1.
+		// else, it would be other index in range.
+		const convIndex = this.currentUserConversations.findIndex((conv) => {
+			return conv.convId == conversation.convId;
+		});
+		// if the conversation is a new one
+		if(convIndex === -1){
+			this.currentUserConversations = [conversation].concat(this.currentUserConversations);
+		}else{
+			// if the conversation is an old conversation
+			// remove it from it's current position
+			const tempConv = this.currentUserConversations.splice(convIndex, 1);
+			// insert as first in array
+			this.currentUserConversations = tempConv.concat(this.currentUserConversations);
+		}
+
 	}
 }

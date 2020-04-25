@@ -6,6 +6,8 @@ import {isNullOrUndefined} from 'util';
 interface IProps {
 	messageContent?: string;
 	messageTime?: string;
+	messageDate?: string;
+	username?: string;
 	isUserSent: boolean;
 }
 
@@ -16,7 +18,11 @@ export default class ChatMessageComponent extends React.Component<IProps, IState
 		return (
 			<div className='message-line'>
 				<div className={`chat-message ${this.props.isUserSent ? 'user-message' : 'other-message'} `}>
-					<div className='message-time'>{this.props.messageTime}</div>
+					<div className='message-time'>{this.props.messageDate}</div>
+					<div className='message-time'>
+						{this.props.messageTime}
+						<div className='username'>{this.props.username}</div>
+					</div>
 					<div className={`message-wrapper  ${this.setLangDirection() ? 'rtl-message' : 'ltr-message'}`}>
 						{this.props.messageContent}
 					</div>

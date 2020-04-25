@@ -81,7 +81,6 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 			// 	return false;
 			// }
 		} else {
-			console.log('false');
 			return false;
 		}
 	}
