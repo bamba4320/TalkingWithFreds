@@ -32,9 +32,16 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 				<div className='conv-details-wrapper'>
 					<div className='conv-name-and-last-message'>
 						<div className='conv-name'>{this.props.convDits.convName}</div>
-						<div className={`last-message ${this.setLangDirection(this.props.convDits.lastMessage) ? 'rtl-message' : 'ltr-message'}`}>{this.showLastMessage(this.props.convDits.lastMessage)}</div>
+						<div
+							className={`last-message ${
+								this.setLangDirection(this.props.convDits.lastMessage) ? 'rtl-message' : 'ltr-message'
+							}`}>
+							{this.showLastMessage(this.props.convDits.lastMessage)}
+						</div>
 					</div>
-					<div className='conv-time-seen-and-mute'>{this.getTime(this.props.convDits.lastMessageTime)}</div>
+					<div className='conv-time-seen-and-mute'>
+						{this.getTime(this.props.convDits.lastMessageTime)}   {this.getDate(this.props.convDits.lastMessageTime)}
+					</div>
 				</div>
 			</div>
 		);
@@ -68,7 +75,14 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 		return '';
 	}
 
-	private setLangDirection(message:string | undefined) {
+	private getDate(dateTime: Date | string | undefined) {
+		if (!isNullOrUndefined(dateTime)) {
+			let dateTimeTemp: string = dateTime.toString();
+			return dateTimeTemp.split('T')[0];
+		}
+	}
+
+	private setLangDirection(message: string | undefined) {
 		if (!isNullOrUndefined(message)) {
 			// console.log(this.props.messageContent);
 			// const nonSpecialCharIndex = LanguageDetector.findFirstNonSpecialChar(this.props.messageContent);
