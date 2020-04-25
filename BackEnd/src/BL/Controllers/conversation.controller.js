@@ -12,6 +12,7 @@ class ConversationController {
 				.verifyToken(token)
 				.then(async (authData) => {
 					const conversations = await ConversationSchema.find({participants: authData.id});
+					
 					return Promise.all(
 						conversations.map(async (conv) => {
 							/**
@@ -179,11 +180,11 @@ class ConversationController {
 	 * @param {newConv} Conversation created conversation
 	 */
 	sendNewConversationViaSocket(newConv) {
-		try{
-			newConv.participants.forEach((userId)=>{
+		try {
+			newConv.participants.forEach((userId) => {
 				socketManager.emit(userId, 'new-conversation', newConv);
 			});
-		}catch(err){
+		} catch (err) {
 			throw new Error(err.message);
 		}
 	}

@@ -50,13 +50,12 @@ export default class ConversationStore {
 				}
 
 				// for new conversation event
-				if(event.event === events.newConversation){
-					// make sure the data is in conversation model format 
+				if (event.event === events.newConversation) {
+					// make sure the data is in conversation model format
 					const conv = ConversationConverter.convertConversationDTOToModel(event.data);
 					// move it to front
 					this.moveConvercationToTop(conv);
 				}
-
 			}
 		);
 
@@ -70,11 +69,24 @@ export default class ConversationStore {
 
 	@action
 	public async initUserConversations() {
-		this.currentUserConversations = (await await ConversationFetcher.getUserConversations()).conversations.map(
-			(conversation: ConversationDTO) => {
-				return ConversationConverter.convertConversationDTOToModel(conversation);
+		const preSortedConversations: ConversationModel[] = (
+			await await ConversationFetcher.getUserConversations()
+		).conversations.map((conversation: ConversationDTO) => {
+			return ConversationConverter.convertConversationDTOToModel(conversation);
+		});
+		this.currentUserConversations = preSortedConversations.sort((a, b) => {
+			if (!isNullOrUndefined(a.lastMessageTime)) {
+				if (!isNullOrUndefined(b.lastMessageTime)) {
+					const bDate = new Date(b.lastMessageTime);
+					const aDate = new Date(a.lastMessageTime);
+					return bDate > aDate ? 1 : bDate == aDate ? 0 : -1;
+				} else {
+					return -1;
+				}
+			} else {
+				return 1;
 			}
-		);
+		});
 	}
 
 	@action
@@ -97,7 +109,7 @@ export default class ConversationStore {
 	}
 
 	@action
-	public CreateNewGroupConversation(users: string[], groupName:string, groupPicture:any) {
+	public CreateNewGroupConversation(users: string[], groupName: string, groupPicture: any) {
 		ConversationFetcher.createNewGroupConversation(users, groupName, groupPicture);
 	}
 
@@ -119,28 +131,29 @@ export default class ConversationStore {
 		this.currentUserConversations[convIndex].lastMessage = message.messageContent;
 		this.currentUserConversations[convIndex].lastMessageTime = message.messageSendingTime;
 
-		// also, move the conversation to top
-		this.moveConvercationToTop(this.currentUserConversations[convIndex]); 
+		// also, move the conversation to top if not init of current messages
+		if (!this.messageStore.getIsInitCurrentConversationMessages) {
+			this.moveConvercationToTop(this.currentUserConversations[convIndex]);
+		}
 	}
 
 	@action
-	public moveConvercationToTop(conversation:ConversationModel){
-		// find conversation location. 
+	public moveConvercationToTop(conversation: ConversationModel) {
+		// find conversation location.
 		// if it's a new one, the index would be -1.
 		// else, it would be other index in range.
 		const convIndex = this.currentUserConversations.findIndex((conv) => {
 			return conv.convId == conversation.convId;
 		});
 		// if the conversation is a new one
-		if(convIndex === -1){
+		if (convIndex === -1) {
 			this.currentUserConversations = [conversation].concat(this.currentUserConversations);
-		}else{
+		} else {
 			// if the conversation is an old conversation
 			// remove it from it's current position
 			const tempConv = this.currentUserConversations.splice(convIndex, 1);
 			// insert as first in array
 			this.currentUserConversations = tempConv.concat(this.currentUserConversations);
 		}
-
 	}
 }
