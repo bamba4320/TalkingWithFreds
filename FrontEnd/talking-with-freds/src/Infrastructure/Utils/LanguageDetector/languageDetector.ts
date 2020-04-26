@@ -11,7 +11,6 @@ export default class LanguageDetector {
 	}
 
 	public static findFirstNonSpecialChar(s: string) {
-		console.log('s:' + s);
 		let found = -1;
 		const regCheck = new RegExp('^[^' + LanguageDetector.ltrChars + LanguageDetector.rtlChars + ']$');
 		for (let i = 0; i < s.length && found !== -1; i++) {

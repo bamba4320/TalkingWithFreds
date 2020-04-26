@@ -21,7 +21,6 @@ class MessagesController {
 							message._id,
 							content,
 							sendTime,
-							senderId,
 							senderUsername
 						);
 						// get all participants

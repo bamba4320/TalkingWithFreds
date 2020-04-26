@@ -6,7 +6,6 @@ import {isNullOrUndefined} from 'util';
 export default class ConversationConverter {
 	public static convertConversationDTOToModel(conversationDTO: ConversationDTO) {
 		const conversation = new ConversationModel();
-		console.log(conversationDTO);
 		conversation.convId = conversationDTO._id;
 		conversation.convName = conversationDTO.convName;
 		conversation.lastMessage = conversationDTO.lastMessage;

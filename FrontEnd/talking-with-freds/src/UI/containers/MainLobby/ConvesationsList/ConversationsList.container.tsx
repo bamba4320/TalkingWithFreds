@@ -49,6 +49,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 			!isNullOrUndefined(conversationStore.getUserConversations) &&
 			conversationStore.getUserConversations.length > 0
 		) {
+			// show all conversations fitting in filter
 			return conversationStore.getUserConversations.map((conv) => {
 				if (this.state.filter !== '') {
 					if (conv.convName && conv.convName.toLowerCase().includes(this.state.filter.toLowerCase())) {
@@ -61,7 +62,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 							/>
 						);
 					} else {
-						return <div key={key++} />;
+						return <div />;
 					}
 				} else {
 					return (
@@ -74,6 +75,10 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 					);
 				}
 			});
+		} else {
+			// if no conversation at all for user or
+			// no conversation fitting the filter
+			return <div>No conversations found</div>;
 		}
 	}
 

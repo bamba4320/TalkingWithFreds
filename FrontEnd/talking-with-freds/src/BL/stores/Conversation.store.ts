@@ -24,13 +24,6 @@ export default class ConversationStore {
 		this.messageStore = messageStore;
 		this.webSocketStore = webSocketStore;
 
-		// const newMessageObserverDisposer = observe(this.webSocketStore.getSocketEventsObserver, (change) => {
-		// 	console.log(change);
-		// 	if (change.name === 'event' && change.object[change.name] === 'new-message') {
-		// 		console.log('got new message');
-		// 	}
-		// });
-
 		const socketEventObserverDisposer = reaction(
 			() => this.webSocketStore.getSocketEventsObserver,
 			(event) => {

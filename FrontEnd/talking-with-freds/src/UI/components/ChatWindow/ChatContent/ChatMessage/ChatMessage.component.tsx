@@ -37,18 +37,8 @@ export default class ChatMessageComponent extends React.Component<IProps, IState
 
 	private setLangDirection() {
 		if (!isNullOrUndefined(this.props.messageContent)) {
-			// console.log(this.props.messageContent);
-			// const nonSpecialCharIndex = LanguageDetector.findFirstNonSpecialChar(this.props.messageContent);
-			// console.log(nonSpecialCharIndex);
-			// if (nonSpecialCharIndex !== -1) {
-			// console.log(LanguageDetector.isRTL(this.props.messageContent[nonSpecialCharIndex]));
 			return LanguageDetector.isRTL(this.props.messageContent[0]);
-			// } else {
-			// 	console.log('false');
-			// 	return false;
-			// }
 		} else {
-			console.log('false');
 			return false;
 		}
 	}

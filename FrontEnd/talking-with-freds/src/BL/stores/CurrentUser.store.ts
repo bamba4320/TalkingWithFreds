@@ -20,7 +20,6 @@ export default class CurrentUserStore {
 		this.conversationStore = convStore;
 		this.webSocketStore = webSocketStore;
 		const getUidDesposer = observe(this.webSocketStore.getSocketEventsObserver, (change) => {
-			console.log(change);
 			if (change.name === events.uid && !isNullOrUndefined(this.currentUser)) {
 				this.webSocketStore.sendUid(this.currentUser.id!);
 			}

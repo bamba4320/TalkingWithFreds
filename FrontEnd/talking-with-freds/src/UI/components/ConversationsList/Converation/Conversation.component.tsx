@@ -53,14 +53,11 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 	}
 
 	private showLastMessage(message: string | undefined) {
-		console.log(this.props.convDits.lastMessageUser, currentUserStore.getCurrentUserUsername);
-
 		if (!isNullOrUndefined(message)) {
 			let username = '';
 			if (this.props.convDits.isGroup) {
 				if (!isNullOrUndefined(this.props.convDits.lastMessageUser)) {
 					if (this.props.convDits.lastMessageUser !== currentUserStore.getCurrentUserUsername) {
-						console.log(this.props.convDits.lastMessageUser, currentUserStore.getCurrentUserUsername);
 						username = this.props.convDits.lastMessageUser + ': ';
 					}
 				}
@@ -100,16 +97,7 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 
 	private setLangDirection(message: string | undefined) {
 		if (!isNullOrUndefined(message)) {
-			// console.log(this.props.messageContent);
-			// const nonSpecialCharIndex = LanguageDetector.findFirstNonSpecialChar(this.props.messageContent);
-			// console.log(nonSpecialCharIndex);
-			// if (nonSpecialCharIndex !== -1) {
-			// console.log(LanguageDetector.isRTL(this.props.messageContent[nonSpecialCharIndex]));
 			return LanguageDetector.isRTL(message[0]);
-			// } else {
-			// 	console.log('false');
-			// 	return false;
-			// }
 		} else {
 			return false;
 		}
