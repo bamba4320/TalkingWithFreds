@@ -40,31 +40,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 				<Form>
 					<Form.Input type='text' placeholder='Search...' onChange={(e) => this.onSearch(e)} />
 					<div className='user-selection-wrapper'>
-						{this.users.map((user: any) => {
-							if (!isNullOrUndefined(user)) {
-								if (this.state.filter !== '') {
-									if (user.username.toLowerCase().includes(this.state.filter)) {
-										return (
-											<AddUserToGroupComponent
-												user={user}
-												key={key++}
-												onSelect={this.onUserClick}
-												isSelected={this.isUserSelected(user.id)}
-											/>
-										);
-									}
-								} else {
-									return (
-										<AddUserToGroupComponent
-											user={user}
-											key={key++}
-											onSelect={this.onUserClick}
-											isSelected={this.isUserSelected(user.id)}
-										/>
-									);
-								}
-							}
-						})}
+						{this.renderUsers()}
 					</div>
 					<Form.Input
 						placeholder='Group Name'
@@ -124,4 +100,43 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 		conversationStore.CreateNewGroupConversation(this.state.selectedUsers, this.state.groupName, undefined);
 		modalStore.closeModal();
 	};
+
+	private renderUsers(){
+		let key = 0;
+		const usersToShow = this.users.map((user: any) => {
+			if (!isNullOrUndefined(user)) {
+				if (this.state.filter !== '') {
+					if (user.username.toLowerCase().includes(this.state.filter)) {
+						return (
+							<AddUserToGroupComponent
+								user={user}
+								key={key++}
+								onSelect={this.onUserClick}
+								isSelected={this.isUserSelected(user.id)}
+							/>
+						);
+					}
+				} else {
+					return (
+						<AddUserToGroupComponent
+							user={user}
+							key={key++}
+							onSelect={this.onUserClick}
+							isSelected={this.isUserSelected(user.id)}
+						/>
+					);
+				}
+			}
+		});
+		let found = false;
+		usersToShow.forEach((user) => {
+			found = !isNullOrUndefined(user);
+		});
+		if (!found) {
+			// if no users found or fitting filter
+			return <div className='not-found-message'>No users found</div>;
+		} else {
+			return usersToShow;
+		}
+	}
 }

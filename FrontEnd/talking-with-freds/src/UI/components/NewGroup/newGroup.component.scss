@@ -10,14 +10,20 @@
 		}
 	}
 
+	.not-found-message {
+		font-size: 2rem;
+		color: #8dc8f8;
+		top: 40%;
+		text-align: center;
+	}
+
 	.ui.button {
 		margin: 0 0 5px 0 !important;
 	}
 	.user-selection-wrapper {
 		max-height: 300px;
 		overflow: auto;
-        padding: 10px;
+		padding: 10px;
 		border: solid 1px #8dc8f848;
-        
 	}
 }

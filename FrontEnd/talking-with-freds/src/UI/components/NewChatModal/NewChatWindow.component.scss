@@ -1,0 +1,19 @@
+.new-chat-wrapper {
+	padding: 5px 0;
+	input {
+		width: 100%;
+		border-radius: 25px !important;
+		background-color: transparent !important;
+		color: wheat !important;
+		border: solid 1px #8dc8f8;
+	}
+
+	.not-found-message {
+		font-size: 2rem;
+		color: #8dc8f8;
+		position: absolute;
+		top: 40%;
+		width: 88%;
+		text-align: center;
+	}
+}
