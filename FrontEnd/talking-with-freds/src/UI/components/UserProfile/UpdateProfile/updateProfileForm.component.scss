@@ -8,6 +8,11 @@
 			background-color: #202020;
 			color: wheat;
 			border: solid 1px #8dc8f8;
+
+			&:focus {
+				background-color: #202020;
+				color: wheat;
+			}
 		}
 	}
 }

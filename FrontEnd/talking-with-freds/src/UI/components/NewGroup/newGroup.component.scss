@@ -7,6 +7,10 @@
 			background-color: transparent !important;
 			color: wheat !important;
 			border: solid 1px #8dc8f8;
+
+			&:focus {
+				outline: none;
+			}
 		}
 	}
 
