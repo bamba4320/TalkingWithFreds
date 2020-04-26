@@ -1,12 +1,12 @@
 const socketServer = require('socket.io')();
 const port = 4321;
 const socketManager = require('./socket/socketManager');
+const conversationController = require('./BL/Controllers/conversation.controller');
 
 // connection
 socketServer.on('connection', (client) => {
 	console.log(`socket connected: ${client.id}`);
 	socketManager.requestSocketForUid(client);
-	
 
 	client.on('uid', (data) => {
 		console.log('uid event');
@@ -29,9 +29,7 @@ socketServer.on('connection', (client) => {
 	client.on('convRead', (data) => {
 		console.log('convRead event');
 		if (data) {
-			// TODO: change this to zeroing out user conversation 
-			// not seen messages
-			socketManager.emit(data.told, 'convRead', data);
+			conversationController.clearUserUnseenInConv(data);
 		} else {
 			console.error('data is null');
 		}

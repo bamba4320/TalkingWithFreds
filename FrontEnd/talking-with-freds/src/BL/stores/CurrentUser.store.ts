@@ -50,7 +50,7 @@ export default class CurrentUserStore {
 	@action
 	public initUser(user: UserModel) {
 		this.currentUser = user;
-		this.conversationStore.initUserConversations();
+		this.conversationStore.initUserConversations(user.id!);
 		if (!isNullOrUndefined(user) && !isNullOrUndefined(user.id)) {
 			this.webSocketStore.sendUid(user.id);
 		}
@@ -74,12 +74,12 @@ export default class CurrentUserStore {
 	}
 
 	@computed
-	get getCurrentUserUsername(){
+	get getCurrentUserUsername() {
 		return this.currentUser?.username;
 	}
 
 	@computed
-	get geCurrentUserProfilePicture(){
+	get geCurrentUserProfilePicture() {
 		return this.currentUser?.profileImage;
 	}
 }

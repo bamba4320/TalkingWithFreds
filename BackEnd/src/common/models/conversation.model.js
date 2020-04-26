@@ -10,7 +10,7 @@ const ConversationSchema = new Schema({
 	isGroup: {type: Boolean, required: true},
 	messages: [{type: Schema.Types.ObjectId, ref: 'message'}],
 	participants: [{type: Schema.Types.ObjectId, ref: 'User'}],
-	unseemMessagesAmount: {type: Number, required: true},
+	unseemMessagesAmount: [{type: Number, required: true}],
 });
 
 module.exports = mongoose.model('conversation', ConversationSchema);

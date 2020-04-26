@@ -18,6 +18,7 @@ export default class ConversationStore {
 
 	private messageStore: MessagesStore;
 	private webSocketStore: WebSocketStore;
+	private currentUserId?: string;
 
 	constructor(messageStore: MessagesStore, webSocketStore: WebSocketStore) {
 		this.currentUserConversations = [];
@@ -45,7 +46,7 @@ export default class ConversationStore {
 				// for new conversation event
 				if (event.event === events.newConversation) {
 					// make sure the data is in conversation model format
-					const conv = ConversationConverter.convertConversationDTOToModel(event.data);
+					const conv = ConversationConverter.convertConversationDTOToModel(event.data, this.currentUserId!);
 					// move it to front
 					this.moveConvercationToTop(conv);
 				}
@@ -61,11 +62,12 @@ export default class ConversationStore {
 	}
 
 	@action
-	public async initUserConversations() {
+	public async initUserConversations(userId: string) {
+		this.initCurrentUserId(userId);
 		const preSortedConversations: ConversationModel[] = (
 			await await ConversationFetcher.getUserConversations()
 		).conversations.map((conversation: ConversationDTO) => {
-			return ConversationConverter.convertConversationDTOToModel(conversation);
+			return ConversationConverter.convertConversationDTOToModel(conversation, userId);
 		});
 		this.currentUserConversations = preSortedConversations.sort((a, b) => {
 			if (!isNullOrUndefined(a.lastMessageTime)) {
@@ -82,11 +84,17 @@ export default class ConversationStore {
 		});
 	}
 
+	public initCurrentUserId(uid: string | undefined) {
+		this.currentUserId = uid;
+	}
+
 	@action
 	public async selectConversation(conv: ConversationModel) {
 		this.currentSelectedConversation = conv;
 		if (conv && conv.convId) {
 			this.messageStore.initCurrentMessages(await ConversationFetcher.getConversationMessages(conv.convId));
+			conv.unseemMessagesAmount = 0;
+			this.webSocketStore.sendConvRead({convId: conv.convId, userId: this.currentUserId!});
 		}
 	}
 
@@ -118,12 +126,29 @@ export default class ConversationStore {
 
 	@action
 	public setNewLastMessageToConv(message: MessageModel) {
+		console.log('setting last message');
 		const convIndex = this.currentUserConversations.findIndex((conv) => {
 			return conv.convId == message.convId;
 		});
 		this.currentUserConversations[convIndex].lastMessage = message.messageContent;
 		this.currentUserConversations[convIndex].lastMessageTime = message.messageSendingTime;
 		this.currentUserConversations[convIndex].lastMessageUser = message.senderUsername;
+		if (!isNullOrUndefined(this.getCurrentSelectedConversation)) {
+			if (this.currentUserConversations[convIndex].convId !== this.getCurrentSelectedConversation.convId) {
+				console.log('message not in selected conv');
+				this.currentUserConversations[convIndex].unseemMessagesAmount += 1;
+			} else {
+				console.log('message in selected conv');
+				if (!isNullOrUndefined(this.currentUserConversations[convIndex].convId)) {
+					this.webSocketStore.sendConvRead({
+						convId: this.currentUserConversations[convIndex].convId,
+						userId: this.currentUserId!,
+					});
+				}
+			}
+		} else {
+			this.currentUserConversations[convIndex].unseemMessagesAmount += 1;
+		}
 
 		// also, move the conversation to top if not init of current messages
 		if (!this.messageStore.getIsInitCurrentConversationMessages) {

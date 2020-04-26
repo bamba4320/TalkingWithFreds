@@ -1,6 +1,6 @@
 import {observer} from 'mobx-react';
 import React from 'react';
-import {Image} from 'semantic-ui-react';
+import {Image, Label} from 'semantic-ui-react';
 import ConversationModel from '../../../../common/models/Conversation.model';
 import './Conversation.component.scss';
 import {isNullOrUndefined} from 'util';
@@ -45,7 +45,20 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 						</div>
 					</div>
 					<div className='conv-time-seen-and-mute'>
-						{this.getTime(this.props.convDits.lastMessageTime)} {this.getDate(this.props.convDits.lastMessageTime)}
+						<div>
+							{this.getTime(this.props.convDits.lastMessageTime)} {this.getDate(this.props.convDits.lastMessageTime)}
+						</div>
+						<div>
+							{console.log(this.props.convDits.unseemMessagesAmount)}
+							{this.props.convDits.unseemMessagesAmount > 0 && (
+								<Label
+									circular
+									color='blue'
+									content={this.props.convDits.unseemMessagesAmount}
+									active={this.props.convDits.unseemMessagesAmount > 0}
+								/>
+							)}
+						</div>
 					</div>
 				</div>
 			</div>

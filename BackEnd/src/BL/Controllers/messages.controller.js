@@ -21,7 +21,7 @@ class MessagesController {
 							message._id,
 							content,
 							sendTime,
-							senderUsername
+							senderUsername,senderId
 						);
 						// get all participants
 						const participants = await conversationController.getAllParticipants(convId);

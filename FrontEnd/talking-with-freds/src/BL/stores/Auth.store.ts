@@ -2,6 +2,7 @@ import {action} from 'mobx';
 import LoginFetcher from '../../Infrastructure/fetchers/Login.fetcher';
 import TalkingWithFredsLocalStorage from '../../Infrastructure/Utils/LocalStorage/TalkingWithFredsLocalStorage';
 import CurrentUserStore from './CurrentUser.store';
+import UserConverter from '../../common/convertors/User.converter';
 
 export default class AuthStore {
 	private currentUserStore: CurrentUserStore;
@@ -20,7 +21,7 @@ export default class AuthStore {
 			if (res.token !== null) {
 				// verify user login and init user from API
 				TalkingWithFredsLocalStorage.setTokenToLocalStorage(res.token).then(() => {
-					this.currentUserStore.initUser(res);
+					this.currentUserStore.initUser(UserConverter.convertToModel(res));
 				});
 			}
 		} catch (err) {

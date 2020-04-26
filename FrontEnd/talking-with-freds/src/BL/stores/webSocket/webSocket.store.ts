@@ -57,4 +57,8 @@ export default class WebSocketStore {
 	get getSocketEventsObserver() {
 		return this.socketEventsObserver;
 	}
+
+	public sendConvRead(data:any){
+		this.socket.emit(events.convRead, data);
+	}
 }

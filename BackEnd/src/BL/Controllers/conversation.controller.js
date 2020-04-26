@@ -62,7 +62,7 @@ class ConversationController {
 									isGroup: false,
 									messages: [],
 									participants: [authData.id, uid2],
-									unseemMessagesAmount: 0,
+									unseemMessagesAmount: [0, 0],
 								});
 								newConversation.save().then((newConv) => {
 									this.sendNewConversationViaSocket(newConv, authData.id);
@@ -98,7 +98,9 @@ class ConversationController {
 							messages: [],
 							participants: users,
 							groupPicture: groupPicture,
-							unseemMessagesAmount: 0,
+							unseemMessagesAmount: users.map((user) => {
+								return 0;
+							}),
 						});
 						newConversation.save().then((newConv) => {
 							this.sendNewConversationViaSocket(newConv, authData.id);
@@ -126,17 +128,32 @@ class ConversationController {
 	}
 
 	// add new message to conversation
-	async addMessageToConversation(convId, messageId, content, sendTime, senderUsername) {
+	async addMessageToConversation(convId, messageId, content, sendTime, senderUsername, senderId) {
 		try {
 			const conv = await ConversationSchema.findById(convId);
 			conv.messages.push(messageId);
 			conv.lastMessage = content;
 			conv.lastMessageTime = sendTime;
 			conv.lastMessageUser = senderUsername;
-			conv.unseemMessagesAmount = conv.unseemMessagesAmount + 1;
+
+			// find participant index
+			const participantIndex = conv.participants.findIndex((userId) => {
+				return userId == senderId;
+			});
+			if (participantIndex !== -1) {
+				const tempArray = [];
+				for (let i = 0; i < conv.unseemMessagesAmount.length; i++) {
+					if (i !== participantIndex) {
+						tempArray.push(conv.unseemMessagesAmount[i] + 1);
+					} else {
+						tempArray.push(conv.unseemMessagesAmount[i]);
+					}
+				}
+				conv.unseemMessagesAmount = tempArray;
+			}
 			conv
 				.save()
-				.then(() => {
+				.then((conv) => {
 					return;
 				})
 				.catch((err) => {
@@ -205,6 +222,29 @@ class ConversationController {
 			newConv.participants.forEach((userId) => {
 				socketManager.emit(userId, 'new-conversation', newConv);
 			});
+		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
+
+	async clearUserUnseenInConv(data) {
+		try {
+			const conv = await ConversationSchema.findById(data.convId);
+			const userIndex = conv.participants.findIndex((id) => {
+				return data.userId == id;
+			});
+			if (userIndex !== -1) {
+				const tempArray = [];
+				for (let i = 0; i < conv.unseemMessagesAmount.length; i++) {
+					if (i === userIndex) {
+						tempArray.push(0);
+					} else {
+						tempArray.push(conv.unseemMessagesAmount[i]);
+					}
+				}
+				conv.unseemMessagesAmount = tempArray;
+			}
+			conv.save().then(() => {});
 		} catch (err) {
 			throw new Error(err.message);
 		}
