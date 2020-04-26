@@ -29,6 +29,8 @@ socketServer.on('connection', (client) => {
 	client.on('convRead', (data) => {
 		console.log('convRead event');
 		if (data) {
+			// TODO: change this to zeroing out user conversation 
+			// not seen messages
 			socketManager.emit(data.told, 'convRead', data);
 		} else {
 			console.error('data is null');

@@ -5,5 +5,6 @@ export default class ConversationDTO {
 	public lastMessageTime ?: string | Date;
 	public lastMessageUser ?: string;
 	public profileImg?: string;
+	public unseemMessagesAmount?:number;
 	public isGroup: boolean = false;
 }

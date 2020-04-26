@@ -62,6 +62,7 @@ class ConversationController {
 									isGroup: false,
 									messages: [],
 									participants: [authData.id, uid2],
+									unseemMessagesAmount: 0,
 								});
 								newConversation.save().then((newConv) => {
 									this.sendNewConversationViaSocket(newConv, authData.id);
@@ -97,6 +98,7 @@ class ConversationController {
 							messages: [],
 							participants: users,
 							groupPicture: groupPicture,
+							unseemMessagesAmount: 0,
 						});
 						newConversation.save().then((newConv) => {
 							this.sendNewConversationViaSocket(newConv, authData.id);
@@ -131,6 +133,7 @@ class ConversationController {
 			conv.lastMessage = content;
 			conv.lastMessageTime = sendTime;
 			conv.lastMessageUser = senderUsername;
+			conv.unseemMessagesAmount = conv.unseemMessagesAmount + 1;
 			conv
 				.save()
 				.then(() => {

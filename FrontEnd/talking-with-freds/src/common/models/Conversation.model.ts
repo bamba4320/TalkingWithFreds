@@ -7,6 +7,8 @@ export default class ConversationModel {
 	public lastMessageUser ?: string;
 	@observable
 	public lastMessage?: string;
+	@observable
+	public unseemMessagesAmount?: number;
 	public profileImg?: string;
 	public isGroup: boolean = false;
 }

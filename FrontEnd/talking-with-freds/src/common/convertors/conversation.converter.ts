@@ -15,6 +15,7 @@ export default class ConversationConverter {
 		if (!isNullOrUndefined(conversationDTO.profileImg)) {
 			conversation.profileImg = imagePreURL + conversationDTO.profileImg;
 		}
+		conversation.unseemMessagesAmount = conversationDTO.unseemMessagesAmount;
 
 		return conversation;
 	}
