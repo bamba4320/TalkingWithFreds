@@ -56,7 +56,6 @@ class ConversationController {
 					.then((authData) => {
 						// check if already has private chat
 						this.checkPrivateChat(authData.id, uid2).then((result) => {
-							console.log(result);
 							if (!result) {
 								const newConversation = new ConversationSchema({
 									convName: ' ',
