@@ -40,7 +40,7 @@ export default class ChatWindowContainer extends React.Component<IProps, IState>
 				</div>
 			);
 		}
-		return <div></div>;
+		return <div className='no-conv-selected'> No conversation Selected! </div>;
 	}
 
 	private onSendMessage = (message: string) => {

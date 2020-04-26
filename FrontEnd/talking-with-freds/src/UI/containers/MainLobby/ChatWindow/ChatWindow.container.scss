@@ -5,4 +5,12 @@
 	background-color: #202020;
 	overflow-y: auto;
 
+	.no-conv-selected {
+		position: absolute;
+		width: 100%;
+		text-align: center;
+		font-size: 2rem;
+		top: 40%;
+		color: #91cdfd;
+	}
 }

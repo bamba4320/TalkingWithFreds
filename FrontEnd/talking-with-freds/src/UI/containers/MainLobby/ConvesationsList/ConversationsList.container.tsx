@@ -45,12 +45,13 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 
 	private renderConversations() {
 		let key = 0;
+
 		if (
 			!isNullOrUndefined(conversationStore.getUserConversations) &&
 			conversationStore.getUserConversations.length > 0
 		) {
 			// show all conversations fitting in filter
-			return conversationStore.getUserConversations.map((conv) => {
+			const showConv = conversationStore.getUserConversations.map((conv) => {
 				if (this.state.filter !== '') {
 					if (conv.convName && conv.convName.toLowerCase().includes(this.state.filter.toLowerCase())) {
 						return (
@@ -62,7 +63,6 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 							/>
 						);
 					} else {
-						return <div />;
 					}
 				} else {
 					return (
@@ -75,6 +75,17 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 					);
 				}
 			});
+			let found = false;
+			showConv.forEach((conv)=>{
+				found = !isNullOrUndefined(conv);
+			})
+			if (!found) {
+				// if no conversation at all for user or
+				// no conversation fitting the filter
+				return <div className='not-found-message'>No conversations found</div>;
+			} else {
+				return showConv;
+			}
 		} else {
 			// if no conversation at all for user or
 			// no conversation fitting the filter
