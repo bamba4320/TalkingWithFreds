@@ -7,15 +7,40 @@
 	height: 7%;
 	z-index: 3;
 	top: 0;
-
-	.ui.avatar {
-		margin: 0.3em;
-		width: 3.2em;
-		height: 3.2em;
+	justify-content: space-between;
+	.username-and-profile {
+		display: inline-flex;
+		.ui.avatar {
+			margin: 0.3em;
+			width: 3.2em;
+			height: 3.2em;
+		}
+		.conv-name-wrapper {
+			padding: 10px 15px;
+			font-size: 1.3em;
+			color: #8dc8f8;
+		}
 	}
-	.conv-name-wrapper {
-		padding: 10px 15px;
-		font-size: 1.3em;
-		color: #8dc8f8;
+
+	.menu.transition {
+		background-color: #18192e;
+		// border-radius: 16px;
+		border: solid 1px #8dc8f8;
+		.item {
+			color: wheat;
+			font-size: 1.3rem;
+			&:hover {
+				color: #8dc8f8;
+			}
+			&.delete-item {
+				color: #f00;
+				&:hover {
+					color: white;
+					background-color: #f00;
+					// border-bottom-left-radius: 16px;
+					// border-bottom-right-radius: 16px;
+				}
+			}
+		}
 	}
 }

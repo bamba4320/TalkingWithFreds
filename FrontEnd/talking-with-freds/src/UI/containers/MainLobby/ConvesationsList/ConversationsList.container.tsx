@@ -77,7 +77,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 			});
 			let found = false;
 			showConv.forEach((conv)=>{
-				found = !isNullOrUndefined(conv);
+				found = !isNullOrUndefined(conv) || found;
 			})
 			if (!found) {
 				// if no conversation at all for user or

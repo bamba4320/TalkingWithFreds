@@ -4,6 +4,7 @@ import {CURRENT_USER_STORE} from '../../../BL/stores/storesKeys';
 import {isNullOrUndefined} from 'util';
 import AddUserToChatComponent from './AddUserToChatComponent/AddUserToChat.component';
 import './NewChatWindow.component.scss';
+import UserModel from '../../../common/models/User.model';
 
 interface IProps {}
 interface IState {
@@ -14,7 +15,7 @@ interface IState {
 const currentUserStore = rootStores[CURRENT_USER_STORE];
 
 export default class NewChatComponent extends React.Component<IProps, IState> {
-	private users: any[];
+	private users: UserModel[];
 
 	constructor(props: IProps) {
 		super(props);
@@ -33,7 +34,6 @@ export default class NewChatComponent extends React.Component<IProps, IState> {
 			<div className='new-chat-wrapper'>
 				<input type='text' placeholder='Search...' onChange={(e) => this.onSearch(e)} />
 				{this.renderUsers()}
-				
 			</div>
 		);
 	}
@@ -44,9 +44,9 @@ export default class NewChatComponent extends React.Component<IProps, IState> {
 
 	private renderUsers() {
 		let key = 0;
-		const usersToShow = this.users.map((user: any) => {
+		const usersToShow = this.users.map((user: UserModel) => {
 			if (!isNullOrUndefined(user)) {
-				if (this.state.filter !== '') {
+				if (this.state.filter !== '' && !isNullOrUndefined(user.username)) {
 					if (user.username.toLowerCase().includes(this.state.filter)) {
 						return <AddUserToChatComponent user={user} key={key++} />;
 					}
@@ -58,7 +58,8 @@ export default class NewChatComponent extends React.Component<IProps, IState> {
 
 		let found = false;
 		usersToShow.forEach((user) => {
-			found = !isNullOrUndefined(user);
+			found = !isNullOrUndefined(user) || found;
+			
 		});
 		if (!found) {
 			// if no users found or fitting filter

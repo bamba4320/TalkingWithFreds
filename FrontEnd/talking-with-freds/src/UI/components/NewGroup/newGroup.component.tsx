@@ -130,7 +130,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 		});
 		let found = false;
 		usersToShow.forEach((user) => {
-			found = !isNullOrUndefined(user);
+			found = !isNullOrUndefined(user)  || found;
 		});
 		if (!found) {
 			// if no users found or fitting filter

@@ -43,7 +43,7 @@ export default class MoreOptionsMenuComponent extends React.Component {
 		);
 	};
 
-	private onProfileUpdateSubmit = (username: string) => {};
+	private onProfileUpdateSubmit = (username: string, photoNumber: number) => {};
 
 	private onChangePasswordClick = () => {
 		modalStore.openModal(<ChangePasswordComponent onSubmit={this.onChangePasswordSubmit} />, {
