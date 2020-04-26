@@ -56,6 +56,7 @@ class ConversationController {
 					.then((authData) => {
 						// check if already has private chat
 						this.checkPrivateChat(authData.id, uid2).then((result) => {
+							console.log(result);
 							if (!result) {
 								const newConversation = new ConversationSchema({
 									convName: ' ',
@@ -64,7 +65,7 @@ class ConversationController {
 									participants: [authData.id, uid2],
 								});
 								newConversation.save().then((newConv) => {
-									this.sendNewConversationViaSocket(newConv);
+									this.sendNewConversationViaSocket(newConv, authData.id);
 									resolve();
 								});
 							} else {
@@ -99,7 +100,7 @@ class ConversationController {
 							groupPicture: groupPicture,
 						});
 						newConversation.save().then((newConv) => {
-							this.sendNewConversationViaSocket(newConv);
+							this.sendNewConversationViaSocket(newConv, authData.id);
 							resolve();
 						});
 					})
@@ -158,15 +159,18 @@ class ConversationController {
 		try {
 			// find all conversations with those two users and if
 			// one participants length is two return true
-			const sharedConvs = await ConversationSchema.find({participants: [uid1]});
+			const sharedConvs = await ConversationSchema.find({$and: [{participants: uid1}, {participants: uid2}]});
+			let found = false;
 			sharedConvs.forEach((conv) => {
-				if (conv.participants.length === 2) {
-					if (conv.participants[0] === uid2 || conv.participants[1] === uid2) {
-						return true;
+				if (!found) {
+					if (conv.participants.length === 2) {
+						if (conv.participants[0] == uid2 || conv.participants[1] == uid2) {
+							found = true;
+						}
 					}
 				}
 			});
-			return false;
+			return found;
 		} catch (err) {
 			throw new Error(err.message);
 		}
@@ -177,8 +181,25 @@ class ConversationController {
 	 * participants
 	 * @param {newConv} Conversation created conversation
 	 */
-	sendNewConversationViaSocket(newConv) {
+	async sendNewConversationViaSocket(newConv, uid1) {
 		try {
+			/**
+			 * for each conversation check if group
+			 * if not, change name and image to the
+			 * other user's username and profile image
+			 */
+			if (!newConv.isGroup) {
+				if (newConv.participants.length === 2) {
+					// find whom of the users are not
+					// the requesting user
+					const otherIndex = newConv.participants[0] == uid1 ? 1 : 0;
+					// get user document
+					const user = await userController.getUserById(newConv.participants[otherIndex]);
+					// set the conversation values.
+					newConv.convName = user.username;
+					newConv.profileImg = user.profileImage;
+				}
+			}
 			newConv.participants.forEach((userId) => {
 				socketManager.emit(userId, 'new-conversation', newConv);
 			});
