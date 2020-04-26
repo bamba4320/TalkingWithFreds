@@ -11,12 +11,19 @@ class MessagesController {
 					convId: convId,
 					messageContent: content,
 					messageSendingTime: sendTime,
-					senderUsername:senderUsername,
+					senderUsername: senderUsername,
 				});
 				message
 					.save()
 					.then(async (message) => {
-						await conversationController.addMessageToConversation(convId, message._id, content, sendTime);
+						await conversationController.addMessageToConversation(
+							convId,
+							message._id,
+							content,
+							sendTime,
+							senderId,
+							senderUsername
+						);
 						// get all participants
 						const participants = await conversationController.getAllParticipants(convId);
 						// for each on of them, if not the sender user, send new message event

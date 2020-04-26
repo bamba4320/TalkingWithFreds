@@ -130,6 +130,7 @@ export default class ConversationStore {
 		});
 		this.currentUserConversations[convIndex].lastMessage = message.messageContent;
 		this.currentUserConversations[convIndex].lastMessageTime = message.messageSendingTime;
+		this.currentUserConversations[convIndex].lastMessageUser = message.senderUsername;
 
 		// also, move the conversation to top if not init of current messages
 		if (!this.messageStore.getIsInitCurrentConversationMessages) {

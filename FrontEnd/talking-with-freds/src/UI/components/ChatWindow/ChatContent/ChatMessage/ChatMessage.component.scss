@@ -29,16 +29,24 @@
 			&.rtl-message {
 				direction: rtl;
 				text-align: right;
+				float: right;
 			}
 
 			&.ltr-message {
 				direction: ltr;
 				text-align: left;
+				float: left;
 			}
 		}
 		.message-time {
 			color: #c9c9c9;
 			font-size: 0.9rem;
+			.username {
+				display: inline-flex;
+				font-size: 1.2rem;
+				float: left;
+				padding-right: 15px;
+			}
 		}
 	}
 }

@@ -24,7 +24,7 @@ export default class ChatMessageComponent extends React.Component<IProps, IState
 				<div className={`chat-message ${this.props.isUserSent ? 'user-message' : 'other-message'} `}>
 					<div className='message-time'>{this.props.messageDate}</div>
 					<div className='message-time'>
-						{this.props.messageTime}
+					{this.props.messageTime}
 						<div className='username'>{this.showUsername()}</div>
 					</div>
 					<div className={`message-wrapper  ${this.setLangDirection() ? 'rtl-message' : 'ltr-message'}`}>

@@ -5,6 +5,9 @@ import ConversationModel from '../../../../common/models/Conversation.model';
 import './Conversation.component.scss';
 import {isNullOrUndefined} from 'util';
 import LanguageDetector from '../../../../Infrastructure/Utils/LanguageDetector/languageDetector';
+import {timingSafeEqual} from 'crypto';
+import rootStores from '../../../../BL/stores';
+import {CURRENT_USER_STORE} from '../../../../BL/stores/storesKeys';
 
 interface IProps {
 	convDits: ConversationModel;
@@ -12,6 +15,8 @@ interface IProps {
 	isSelected: any;
 }
 interface IState {}
+
+const currentUserStore = rootStores[CURRENT_USER_STORE];
 
 @observer
 export default class ConversationComponent extends React.Component<IProps, IState> {
@@ -40,7 +45,7 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 						</div>
 					</div>
 					<div className='conv-time-seen-and-mute'>
-						{this.getTime(this.props.convDits.lastMessageTime)}   {this.getDate(this.props.convDits.lastMessageTime)}
+						{this.getTime(this.props.convDits.lastMessageTime)} {this.getDate(this.props.convDits.lastMessageTime)}
 					</div>
 				</div>
 			</div>
@@ -48,11 +53,22 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 	}
 
 	private showLastMessage(message: string | undefined) {
+		console.log(this.props.convDits.lastMessageUser, currentUserStore.getCurrentUserUsername);
+
 		if (!isNullOrUndefined(message)) {
+			let username = '';
+			if (this.props.convDits.isGroup) {
+				if (!isNullOrUndefined(this.props.convDits.lastMessageUser)) {
+					if (this.props.convDits.lastMessageUser !== currentUserStore.getCurrentUserUsername) {
+						console.log(this.props.convDits.lastMessageUser, currentUserStore.getCurrentUserUsername);
+						username = this.props.convDits.lastMessageUser + ': ';
+					}
+				}
+			}
 			if (message.length > 40) {
-				return message.slice(0, 41) + '...';
+				return username + message.slice(0, 41) + '...';
 			} else {
-				return message;
+				return username + message;
 			}
 		} else {
 			return '';

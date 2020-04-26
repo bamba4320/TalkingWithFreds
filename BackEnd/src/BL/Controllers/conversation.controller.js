@@ -12,7 +12,7 @@ class ConversationController {
 				.verifyToken(token)
 				.then(async (authData) => {
 					const conversations = await ConversationSchema.find({participants: authData.id});
-					
+
 					return Promise.all(
 						conversations.map(async (conv) => {
 							/**
@@ -124,12 +124,13 @@ class ConversationController {
 	}
 
 	// add new message to conversation
-	async addMessageToConversation(convId, messageId, content, sendTime) {
+	async addMessageToConversation(convId, messageId, content, sendTime, senderUsername) {
 		try {
 			const conv = await ConversationSchema.findById(convId);
 			conv.messages.push(messageId);
 			conv.lastMessage = content;
 			conv.lastMessageTime = sendTime;
+			conv.lastMessageUser = senderUsername;
 			conv
 				.save()
 				.then(() => {
@@ -157,11 +158,8 @@ class ConversationController {
 		try {
 			// find all conversations with those two users and if
 			// one participants length is two return true
-			console.log(uid1, uid2);
 			const sharedConvs = await ConversationSchema.find({participants: [uid1]});
-			console.log(sharedConvs);
 			sharedConvs.forEach((conv) => {
-				console.log(conv.participants, conv.participants.length);
 				if (conv.participants.length === 2) {
 					if (conv.participants[0] === uid2 || conv.participants[1] === uid2) {
 						return true;
