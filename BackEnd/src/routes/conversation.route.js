@@ -62,4 +62,19 @@ router.get('/:convId', (req, res) => {
 	}
 });
 
+router.delete('/:convId', (req, res) => {
+	try {
+		conversationController
+			.deleteConv(req.params.convId, req.token)
+			.then(() => {
+				res.sendStatus(200);
+			})
+			.catch((err) => {
+				errorController.sendError(res, err);
+			});
+	} catch (err) {
+		errorController.sendError(res, err);
+	}
+});
+
 module.exports = router;

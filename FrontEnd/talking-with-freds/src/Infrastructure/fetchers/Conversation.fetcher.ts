@@ -13,8 +13,12 @@ class ConversationFetcher extends BaseFetcher {
 		return this.post(`/group`, {users, groupName, groupPicture});
 	}
 
-	public getConversationMessages(convId: String) {
+	public getConversationMessages(convId: string) {
 		return this.get(`/${convId}`);
+	}
+
+	public deleteConversation(convId:string){
+		return this.del(`/${convId}`);
 	}
 }
 

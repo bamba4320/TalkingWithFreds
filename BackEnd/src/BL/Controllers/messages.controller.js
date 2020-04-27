@@ -21,7 +21,8 @@ class MessagesController {
 							message._id,
 							content,
 							sendTime,
-							senderUsername,senderId
+							senderUsername,
+							senderId
 						);
 						// get all participants
 						const participants = await conversationController.getAllParticipants(convId);
@@ -40,6 +41,14 @@ class MessagesController {
 				reject(err);
 			}
 		});
+	}
+
+	async deleteMessages(convId) {
+		try {
+			await MessageSchema.deleteMany({convId: convId});
+		} catch (err) {
+			throw new Error(err.messaeg);
+		}
 	}
 }
 

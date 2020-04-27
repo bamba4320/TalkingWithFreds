@@ -175,4 +175,31 @@ export default class ConversationStore {
 			this.currentUserConversations = tempConv.concat(this.currentUserConversations);
 		}
 	}
+
+	@action
+	public deleteConversationForUser() {
+		// find current selected conversation index
+		const convIndex = this.currentUserConversations.findIndex((conv) => {
+			if (!isNullOrUndefined(this.currentSelectedConversation)) {
+				return conv.convId == this.currentSelectedConversation.convId;
+			} else {
+				return false;
+			}
+		});
+
+		// verify exists
+		if (convIndex !== -1) {
+			// remove conversation from current user's array
+			// and send delete request
+			const tempConversationsArray = this.currentUserConversations;
+			const deletedConv: ConversationModel[] = tempConversationsArray.splice(convIndex, 1);
+			if (!isNullOrUndefined(deletedConv[0]) && !isNullOrUndefined(deletedConv[0].convId)) {
+				ConversationFetcher.deleteConversation(deletedConv[0].convId);
+				// set current selected to null
+				this.currentSelectedConversation = undefined;
+				// remove from array 
+				this.currentUserConversations = tempConversationsArray;
+			}
+		}
+	}
 }

@@ -2,6 +2,7 @@ const ConversationSchema = require('../../common/models/conversation.model');
 const jwtUtils = require('../../Infrustructure/utils/jwt.utils');
 const userController = require('./User.controller');
 const socketManager = require('../../socket/socketManager');
+const messagesController = require('./messages.controller');
 
 class ConversationController {
 	// find all the conversations thats the user is part of
@@ -245,6 +246,55 @@ class ConversationController {
 				conv.unseemMessagesAmount = tempArray;
 			}
 			conv.save().then(() => {});
+		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
+
+	/**
+	 * delete conversation for user
+	 * @param {Document} conv conversation model object
+	 * @param {string} token delete requesting user token
+	 */
+	async deleteConv(convId, token) {
+		try {
+			jwtUtils
+				.verifyToken(token)
+				.then(async (authData) => {
+					const toDeleteConv = await ConversationSchema.findById(convId);
+					// if the conversation is a private chat,
+					// delete conversation and all messages
+					if (!toDeleteConv.isGroup) {
+						await ConversationSchema.deleteOne({_id: convId});
+						messagesController.deleteMessages(convId);
+					} else {
+						// if group, remove user from participants array
+
+						const tempParticipants = toDeleteConv.participants;
+
+						// find user
+						const userIndex = tempParticipants.findIndex((id) => {
+							return authData.id == id;
+						});
+						// if exists
+						if (userIndex !== -1) {
+							tempParticipants.splice(userIndex, 1);
+							// check if down to 0 participants
+							// if true, delete cobversation and messages
+							if (tempParticipants.length === 0) {
+								await ConversationSchema.deleteOne({_id: convId});
+								messagesController.deleteMessages(convId);
+							} else {
+								// if false, just remove the user
+								toDeleteConv.participants = tempParticipants;
+								toDeleteConv.save();
+							}
+						}
+					}
+				})
+				.catch((err) => {
+					throw new Error(err.message);
+				});
 		} catch (err) {
 			throw new Error(err.message);
 		}
