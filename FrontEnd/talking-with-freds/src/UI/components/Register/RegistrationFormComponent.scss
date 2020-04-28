@@ -15,8 +15,15 @@
 		width: 70%;
 		padding-left: 25%;
 		margin-right: 0 !important;
+
 		.form-field-wrapper {
 			margin-bottom: 50px;
+
+			.error-text {
+				color: #ff0000;
+				font-size: 2.2rem;
+			}
+
 			.registration-input {
 				font-size: 2rem;
 				input {
@@ -24,6 +31,16 @@
 					color: wheat !important;
 					border: solid 1px #8dc8f8;
 					border-radius: 15px;
+				}
+
+				&.error-input {
+					input {
+						border: solid 1px #ff0000;
+
+						&:focus {
+							border: solid 1px #8dc8f8;
+						}
+					}
 				}
 			}
 		}

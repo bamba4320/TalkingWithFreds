@@ -49,13 +49,14 @@ export default class AlertUtils {
 		});
 	}
 
-	public static async showGeneralWarningPopup(message?: string) {
+	public static async showGeneralWarningPopup(message?: string, onAfterPopUpClose?: any) {
 		return Swal.fire({
 			html: message,
-			icon: 'question',
+			icon: 'warning',
 			showConfirmButton: true,
 			showCancelButton: true,
 			confirmButtonText: swalTextConst.confirm,
+			onAfterClose: onAfterPopUpClose,
 			customClass: {confirmButton: 'regular-button', cancelButton: 'inverted-button'},
 		});
 	}

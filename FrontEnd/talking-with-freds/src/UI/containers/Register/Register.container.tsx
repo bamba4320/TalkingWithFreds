@@ -1,16 +1,17 @@
 import React from 'react';
 import rootStores from '../../../BL/stores';
-import {AUTH_STORE, REGISTER_STORE} from '../../../BL/stores/storesKeys';
+import {AUTH_STORE, REGISTER_STORE, UI_STORE} from '../../../BL/stores/storesKeys';
 import RegistrationFormComponent from '../../components/Register/RegistrationForm.component';
 import './Register.container.scss';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {Button, Icon} from 'semantic-ui-react';
+import AlertUtils from '../../../Infrastructure/Utils/AlertUtils/AlertUtils';
 
 interface IProps extends RouteComponentProps {}
 interface IState {}
 
-const authStore = rootStores[AUTH_STORE];
 const registerStore = rootStores[REGISTER_STORE];
+const uiStore = rootStores[UI_STORE];
 
 class RegisterContainer extends React.Component<IProps, IState> {
 	public render() {
@@ -33,10 +34,23 @@ class RegisterContainer extends React.Component<IProps, IState> {
 		);
 	}
 
-	private onSubmit = (email: string, username:string, password: string) => {
-		registerStore.addNewUser(email,username,password).then(()=>{
-			this.props.history.replace('/Login');
-		});
+	private onSubmit = (email: string, username: string, password: string) => {
+		uiStore.blockUiSite();
+		uiStore.showBlockUiLoadingPopUp();
+		registerStore
+			.addNewUser(email, username, password)
+			.then(() => {
+				uiStore.unblockUiSite();
+				uiStore.closeBlockUiLoadingPopUp();
+				AlertUtils.showGeneralSuccessPopUp('Registration was successfuly!').then(() => {
+					this.props.history.replace('/Login');
+				});
+			})
+			.catch((err) => {
+				uiStore.unblockUiSite();
+				uiStore.closeBlockUiLoadingPopUp();
+				AlertUtils.showGeneralErrorPopUp(err.message, true);
+			});
 	};
 
 	private onBackClick = () => {

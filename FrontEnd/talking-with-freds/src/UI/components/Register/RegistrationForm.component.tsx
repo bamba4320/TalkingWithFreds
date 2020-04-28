@@ -2,6 +2,8 @@ import React from 'react';
 import {Button, Form} from 'semantic-ui-react';
 import './RegistrationFormComponent.scss';
 import {emailRegex} from '../../../common/generalConsts';
+import AlertUtils from '../../../Infrastructure/Utils/AlertUtils/AlertUtils';
+import Swal from 'sweetalert2';
 
 interface IProps {
 	onSubmit: any;
@@ -31,12 +33,13 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 				<Form className='registration-form'>
 					<div className='form-field-wrapper'>
 						<Form.Input
-							className='registration-input'
+							className={`registration-input ${!this.isValidEmail() && this.state.email !== '' ? 'error-input' : ''}`}
 							type='text'
 							id='email-input'
 							placeholder='Email'
 							onChange={(e) => this.setState({email: e.target.value})}
 						/>
+						{!this.isValidEmail() && this.state.email !== '' && <div className='error-text'>Invalid email format!</div>}
 					</div>
 					<div className='form-field-wrapper'>
 						<Form.Input
@@ -58,12 +61,13 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 					</div>
 					<div className='form-field-wrapper'>
 						<Form.Input
-							className='registration-input'
+							className={`registration-input ${!this.isValidPasswordConfirmed() ? 'error-input' : ''}`}
 							type='password'
 							id='password-input'
 							placeholder='Confirm Password'
 							onChange={(e) => this.setState({confirmPassword: e.target.value})}
 						/>
+						{!this.isValidPasswordConfirmed() && <div className='error-text'>Passwords do not match!</div>}
 					</div>
 				</Form>
 				<div className='submit-btn-wrapper'>
@@ -73,7 +77,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 						inverted
 						color='blue'
 						className='submit-or-registr-btn'
-						disabled = {!this.isValidEmail()}
+						disabled={!this.isValidToSubmit()}
 						onClick={this.handleSubmit}>
 						Sign Up
 					</Button>
@@ -83,10 +87,32 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 	}
 
 	private handleSubmit = () => {
-		this.props.onSubmit(this.state.email, this.state.username, this.state.password);
+		AlertUtils.showGeneralWarningPopup('You are about to register. Have you check all your details?').then((result) => {
+			if (result.dismiss === Swal.DismissReason.cancel) {
+				// if cancel - do nothing
+			} else {
+				// if confirmed
+				this.props.onSubmit(this.state.email.trim(), this.state.username.trim(), this.state.password.trim());
+			}
+		});
 	};
 
 	private isValidEmail(): boolean {
-		return new RegExp(emailRegex).test(this.state.email);
+		return new RegExp(emailRegex).test(this.state.email.trim());
+	}
+
+	private isValidPasswordConfirmed(): boolean {
+		return this.state.password.trim() === this.state.confirmPassword.trim();
+	}
+
+	private isValidToSubmit(): boolean {
+		return (
+			this.isValidEmail() &&
+			this.state.email.trim() !== '' &&
+			this.state.username.trim() !== '' &&
+			this.state.password.trim() !== '' &&
+			this.state.confirmPassword.trim() !== '' &&
+			this.isValidPasswordConfirmed()
+		);
 	}
 }
