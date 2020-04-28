@@ -27,7 +27,7 @@ router.post('/recoverPassword', (req, res) => {
 		userController
 			.recoverPassword(req.body.email)
 			.then(() => {
-				res.sensStatus(200);
+				res.sendStatus(200);
 			})
 			.catch((err) => {
 				errorController.sendError(res, err);

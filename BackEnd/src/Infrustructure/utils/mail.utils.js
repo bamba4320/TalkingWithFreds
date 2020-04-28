@@ -9,9 +9,7 @@ class MailUtils {
 	transporter;
 	constructor() {
 		this.transporter = nodemailer.createTransport({
-			host: 'smtp.ethereal.email',
-			port: 587,
-			secure: false, // true for 465, false for other ports
+			service: 'Gmail',
 			auth: {
 				user: serviceMail.user,
 				pass: serviceMail.pass,
@@ -24,15 +22,29 @@ class MailUtils {
 	 * @param {string[]} recipiants
 	 * @param {string} content
 	 */
-	async sendMail(recipiants, content) {
-		let recipiantsString = recipiants.join(', ');
-		recipiantsString = recipiantsString.splice(recipiantsString.length - 1, 1);
-		await this.transporter.sendMail({
-			from: '"Talking With Fred\'s Service" <talkingwithfreds2020@gmail.com>',
-			to: recipiantsString,
-			subject: 'Password Recovery',
-			text: content,
-		});
+	sendMail(recipiants, content) {
+		try {
+			let recipiantsString = recipiants.join(', ');
+			console.log('>>>>>>>>>>>>>>>> sending....');
+			return this.transporter.sendMail(
+				{
+					from: '"Talking With Fred\'s Service" <talkingwithfreds2020@gmail.com>',
+					to: recipiantsString,
+					subject: 'Password Recovery',
+					text: content,
+				},
+				(err, response) => {
+					if (err) {
+						throw new Error(err.message);
+					} else {
+						console.log('>>>>>>>>>>>>>> Sent!', response);
+						return true;
+					}
+				}
+			);
+		} catch (err) {
+			throw new Error(err.message);
+		}
 	}
 }
 

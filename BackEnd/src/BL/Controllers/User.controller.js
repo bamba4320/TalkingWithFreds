@@ -143,7 +143,6 @@ class UserController {
 	 * @param {string} newPassword
 	 */
 	async changePassword(token, oldPassword, newPassword) {
-		console.log('>>>>>>>>> ' + token, oldPassword, newPassword);
 		try {
 			return new Promise((resolve, reject) => {
 				// decode token and response with two options:
@@ -231,9 +230,10 @@ class UserController {
 					user.salt = salt;
 					user.passwordHash = newPasswordHashed;
 					// save changes
-					user.save().then(()=>{
+					user.save().then(() => {
 						const mailBody = `Hello there ${user.username}!\nOur services recieved your rquest for a new password.\nYour new password is:\n${newPassword}\n\n\nGo on, login with it!\n REMEMBER! to keep your accound secured hurry up and change your password!!`;
-						mailUtils.sendMail([user.email],mailBody);
+						mailUtils.sendMail([user.email], mailBody);
+						
 					});
 				});
 			});
