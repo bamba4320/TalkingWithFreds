@@ -20,6 +20,10 @@ class ConversationFetcher extends BaseFetcher {
 	public deleteConversation(convId:string){
 		return this.del(`/${convId}`);
 	}
+
+	public changeConvName(convId:string, newName:string){
+		return this.post(`/changeName/${convId}`, {newName});
+	}
 }
 
 export default new ConversationFetcher('conversation');

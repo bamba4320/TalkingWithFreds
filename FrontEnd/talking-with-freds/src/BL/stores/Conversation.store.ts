@@ -197,9 +197,37 @@ export default class ConversationStore {
 				ConversationFetcher.deleteConversation(deletedConv[0].convId);
 				// set current selected to null
 				this.currentSelectedConversation = undefined;
-				// remove from array 
+				// remove from array
 				this.currentUserConversations = tempConversationsArray;
 			}
+		}
+	}
+
+	public changeGroupName(newName: string) {
+		try {
+			// find current selected conversation index
+			const convIndex = this.currentUserConversations.findIndex((conv) => {
+				if (!isNullOrUndefined(this.currentSelectedConversation)) {
+					return conv.convId == this.currentSelectedConversation.convId;
+				} else {
+					return false;
+				}
+			});
+
+			// send change name to API and set new name to current user
+			if (
+				!isNullOrUndefined(this.currentSelectedConversation) &&
+				!isNullOrUndefined(this.currentSelectedConversation.convId && convIndex !== -1)
+			) {
+				// ConversationFetcher.changeConvName(this.currentSelectedConversation.convId, newName);
+				const tempConversationsArray = this.currentUserConversations;
+				const tempConversation = tempConversationsArray[convIndex];
+				tempConversation.convName = newName;
+				tempConversationsArray.splice(convIndex, 1, tempConversation);
+				this.currentUserConversations = tempConversationsArray;
+			}
+		} catch (err) {
+			console.log(err);
 		}
 	}
 }

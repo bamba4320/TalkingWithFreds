@@ -2,7 +2,8 @@ import React from 'react';
 import {Image, Dropdown} from 'semantic-ui-react';
 import './ChatTopBar.component.scss';
 import rootStores from '../../../../BL/stores';
-import {CONVERSATION_STORE} from '../../../../BL/stores/storesKeys';
+import {CONVERSATION_STORE, MODAL_STORE} from '../../../../BL/stores/storesKeys';
+import ChangeConversationNameComponent from './ChangeName/ChangeConversationName.component';
 
 interface IProps {
 	convName?: string;
@@ -13,6 +14,7 @@ interface IProps {
 interface IState {}
 
 const conversationStore = rootStores[CONVERSATION_STORE];
+const modalStore = rootStores[MODAL_STORE];
 
 export default class ChatTopBarComponent extends React.Component<IProps, IState> {
 	public render() {
@@ -36,7 +38,7 @@ export default class ChatTopBarComponent extends React.Component<IProps, IState>
 		if (this.props.isGroup) {
 			return (
 				<Dropdown.Menu>
-					<Dropdown.Item text='Edit group name' />
+					<Dropdown.Item text='Edit group name' onClick={this.onChangeNameClick} />
 					<Dropdown.Item text='Change group picture' />
 					<Dropdown.Item
 						className='delete-item'
@@ -57,4 +59,19 @@ export default class ChatTopBarComponent extends React.Component<IProps, IState>
 			);
 		}
 	}
+
+	private onChangeNameClick = () => {
+		modalStore.openModal(
+			<ChangeConversationNameComponent onSubmit={this.onChangeNameSubmit} groupName={this.props.convName} />,
+			{
+				title: 'Change Conversation Name',
+				closeFromOutsideModal: true,
+			}
+		);
+	};
+
+	private onChangeNameSubmit = (newName: string) => {
+		conversationStore.changeGroupName(newName);
+		modalStore.closeModal();
+	};
 }
