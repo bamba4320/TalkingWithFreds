@@ -127,12 +127,20 @@ export default class ConversationStore {
 
 	@action
 	public CreateNewConversation(userId: string) {
-		ConversationFetcher.createNewConversation(userId);
+		try {
+			return ConversationFetcher.createNewConversation(userId);
+		} catch (err) {
+			throw new Error(err.message);
+		}
 	}
 
 	@action
 	public CreateNewGroupConversation(users: string[], groupName: string, groupPicture: any) {
-		ConversationFetcher.createNewGroupConversation(users, groupName, groupPicture);
+		try {
+			return ConversationFetcher.createNewGroupConversation(users, groupName, groupPicture);
+		} catch (err) {
+			throw new Error(err.message);
+		}
 	}
 
 	@computed
