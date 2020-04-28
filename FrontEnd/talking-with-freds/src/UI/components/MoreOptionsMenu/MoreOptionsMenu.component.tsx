@@ -52,5 +52,8 @@ export default class MoreOptionsMenuComponent extends React.Component {
 		});
 	};
 
-	private onChangePasswordSubmit = (oldPassword: string, newPassword: string) => {};
+	private onChangePasswordSubmit = (oldPassword: string, newPassword: string) => {
+		currentUserStore.changeUserPassword(oldPassword, newPassword);
+		modalStore.closeModal();
+	};
 }

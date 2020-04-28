@@ -1,6 +1,7 @@
 const UserSchema = require('../../common/models/User.model');
 const jwtUtils = require('../../Infrustructure/utils/jwt.utils');
 const encryptionUtils = require('../../Infrustructure/utils/encryption.utils');
+const profileImageUtils = require('../../Infrustructure/utils/profileImage.utils');
 
 class UserController {
 	/**
@@ -90,21 +91,27 @@ class UserController {
 	 * update user details
 	 * @param {string} uid
 	 * @param {string} newUsername
-	 * @param {string} newPassword
+	 * @param {number} profileImage
 	 */
-	async updateUser(uid, newUsername, newPassword) {
+	async updateUser(token, newUsername, profileImage) {
 		try {
-			// Find the user
-			const user = await UserSchema.findOne({_id: uid});
-			// After finding a user, generate new salt for him
-			const salt = await encryptionUtils.generateNewSalt();
-			// Hash the new password
-			const passwordHash = await encryptionUtils.hashPassword(newPassword, salt);
-			//change and save the user details
-			user.username = newUsername;
-			user.passwordHash = passwordHash;
-			user.salt = salt;
-			jwtUtils.saveUserToken(user);
+			return jwtUtils
+				.verifyToken(token)
+				.then(async (authData) => {
+					// Find the user
+					const user = await UserSchema.findOne({_id: authData.id});
+					//change and save the user details
+					user.username = newUsername;
+					user.profileImage = profileImageUtils.getImagePath(profileImage);
+					return user.save().then((user) => {
+						return jwtUtils.saveUserToken(user).then((token) => {
+							return token;
+						});
+					});
+				})
+				.catch(() => {
+					throw new Error('User Update Falied');
+				});
 		} catch (err) {
 			throw new Error(err.message);
 		}
@@ -135,14 +142,14 @@ class UserController {
 	 * @param {string} newPassword
 	 */
 	async changePassword(token, oldPassword, newPassword) {
+		console.log('>>>>>>>>> ' + token, oldPassword, newPassword);
 		try {
 			return new Promise((resolve, reject) => {
 				// decode token and response with two options:
 				// The data from the token, or HTTP 403 Error
-				jwtUtils.verifyToken(token, (err, authData) => {
-					if (err) {
-						reject(err);
-					} else {
+				jwtUtils
+					.verifyToken(token)
+					.then((authData) => {
 						// after token is verified, extract id and find user
 						UserSchema.findOne({_id: authData.id}).then((user) => {
 							// hash old password, and authenticate it is correct
@@ -157,7 +164,7 @@ class UserController {
 											user.salt = salt;
 											user.passwordHash = newPasswordHashed;
 											// create new token and return it
-											encryptionUtils
+											jwtUtils
 												.saveUserToken(user)
 												.then((token) => {
 													resolve(token);
@@ -170,8 +177,10 @@ class UserController {
 								}
 							});
 						});
-					}
-				});
+					})
+					.catch((err) => {
+						reject(err);
+					});
 			});
 		} catch (err) {
 			console.error(err);

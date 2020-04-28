@@ -82,4 +82,14 @@ export default class CurrentUserStore {
 	get geCurrentUserProfilePicture() {
 		return this.currentUser?.profileImage;
 	}
+
+	@action
+	public async changeUserPassword(oldPassword: string, newPassword: string) {
+		try {
+			const token = await UserFetcher.changeUserPassword(oldPassword, newPassword);
+			TalkingWithFredsLocalStorage.setTokenToLocalStorage(token.token);
+		} catch (err) {
+			console.error(err.message);
+		}
+	}
 }

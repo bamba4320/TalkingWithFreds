@@ -9,6 +9,10 @@ class UserFetcher extends BaseFetcher {
         return this.get('/getFriends');
     }
 
+    public async changeUserPassword(oldPassword:string, newPassword:string){
+        return this.post('/changePassword',{oldPassword, newPassword});
+    }
+
 
 }
 

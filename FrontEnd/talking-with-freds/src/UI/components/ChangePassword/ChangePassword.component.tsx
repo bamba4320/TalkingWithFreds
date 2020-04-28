@@ -5,18 +5,20 @@ import './ChangePassword.component.scss';
 interface IProps {
 	onSubmit: any;
 }
-interface IState {}
+interface IState {
+	oldPassword: string;
+	newPassword: string;
+	confirmPassword: string;
+}
 
 export default class ChangePasswordComponent extends React.Component<IProps, IState> {
-	private oldPassword: string;
-	private newPassword: string;
-	private confirmPassword: string;
-
 	constructor(props: IProps) {
 		super(props);
-		this.oldPassword = '';
-		this.newPassword = '';
-		this.confirmPassword = '';
+		this.state = {
+			oldPassword: '',
+			newPassword: '',
+			confirmPassword: '',
+		};
 	}
 
 	public render() {
@@ -26,24 +28,28 @@ export default class ChangePasswordComponent extends React.Component<IProps, ISt
 					type='password'
 					placeholder='Old Password'
 					onChange={(e) => {
-						this.oldPassword = e.target.value;
+						this.setState({oldPassword: e.target.value});
 					}}
 				/>
 				<Input
 					type='password'
 					placeholder='New Password'
 					onChange={(e) => {
-						this.newPassword = e.target.value;
+						this.setState({newPassword: e.target.value});
 					}}
 				/>
 				<Input
+					className={`${this.state.newPassword !== this.state.confirmPassword ? 'error-show' : ''}`}
 					type='password'
 					placeholder='Confirm new Password'
 					onChange={(e) => {
-						this.confirmPassword = e.target.value;
+						this.setState({confirmPassword: e.target.value});
 					}}
 					onKeyDown={this.handleOnKeyDown}
 				/>
+				{this.state.newPassword !== this.state.confirmPassword && (
+					<div className='error-message'>Passwords do not match!</div>
+				)}
 
 				<Button
 					inverted
@@ -51,16 +57,28 @@ export default class ChangePasswordComponent extends React.Component<IProps, ISt
 					content='Submit'
 					type='button'
 					onClick={() => {
-						this.props.onSubmit(this.oldPassword, this.newPassword);
+						this.props.onSubmit(this.state.oldPassword, this.state.newPassword);
 					}}
+					disabled={
+						this.state.oldPassword === '' ||
+						this.state.newPassword === '' ||
+						this.state.confirmPassword === '' ||
+						this.state.newPassword !== this.state.confirmPassword
+					}
 				/>
 			</Form>
 		);
 	}
 
 	public handleOnKeyDown = (e: any) => {
-		if (e.key === 'Enter') {
-			this.props.onSubmit(this.oldPassword, this.newPassword);
+		if (
+			e.key === 'Enter' &&
+			this.state.oldPassword !== '' &&
+			this.state.newPassword !== '' &&
+			this.state.confirmPassword !== '' &&
+			this.state.newPassword === this.state.confirmPassword
+		) {
+			this.props.onSubmit(this.state.oldPassword, this.state.newPassword);
 			return false;
 		}
 	};

@@ -49,7 +49,6 @@ export default class ConversationComponent extends React.Component<IProps, IStat
 							{this.getTime(this.props.convDits.lastMessageTime)} {this.getDate(this.props.convDits.lastMessageTime)}
 						</div>
 						<div>
-							{console.log(this.props.convDits.unseemMessagesAmount)}
 							{this.props.convDits.unseemMessagesAmount > 0 && (
 								<Label
 									circular

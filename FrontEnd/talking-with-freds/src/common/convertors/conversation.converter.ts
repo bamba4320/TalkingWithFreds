@@ -16,11 +16,9 @@ export default class ConversationConverter {
 			conversation.profileImg = imagePreURL + conversationDTO.profileImg;
 		}
 		if (conversationDTO.participants) {
-			console.log(conversationDTO.participants);
 			const userIndex = conversationDTO.participants.findIndex((id: string) => {
 				return id == userId;
 			});
-			console.log(conversationDTO.unseemMessagesAmount[userIndex], conversation.unseemMessagesAmount);
 			if (userIndex !== -1) {
 				conversation.unseemMessagesAmount = conversationDTO.unseemMessagesAmount[userIndex];
 			}

@@ -39,4 +39,20 @@ router.get('/getFriends', (req, res) => {
 	}
 });
 
+// change user password
+router.post('/changePassword',(req, res)=>{
+	try {
+		userController
+			.changePassword(req.token,req.body.oldPassword, req.body.newPassword)
+			.then((token) => {
+				res.status(200).json({token});
+			})
+			.catch((err) => {
+				errorController.sendError(res, err);
+			});
+	} catch (err) {
+		errorController.sendError(res, err);
+	}
+});
+
 module.exports = router;
