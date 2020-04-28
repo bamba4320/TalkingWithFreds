@@ -57,13 +57,13 @@ export default class ChangePasswordComponent extends React.Component<IProps, ISt
 					content='Submit'
 					type='button'
 					onClick={() => {
-						this.props.onSubmit(this.state.oldPassword, this.state.newPassword);
+						this.props.onSubmit(this.state.oldPassword.trim(), this.state.newPassword.trim());
 					}}
 					disabled={
-						this.state.oldPassword === '' ||
-						this.state.newPassword === '' ||
-						this.state.confirmPassword === '' ||
-						this.state.newPassword !== this.state.confirmPassword
+						this.state.oldPassword.trim() === '' ||
+						this.state.newPassword.trim() === '' ||
+						this.state.confirmPassword.trim() === '' ||
+						this.state.newPassword.trim() !== this.state.confirmPassword.trim()
 					}
 				/>
 			</Form>

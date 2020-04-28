@@ -25,10 +25,26 @@ export default class AuthStore {
 						this.currentUserStore.initUser(UserConverter.convertToModel(res));
 					});
 				});
+			} else {
+				throw new Error('Authentication Failed. Incorrent email or password. Please try again....');
 			}
 		} catch (err) {
 			console.error(err.message);
 			throw new Error('Authentication Failed. Incorrent email or password. Please try again....');
+		}
+	}
+
+	public async sendRecoverPassword(email: string) {
+		try {
+			const res = await LoginFetcher.recoverPassword(email);
+			if (res) {
+				return res;
+			}else{
+				throw new Error('Faild to find exsisting user register with this email. Please verify your email address.');
+			}
+		} catch (err) {
+			console.error(err.message);
+			throw new Error('Faild to find exsisting user register with this email. Please verify your email address.');
 		}
 	}
 }

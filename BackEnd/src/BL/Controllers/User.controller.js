@@ -2,6 +2,7 @@ const UserSchema = require('../../common/models/User.model');
 const jwtUtils = require('../../Infrustructure/utils/jwt.utils');
 const encryptionUtils = require('../../Infrustructure/utils/encryption.utils');
 const profileImageUtils = require('../../Infrustructure/utils/profileImage.utils');
+const mailUtils = require('../../Infrustructure/utils/mail.utils');
 
 class UserController {
 	/**
@@ -215,6 +216,27 @@ class UserController {
 	async getUserById(uid) {
 		try {
 			return await UserSchema.findById(uid);
+		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
+
+	async recoverPassword(email) {
+		try {
+			const user = await UserSchema.findOne({email: email});
+			const newPassword = encryptionUtils.generateRandomPassword();
+			encryptionUtils.generateNewSalt().then((salt) => {
+				encryptionUtils.hashPassword(newPassword, salt).then((newPasswordHashed) => {
+					// modify fields and save
+					user.salt = salt;
+					user.passwordHash = newPasswordHashed;
+					// save changes
+					user.save().then(()=>{
+						const mailBody = `Hello there ${user.username}!\nOur services recieved your rquest for a new password.\nYour new password is:\n${newPassword}\n\n\nGo on, login with it!\n REMEMBER! to keep your accound secured hurry up and change your password!!`;
+						mailUtils.sendMail([user.email],mailBody);
+					});
+				});
+			});
 		} catch (err) {
 			throw new Error(err.message);
 		}

@@ -68,9 +68,6 @@ class App extends React.Component<IProps, IState> {
 					<Route exact={true} path='/Register'>
 						{!currentUserStore.isUserLoggedIn ? <RegisterContainer /> : <Redirect to='/MainLobby' />}
 					</Route>
-					<Route exact={true} path='/RecoverPassword'>
-						{!currentUserStore.isUserLoggedIn ? <RecoverPasswordContainer /> : <Redirect to='/MainLobby' />}
-					</Route>
 					<Route exact={true} path='/'>
 						{currentUserStore.isUserLoggedIn ? <Redirect to='/MainLobby' /> : <Redirect to='/Login' />}
 					</Route>

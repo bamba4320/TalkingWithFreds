@@ -1,16 +1,19 @@
 import React from 'react';
 import rootStores from '../../../BL/stores';
-import {AUTH_STORE, UI_STORE} from '../../../BL/stores/storesKeys';
+import {AUTH_STORE, UI_STORE, MODAL_STORE} from '../../../BL/stores/storesKeys';
 import LoginFormComponent from '../../components/Login/LoginForm.component';
 import './Login.container.scss';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import AlertUtils from '../../../Infrastructure/Utils/AlertUtils/AlertUtils';
+import RecoverPasswordContainer from '../RecoverPassword/RecoverPassword.container';
 
 interface IProps extends RouteComponentProps {}
 interface IState {}
 
 const authStore = rootStores[AUTH_STORE];
 const uiStore = rootStores[UI_STORE];
+const modalStore = rootStores[MODAL_STORE];
+
 class LoginContainer extends React.Component<IProps, IState> {
 	public render() {
 		return (
@@ -49,7 +52,10 @@ class LoginContainer extends React.Component<IProps, IState> {
 	};
 
 	private onRecoverPassword = () => {
-		this.props.history.push('/RecoverPassword');
+		modalStore.openModal(<RecoverPasswordContainer />, {
+			title: 'Recover Password',
+			closeFromOutsideModal: true,
+		});
 	};
 }
 export default withRouter(LoginContainer);

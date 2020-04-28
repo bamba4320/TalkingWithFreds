@@ -39,7 +39,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 							placeholder='Email'
 							onChange={(e) => this.setState({email: e.target.value})}
 						/>
-						{!this.isValidEmail() && this.state.email !== '' && <div className='error-text'>Invalid email format!</div>}
+						{!this.isValidEmail() && this.state.email.trim() !== '' && <div className='error-text'>Invalid email format!</div>}
 					</div>
 					<div className='form-field-wrapper'>
 						<Form.Input

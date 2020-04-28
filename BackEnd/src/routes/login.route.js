@@ -22,5 +22,20 @@ router.post('/authenticateLogin', (req, res) => {
 	}
 });
 
+router.post('/recoverPassword', (req, res) => {
+	try {
+		userController
+			.recoverPassword(req.body.email)
+			.then(() => {
+				res.sensStatus(200);
+			})
+			.catch((err) => {
+				errorController.sendError(res, err);
+			});
+	} catch (err) {
+		errorController.sendError(res, err);
+	}
+});
+
 // export route
 module.exports = router;
