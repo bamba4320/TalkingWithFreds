@@ -62,10 +62,27 @@ router.get('/:convId', (req, res) => {
 	}
 });
 
+// delete conversation for user
 router.delete('/:convId', (req, res) => {
 	try {
 		conversationController
 			.deleteConv(req.params.convId, req.token)
+			.then(() => {
+				res.sendStatus(200);
+			})
+			.catch((err) => {
+				errorController.sendError(res, err);
+			});
+	} catch (err) {
+		errorController.sendError(res, err);
+	}
+});
+
+// change conversation name
+router.post('/changeName/:convId', (req, res) => {
+	try {
+		conversationController
+			.changeGroupName(req.params.convId, req.body.newName)
 			.then(() => {
 				res.sendStatus(200);
 			})

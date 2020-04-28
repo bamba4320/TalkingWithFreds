@@ -43,6 +43,11 @@ export default class WebSocketStore {
 			this.socketEventsObserver = {event: events.newConversation, data};
 		});
 
+		this.socket.on(events.conversationNameChange, (data:any)=>{
+			console.debug('on conversation name change in websocket store');
+			this.socketEventsObserver = {event: events.conversationNameChange, data};
+		});
+
 		return () => {
 			console.debug('disconnecting from socket');
 			this.socket.disconnect();

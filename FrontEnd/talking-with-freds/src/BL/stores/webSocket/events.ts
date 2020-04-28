@@ -6,4 +6,5 @@ export const events = {
 	logEvent: 'logEvent',
 	getUid: 'getUid',
 	newConversation: 'new-conversation',
+	conversationNameChange:'conversation-name-change',
 };

@@ -299,6 +299,37 @@ class ConversationController {
 			throw new Error(err.message);
 		}
 	}
+
+	/**
+	 * change group name
+	 * @param {string} convId
+	 * @param {string} newName
+	 */
+	async changeGroupName(convId, newName) {
+		try {
+			// find conversation
+			const converastion = await ConversationSchema.findById(convId);
+			// verify it's a group
+			if (converastion.isGroup) {
+				// change the group name
+				converastion.convName = newName;
+				converastion
+					.save()
+					.then((conv) => {
+						conv.participants.forEach((userId) => {
+							socketManager.emit(userId, 'conversation-name-change', {convId, newName});
+						});
+					})
+					.catch((err) => {
+						throw new Error(err.message);
+					});
+			} else {
+				throw new Error('Changeing name at private chat is forbidden');
+			}
+		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
 }
 
 module.exports = new ConversationController();

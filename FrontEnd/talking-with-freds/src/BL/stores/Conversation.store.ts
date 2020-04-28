@@ -50,6 +50,27 @@ export default class ConversationStore {
 					// move it to front
 					this.moveConvercationToTop(conv);
 				}
+
+				// for conversation name change
+				if (event.event === events.conversationNameChange) {
+					// find the conversation and change the name
+					const convIndex = this.currentUserConversations.findIndex((conv) => {
+						if (!isNullOrUndefined(conv) && !isNullOrUndefined(event.data.convId)) {
+							return conv.convId == event.data.convId;
+						} else {
+							return false;
+						}
+					});
+					console.log(event.data.newName);
+					// change the name in founded index
+					if (convIndex !== -1 && this.currentUserConversations[convIndex].isGroup) {
+						const tempConversationsArray = this.currentUserConversations;
+						const tempConversation = tempConversationsArray[convIndex];
+						tempConversation.convName = event.data.newName;
+						tempConversationsArray.splice(convIndex, 1, tempConversation);
+						this.currentUserConversations = tempConversationsArray;
+					}
+				}
 			}
 		);
 
@@ -215,16 +236,18 @@ export default class ConversationStore {
 			});
 
 			// send change name to API and set new name to current user
-			if (
-				!isNullOrUndefined(this.currentSelectedConversation) &&
-				!isNullOrUndefined(this.currentSelectedConversation.convId && convIndex !== -1)
-			) {
-				// ConversationFetcher.changeConvName(this.currentSelectedConversation.convId, newName);
-				const tempConversationsArray = this.currentUserConversations;
-				const tempConversation = tempConversationsArray[convIndex];
-				tempConversation.convName = newName;
-				tempConversationsArray.splice(convIndex, 1, tempConversation);
-				this.currentUserConversations = tempConversationsArray;
+			if (convIndex !== -1) {
+				if (
+					!isNullOrUndefined(this.currentSelectedConversation) &&
+					!isNullOrUndefined(this.currentSelectedConversation.convId)
+				) {
+					ConversationFetcher.changeConvName(this.currentSelectedConversation.convId, newName);
+					const tempConversationsArray = this.currentUserConversations;
+					const tempConversation = tempConversationsArray[convIndex];
+					tempConversation.convName = newName;
+					tempConversationsArray.splice(convIndex, 1, tempConversation);
+					this.currentUserConversations = tempConversationsArray;
+				}
 			}
 		} catch (err) {
 			console.log(err);
