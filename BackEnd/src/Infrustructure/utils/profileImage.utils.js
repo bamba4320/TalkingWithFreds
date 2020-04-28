@@ -10,7 +10,8 @@ const Imagespaths = {
 	5: conversationImagesPath + '',
 	6: conversationImagesPath + '',
 	7: conversationImagesPath + '',
-	8: conversationImagesPath + '',
+    8: conversationImagesPath + '',
+    9: undefined,
 };
 
 function getImagePath(selection) {

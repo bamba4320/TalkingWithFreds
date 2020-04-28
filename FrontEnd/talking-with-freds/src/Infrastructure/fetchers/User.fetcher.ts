@@ -13,6 +13,11 @@ class UserFetcher extends BaseFetcher {
         return this.post('/changePassword',{oldPassword, newPassword});
     }
 
+    public async updateUser(newUsername:string, profileImage:number){
+        return this.post('/updateUser',{newUsername, profileImage});
+    }
+
+    // TODO: add fetch for all photos url for user and in conversation fetcher for conv update and create
 
 }
 

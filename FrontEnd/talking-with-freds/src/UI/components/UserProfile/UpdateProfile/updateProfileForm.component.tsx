@@ -51,7 +51,7 @@ export default class UpdateProfileFormComponent extends React.Component<IProps, 
 					type='submit'
 					content='Submit'
 					onClick={() => {
-						this.props.onSubmit();
+						this.props.onSubmit(this.state.username, 9);
 					}}
 				/>
 			</Form>

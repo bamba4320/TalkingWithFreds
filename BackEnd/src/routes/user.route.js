@@ -40,12 +40,28 @@ router.get('/getFriends', (req, res) => {
 });
 
 // change user password
-router.post('/changePassword',(req, res)=>{
+router.post('/changePassword', (req, res) => {
 	try {
 		userController
-			.changePassword(req.token,req.body.oldPassword, req.body.newPassword)
+			.changePassword(req.token, req.body.oldPassword, req.body.newPassword)
 			.then((token) => {
 				res.status(200).json({token});
+			})
+			.catch((err) => {
+				errorController.sendError(res, err);
+			});
+	} catch (err) {
+		errorController.sendError(res, err);
+	}
+});
+
+// update user
+router.post('/updateUser', (req, res) => {
+	try {
+		userController
+			.updateUser(req.token, req.body.newUsername, req.body.profileImage)
+			.then((user) => {
+				res.status(200).json({user});
 			})
 			.catch((err) => {
 				errorController.sendError(res, err);

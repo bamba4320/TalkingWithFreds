@@ -92,4 +92,18 @@ export default class CurrentUserStore {
 			console.error(err.message);
 		}
 	}
+
+	// update user
+	@action async updateUser(newUsername: string, profileImage: number) {
+		try {
+			const res = (await UserFetcher.updateUser(newUsername, profileImage)).user;
+			if (res.token !== null) {
+				TalkingWithFredsLocalStorage.setTokenToLocalStorage(res.token).then(() => {
+					this.initUser(UserConverter.convertToModel(res));
+				});
+			}
+		} catch (err) {
+			console.error(err.message);
+		}
+	}
 }

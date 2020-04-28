@@ -105,7 +105,7 @@ class UserController {
 					user.profileImage = profileImageUtils.getImagePath(profileImage);
 					return user.save().then((user) => {
 						return jwtUtils.saveUserToken(user).then((token) => {
-							return token;
+							return {id: user._id, username: user.username, email: user.email, profileImage: user.profileImage, token};
 						});
 					});
 				})
