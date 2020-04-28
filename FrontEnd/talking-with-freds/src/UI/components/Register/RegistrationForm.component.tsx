@@ -1,23 +1,27 @@
 import React from 'react';
 import {Button, Form} from 'semantic-ui-react';
 import './RegistrationFormComponent.scss';
+import {emailRegex} from '../../../common/generalConsts';
 
 interface IProps {
 	onSubmit: any;
 }
-interface IState {}
+interface IState {
+	email: string;
+	username: string;
+	password: string;
+	confirmPassword: string;
+}
 
 export default class RegistrationFormComponent extends React.Component<IProps, IState> {
-	private email: string;
-	private username: string;
-	private password: string;
-	private confirmPassword: string;
 	constructor(props: IProps) {
 		super(props);
-		this.email = '';
-		this.username = '';
-		this.password = '';
-		this.confirmPassword = '';
+		this.state = {
+			email: '',
+			username: '',
+			password: '',
+			confirmPassword: '',
+		};
 	}
 
 	public render() {
@@ -31,7 +35,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 							type='text'
 							id='email-input'
 							placeholder='Email'
-							onChange={(e) => (this.email = e.target.value)}
+							onChange={(e) => this.setState({email: e.target.value})}
 						/>
 					</div>
 					<div className='form-field-wrapper'>
@@ -40,7 +44,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 							type='text'
 							id='username-input'
 							placeholder='Username'
-							onChange={(e) => (this.username = e.target.value)}
+							onChange={(e) => this.setState({username: e.target.value})}
 						/>
 					</div>
 					<div className='form-field-wrapper'>
@@ -49,7 +53,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 							type='password'
 							id='password-input'
 							placeholder='Password'
-							onChange={(e) => (this.password = e.target.value)}
+							onChange={(e) => this.setState({password: e.target.value})}
 						/>
 					</div>
 					<div className='form-field-wrapper'>
@@ -58,7 +62,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 							type='password'
 							id='password-input'
 							placeholder='Confirm Password'
-							onChange={(e) => (this.confirmPassword = e.target.value)}
+							onChange={(e) => this.setState({confirmPassword: e.target.value})}
 						/>
 					</div>
 				</Form>
@@ -69,6 +73,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 						inverted
 						color='blue'
 						className='submit-or-registr-btn'
+						disabled = {!this.isValidEmail()}
 						onClick={this.handleSubmit}>
 						Sign Up
 					</Button>
@@ -78,6 +83,10 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 	}
 
 	private handleSubmit = () => {
-		this.props.onSubmit(this.email, this.username, this.password);
+		this.props.onSubmit(this.state.email, this.state.username, this.state.password);
 	};
+
+	private isValidEmail(): boolean {
+		return new RegExp(emailRegex).test(this.state.email);
+	}
 }

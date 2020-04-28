@@ -40,7 +40,7 @@ class RegisterContainer extends React.Component<IProps, IState> {
 	};
 
 	private onBackClick = () => {
-		this.props.history.replace('/Login');
+		this.props.history.goBack();
 	};
 }
 export default withRouter(RegisterContainer);

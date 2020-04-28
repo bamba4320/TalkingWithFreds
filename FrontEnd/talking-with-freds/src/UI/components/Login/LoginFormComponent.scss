@@ -1,8 +1,18 @@
 .login-form-wrapper {
 	position: relative;
-	width: 45%;
+	width: 50%;
 	margin: auto;
-	padding-top: 10%;
+	padding-top: 8%;
+
+	.form-title {
+		color: wheat;
+		padding-bottom: 40px;
+		margin-bottom: 20px;
+		font-size: 4rem;
+		line-height: 4rem;
+		font-weight: bold;
+		border-bottom: solid 1px #8dc8f8;
+	}
 
 	.login-form {
 		.form-field-wrapper {
@@ -26,6 +36,9 @@
 			.submit-or-registr-btn {
 				width: 45%;
 				font-size: 2rem;
+			}
+			&.center-button {
+				display: block;
 			}
 		}
 	}

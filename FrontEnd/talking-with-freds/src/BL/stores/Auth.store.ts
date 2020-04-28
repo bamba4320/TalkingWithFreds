@@ -14,18 +14,21 @@ export default class AuthStore {
 	 * handle user login to the system.
 	 */
 	@action
-	public async authenticateLogin(email: string, password: string) {
+	public async authenticateLogin(email: string, password: string, onSuccess: any) {
 		try {
 			// Get user token from API
 			const res = (await LoginFetcher.authenticateLogin(email, password)).user;
 			if (res.token !== null) {
 				// verify user login and init user from API
 				TalkingWithFredsLocalStorage.setTokenToLocalStorage(res.token).then(() => {
-					this.currentUserStore.initUser(UserConverter.convertToModel(res));
+					onSuccess().then(() => {
+						this.currentUserStore.initUser(UserConverter.convertToModel(res));
+					});
 				});
 			}
 		} catch (err) {
 			console.error(err.message);
+			throw new Error('Authentication Failed. Incorrent email or password. Please try again....');
 		}
 	}
 }

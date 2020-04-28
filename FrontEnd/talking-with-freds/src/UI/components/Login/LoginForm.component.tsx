@@ -5,21 +5,26 @@ import './LoginFormComponent.scss';
 interface IProps {
 	onSubmit: any;
 	onRegisterClick: any;
+	onForgotPassword: any;
 }
-interface IState {}
+interface IState {
+	email: string;
+	password: string;
+}
 
 export default class LoginFormComponent extends React.Component<IProps, IState> {
-	private email: string;
-	private password: string;
 	constructor(props: IProps) {
 		super(props);
-		this.email = '';
-		this.password = '';
+		this.state = {
+			email: '',
+			password: '',
+		};
 	}
 
 	public render() {
 		return (
 			<div className='login-form-wrapper'>
+				<div className='form-title'>Welcome, Please Login...</div>
 				<Form className='login-form'>
 					<div className='form-field-wrapper'>
 						<Form.Input
@@ -27,7 +32,7 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 							type='text'
 							id='email-input'
 							placeholder='Email'
-							onChange={(e) => (this.email = e.target.value)}
+							onChange={(e) => this.setState({email: e.target.value})}
 						/>
 					</div>
 					<div className='form-field-wrapper'>
@@ -36,7 +41,7 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 							type='password'
 							id='password-input'
 							placeholder='Password'
-							onChange={(e) => (this.password = e.target.value)}
+							onChange={(e) => this.setState({password: e.target.value})}
 							onKeyDown={(e: any) => {
 								if (e.key === 'Enter') {
 									this.handleSubmit();
@@ -47,12 +52,13 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 					</div>
 					<div className='submit-btn-wrapper'>
 						<Button
-							type='button'
+							type='submit'
 							circular
 							inverted
 							color='green'
 							className='submit-or-registr-btn'
-							onClick={this.handleSubmit}>
+							onClick={this.handleSubmit}
+							disabled={!this.checkLoginValid()}>
 							Login
 						</Button>
 						<Button
@@ -66,16 +72,35 @@ export default class LoginFormComponent extends React.Component<IProps, IState> 
 							Sign Up
 						</Button>
 					</div>
+					<div className='submit-btn-wrapper center-button'>
+						<Button
+							inverted
+							color='orange'
+							className='submit-or-registr-btn'
+							circular
+							content='Forgot Password'
+							onClick={() => {
+								this.props.onForgotPassword();
+							}}
+						/>
+					</div>
 				</Form>
 			</div>
 		);
 	}
 
 	private handleSubmit = () => {
-		this.props.onSubmit(this.email, this.password);
+		this.props.onSubmit(this.state.email, this.state.password);
 	};
 
 	private onRegisterClick = () => {
 		this.props.onRegisterClick();
 	};
+
+	/**
+	 * check if login is valid
+	 */
+	private checkLoginValid(): boolean {
+		return this.state.email !== '' && this.state.password !== '';
+	}
 }

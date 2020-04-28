@@ -10,6 +10,7 @@ import LoginContainer from './UI/containers/Login/Login.container';
 import MainLobbyContainer from './UI/containers/MainLobby/MainLobby.container';
 import MainModalContainer from './UI/containers/MainModal/MainModal.container';
 import RegisterContainer from './UI/containers/Register/Register.container';
+import RecoverPasswordContainer from './UI/containers/RecoverPassword/RecoverPassword.container';
 
 interface IProps {}
 interface IState {
@@ -66,6 +67,9 @@ class App extends React.Component<IProps, IState> {
 					</Route>
 					<Route exact={true} path='/Register'>
 						{!currentUserStore.isUserLoggedIn ? <RegisterContainer /> : <Redirect to='/MainLobby' />}
+					</Route>
+					<Route exact={true} path='/RecoverPassword'>
+						{!currentUserStore.isUserLoggedIn ? <RecoverPasswordContainer /> : <Redirect to='/MainLobby' />}
 					</Route>
 					<Route exact={true} path='/'>
 						{currentUserStore.isUserLoggedIn ? <Redirect to='/MainLobby' /> : <Redirect to='/Login' />}
