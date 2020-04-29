@@ -1,11 +1,13 @@
 import React from 'react';
 import {isNullOrUndefined} from 'util';
 import rootStores from '../../../BL/stores';
-import {CURRENT_USER_STORE, CONVERSATION_STORE, MODAL_STORE} from '../../../BL/stores/storesKeys';
+import {CURRENT_USER_STORE, CONVERSATION_STORE, MODAL_STORE, UI_STORE} from '../../../BL/stores/storesKeys';
 import AddUserToGroupComponent from './AddUserToGroup/AddUserToGroup.component';
 import UserModel from '../../../common/models/User.model';
 import {Button, Form} from 'semantic-ui-react';
 import './newGroup.component.scss';
+import AlertUtils from '../../../Infrastructure/Utils/AlertUtils/AlertUtils';
+import Swal from 'sweetalert2';
 
 interface IProps {}
 interface IState {
@@ -18,6 +20,7 @@ interface IState {
 const currentUserStore = rootStores[CURRENT_USER_STORE];
 const conversationStore = rootStores[CONVERSATION_STORE];
 const modalStore = rootStores[MODAL_STORE];
+const uiStore = rootStores[UI_STORE];
 
 export default class NewGroupComponent extends React.Component<IProps, IState> {
 	private users: any[];
@@ -39,9 +42,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 			<div className='new-group-wrapper'>
 				<Form>
 					<Form.Input type='text' placeholder='Search...' onChange={(e) => this.onSearch(e)} />
-					<div className='user-selection-wrapper'>
-						{this.renderUsers()}
-					</div>
+					<div className='user-selection-wrapper'>{this.renderUsers()}</div>
 					<Form.Input
 						placeholder='Group Name'
 						type='text'
@@ -97,11 +98,32 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 	};
 
 	private onDoneClick = () => {
-		conversationStore.CreateNewGroupConversation(this.state.selectedUsers, this.state.groupName, undefined);
-		modalStore.closeModal();
+		AlertUtils.showConfirmationPopup('Are you sure you want to create that group?').then((result) => {
+			if (result.dismiss === Swal.DismissReason.cancel) {
+			} else {
+				uiStore.blockUiSite();
+				uiStore.showBlockUiLoadingPopUp();
+				conversationStore
+					.CreateNewGroupConversation(this.state.selectedUsers, this.state.groupName, undefined)
+					.then(() => {
+						uiStore.unblockUiSite();
+						uiStore.closeBlockUiLoadingPopUp();
+						AlertUtils.showGeneralSuccessPopUp('Group created successfully!').then(() => {
+							modalStore.closeModal();
+						});
+					})
+					.catch((err) => {
+						uiStore.unblockUiSite();
+						uiStore.closeBlockUiLoadingPopUp();
+						AlertUtils.showGeneralErrorPopUp(err.message).then(() => {
+							modalStore.closeModal();
+						});
+					});
+			}
+		});
 	};
 
-	private renderUsers(){
+	private renderUsers() {
 		let key = 0;
 		const usersToShow = this.users.map((user: any) => {
 			if (!isNullOrUndefined(user)) {
@@ -130,7 +152,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 		});
 		let found = false;
 		usersToShow.forEach((user) => {
-			found = !isNullOrUndefined(user)  || found;
+			found = !isNullOrUndefined(user) || found;
 		});
 		if (!found) {
 			// if no users found or fitting filter
