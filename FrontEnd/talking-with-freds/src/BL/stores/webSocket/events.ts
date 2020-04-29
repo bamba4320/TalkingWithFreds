@@ -7,4 +7,5 @@ export const events = {
 	getUid: 'getUid',
 	newConversation: 'new-conversation',
 	conversationNameChange:'conversation-name-change',
+	conversationImageChange:'conversation-image-change',
 };

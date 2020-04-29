@@ -36,6 +36,31 @@ export default class ImageStore {
 		return await ImagesFetcher.getAllImages();
 	}
 
+	// find image
+	public findImage(imageNumber: number) {
+		// search in user profile images
+		let imageIndex = this.userProfileImages.findIndex((imageModel: ImageModel) => {
+			return imageModel.imageNumber === imageNumber;
+		});
+
+		// if found, return
+		if (imageIndex !== -1) {
+			return this.userProfileImages[imageIndex];
+		} else {
+			// is not exists, search in conversation images
+			imageIndex = this.conversationImages.findIndex((imageModel: ImageModel) => {
+				return imageModel.imageNumber === imageNumber;
+			});
+			// if found
+			if (imageIndex !== -1) {
+				return this.conversationImages[imageIndex];
+			}
+		}
+		// if not found
+
+		return this.conversationImages[0];
+	}
+
 	@computed
 	get getUserProfileImages() {
 		return this.userProfileImages;

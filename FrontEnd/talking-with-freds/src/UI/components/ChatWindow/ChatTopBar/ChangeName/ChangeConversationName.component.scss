@@ -1,0 +1,20 @@
+.ui.form {
+	.ui.input {
+		padding: 5px 0;
+		input {
+			width: 100%;
+			border-radius: 25px !important;
+			background-color: transparent !important;
+			color: wheat !important;
+			border: solid 1px #8dc8f8;
+			font-size: 2.2rem !important;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+	.ui.button {
+		font-size: 2.2rem !important;
+	}
+}

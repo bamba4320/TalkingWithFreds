@@ -4,6 +4,7 @@ import './ChatTopBar.component.scss';
 import rootStores from '../../../../BL/stores';
 import {CONVERSATION_STORE, MODAL_STORE} from '../../../../BL/stores/storesKeys';
 import ChangeConversationNameComponent from './ChangeName/ChangeConversationName.component';
+import ChangeConversationPicture from './ChangeConversationPicture/ChangeConversationPicture.component';
 
 interface IProps {
 	convName?: string;
@@ -39,7 +40,7 @@ export default class ChatTopBarComponent extends React.Component<IProps, IState>
 			return (
 				<Dropdown.Menu>
 					<Dropdown.Item text='Edit group name' onClick={this.onChangeNameClick} />
-					<Dropdown.Item text='Change group picture' />
+					<Dropdown.Item text='Change group picture' onClick={this.onChangeImageClick} />
 					<Dropdown.Item
 						className='delete-item'
 						text='Delete Group'
@@ -73,5 +74,12 @@ export default class ChatTopBarComponent extends React.Component<IProps, IState>
 	private onChangeNameSubmit = (newName: string) => {
 		conversationStore.changeGroupName(newName);
 		modalStore.closeModal();
+	};
+
+	private onChangeImageClick = () => {
+		modalStore.openModal(<ChangeConversationPicture />, {
+			title: 'Change Conversation Image',
+			closeFromOutsideModal: true,
+		});
 	};
 }

@@ -11,6 +11,7 @@
 	.username-and-profile {
 		display: inline-flex;
 		.ui.avatar {
+			object-fit: cover;
 			margin: 0.3em;
 			width: 3.2em;
 			height: 3.2em;

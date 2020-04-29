@@ -38,14 +38,19 @@ export default class WebSocketStore {
 			this.socketEventsObserver = {event: events.convRead, data};
 		});
 
-		this.socket.on(events.newConversation, (data:any)=>{
+		this.socket.on(events.newConversation, (data: any) => {
 			console.debug('on new conversation in websocket store');
 			this.socketEventsObserver = {event: events.newConversation, data};
 		});
 
-		this.socket.on(events.conversationNameChange, (data:any)=>{
+		this.socket.on(events.conversationNameChange, (data: any) => {
 			console.debug('on conversation name change in websocket store');
 			this.socketEventsObserver = {event: events.conversationNameChange, data};
+		});
+
+		this.socket.on(events.conversationImageChange, (data: any) => {
+			console.debug('on conversation image change in websocket store');
+			this.socketEventsObserver = {event: events.conversationImageChange, data};
 		});
 
 		return () => {
@@ -63,7 +68,7 @@ export default class WebSocketStore {
 		return this.socketEventsObserver;
 	}
 
-	public sendConvRead(data:any){
+	public sendConvRead(data: any) {
 		this.socket.emit(events.convRead, data);
 	}
 }

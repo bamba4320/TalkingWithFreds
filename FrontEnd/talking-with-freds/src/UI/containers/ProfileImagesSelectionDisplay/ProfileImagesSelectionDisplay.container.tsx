@@ -43,7 +43,6 @@ export default class ProfileImageSelectionDisplayContainer extends React.Compone
 	}
 
 	private renderImages() {
-		console.log(this.state.imagesArray);
 		return this.state.imagesArray.map((image: ImageModel) => {
 			return (
 				<ProfileImageSelectionComponent

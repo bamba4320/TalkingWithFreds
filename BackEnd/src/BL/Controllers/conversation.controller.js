@@ -99,7 +99,7 @@ class ConversationController {
 							isGroup: true,
 							messages: [],
 							participants: users,
-							groupPicture: groupPicture,
+							profileImg: profileImageUtils.getImagePath(groupPicture),
 							unseemMessagesAmount: users.map((user) => {
 								return 0;
 							}),
@@ -319,6 +319,37 @@ class ConversationController {
 					.then((conv) => {
 						conv.participants.forEach((userId) => {
 							socketManager.emit(userId, 'conversation-name-change', {convId, newName});
+						});
+					})
+					.catch((err) => {
+						throw new Error(err.message);
+					});
+			} else {
+				throw new Error('Changeing name at private chat is forbidden');
+			}
+		} catch (err) {
+			throw new Error(err.message);
+		}
+	}
+
+	/**
+	 * change group image
+	 * @param {string} convId
+	 * @param {number} imageNumber
+	 */
+	async changeGroupImage(convId, imageNumber) {
+		try {
+			// find conversation
+			const converastion = await ConversationSchema.findById(convId);
+			// verify it's a group
+			if (converastion.isGroup) {
+				// change the group image
+				converastion.profileImg = profileImageUtils.getImagePath(imageNumber);
+				converastion
+					.save()
+					.then((conv) => {
+						conv.participants.forEach((userId) => {
+							socketManager.emit(userId, 'conversation-image-change', {convId, imagePath: conv.profileImg});
 						});
 					})
 					.catch((err) => {

@@ -8,6 +8,8 @@ import WebSocketStore from './webSocket/webSocket.store';
 import {events} from './webSocket/events';
 import {isNullOrUndefined} from 'util';
 import MessageModel from '../../common/models/Message.model';
+import ImageModel from '../../common/models/Image.model';
+import {imagePreURL} from '../../common/generalConsts';
 
 export default class ConversationStore {
 	@observable
@@ -61,12 +63,31 @@ export default class ConversationStore {
 							return false;
 						}
 					});
-					console.log(event.data.newName);
 					// change the name in founded index
 					if (convIndex !== -1 && this.currentUserConversations[convIndex].isGroup) {
 						const tempConversationsArray = this.currentUserConversations;
 						const tempConversation = tempConversationsArray[convIndex];
 						tempConversation.convName = event.data.newName;
+						tempConversationsArray.splice(convIndex, 1, tempConversation);
+						this.currentUserConversations = tempConversationsArray;
+					}
+				}
+
+				// for conversation image change
+				if (event.event === events.conversationImageChange) {
+					// find the conversation and change the name
+					const convIndex = this.currentUserConversations.findIndex((conv) => {
+						if (!isNullOrUndefined(conv) && !isNullOrUndefined(event.data.convId)) {
+							return conv.convId == event.data.convId;
+						} else {
+							return false;
+						}
+					});
+					// change the name in founded index
+					if (convIndex !== -1 && this.currentUserConversations[convIndex].isGroup) {
+						const tempConversationsArray = this.currentUserConversations;
+						const tempConversation = tempConversationsArray[convIndex];
+						tempConversation.profileImg = imagePreURL + event.data.imagePath;
 						tempConversationsArray.splice(convIndex, 1, tempConversation);
 						this.currentUserConversations = tempConversationsArray;
 					}
@@ -135,7 +156,7 @@ export default class ConversationStore {
 	}
 
 	@action
-	public CreateNewGroupConversation(users: string[], groupName: string, groupPicture: any) {
+	public CreateNewGroupConversation(users: string[], groupName: string, groupPicture: number) {
 		try {
 			return ConversationFetcher.createNewGroupConversation(users, groupName, groupPicture);
 		} catch (err) {
@@ -259,6 +280,17 @@ export default class ConversationStore {
 			}
 		} catch (err) {
 			console.log(err);
+		}
+	}
+
+	public changeConversationImage(selectedImage?: ImageModel) {
+		if (
+			!isNullOrUndefined(this.currentSelectedConversation) &&
+			!isNullOrUndefined(this.currentSelectedConversation.convId) &&
+			!isNullOrUndefined(selectedImage) &&
+			!isNullOrUndefined(selectedImage.imageNumber)
+		) {
+			return ConversationFetcher.changeConvImage(this.currentSelectedConversation?.convId, selectedImage.imageNumber);
 		}
 	}
 }

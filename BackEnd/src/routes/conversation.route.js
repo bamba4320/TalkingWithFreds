@@ -93,4 +93,22 @@ router.post('/changeName/:convId', (req, res) => {
 		errorController.sendError(res, err);
 	}
 });
+
+// change conversation name
+router.post('/changeImage/:convId', (req, res) => {
+	try {
+		conversationController
+			.changeGroupImage(req.params.convId, req.body.imageNumber)
+			.then(() => {
+				res.sendStatus(200);
+			})
+			.catch((err) => {
+				errorController.sendError(res, err);
+			});
+	} catch (err) {
+		errorController.sendError(res, err);
+	}
+});
+
+
 module.exports = router;

@@ -24,6 +24,10 @@ class ConversationFetcher extends BaseFetcher {
 	public changeConvName(convId:string, newName:string){
 		return this.post(`/changeName/${convId}`, {newName});
 	}
+
+	public changeConvImage(convId:string, imageNumber:number){
+		return this.post(`/changeImage/${convId}`, {imageNumber});
+	}
 }
 
 export default new ConversationFetcher('conversation');

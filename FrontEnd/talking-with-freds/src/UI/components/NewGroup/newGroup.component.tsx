@@ -8,6 +8,7 @@ import {Button, Form} from 'semantic-ui-react';
 import './newGroup.component.scss';
 import AlertUtils from '../../../Infrastructure/Utils/AlertUtils/AlertUtils';
 import Swal from 'sweetalert2';
+import ProfileImageSelectionDisplayContainer from '../../containers/ProfileImagesSelectionDisplay/ProfileImagesSelectionDisplay.container';
 
 interface IProps {}
 interface IState {
@@ -15,6 +16,7 @@ interface IState {
 	filter: string;
 	selectedUsers: string[];
 	groupName: string;
+	selectedImageNumber: number;
 }
 
 const currentUserStore = rootStores[CURRENT_USER_STORE];
@@ -28,7 +30,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.users = [];
-		this.state = {loading: true, filter: '', selectedUsers: [], groupName: ''};
+		this.state = {loading: true, filter: '', selectedUsers: [], groupName: '', selectedImageNumber: 0};
 	}
 
 	public async componentDidMount() {
@@ -50,7 +52,13 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 							this.setState({groupName: e.target.value});
 						}}
 					/>
-					<Form.Input type='file' accept='.jpg,.jpeg,.png,.jfif' />
+					<ProfileImageSelectionDisplayContainer
+						isUser={false}
+						onSelect={(selectedNumber: number) => {
+							console.log(selectedNumber);
+							this.setState({selectedImageNumber: selectedNumber});
+						}}
+					/>
 					<Button inverted color='purple' content='Done' disabled={this.isValidToSubmit()} onClick={this.onDoneClick} />
 				</Form>
 			</div>
@@ -104,7 +112,7 @@ export default class NewGroupComponent extends React.Component<IProps, IState> {
 				uiStore.blockUiSite();
 				uiStore.showBlockUiLoadingPopUp();
 				conversationStore
-					.CreateNewGroupConversation(this.state.selectedUsers, this.state.groupName, undefined)
+					.CreateNewGroupConversation(this.state.selectedUsers, this.state.groupName, this.state.selectedImageNumber)
 					.then(() => {
 						uiStore.unblockUiSite();
 						uiStore.closeBlockUiLoadingPopUp();
