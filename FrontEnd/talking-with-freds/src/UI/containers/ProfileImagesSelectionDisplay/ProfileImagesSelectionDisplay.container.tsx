@@ -43,12 +43,14 @@ export default class ProfileImageSelectionDisplayContainer extends React.Compone
 	}
 
 	private renderImages() {
+		let key = 0;
 		return this.state.imagesArray.map((image: ImageModel) => {
 			return (
 				<ProfileImageSelectionComponent
 					imageModel={image}
 					isSelected={this.isSelected(image.imageNumber || 0)}
 					onSelection={this.onImageSelect}
+					key={key++}
 				/>
 			);
 		});

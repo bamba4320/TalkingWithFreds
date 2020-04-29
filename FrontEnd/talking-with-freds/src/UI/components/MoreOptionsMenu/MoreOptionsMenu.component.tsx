@@ -44,7 +44,9 @@ export default class MoreOptionsMenuComponent extends React.Component {
 	};
 
 	private onProfileUpdateSubmit = (username: string, photoNumber: number) => {
-		currentUserStore.updateUser(username, photoNumber);
+		currentUserStore.updateUser(username, photoNumber).then(() => {
+			modalStore.closeModal();
+		});
 	};
 
 	private onChangePasswordClick = () => {
@@ -55,12 +57,10 @@ export default class MoreOptionsMenuComponent extends React.Component {
 	};
 
 	private onChangePasswordSubmit = (oldPassword: string, newPassword: string) => {
-		
-		currentUserStore.changeUserPassword(oldPassword, newPassword).then(()=>{
-
-		}).catch((err)=>{
-
-		})
+		currentUserStore
+			.changeUserPassword(oldPassword, newPassword)
+			.then(() => {})
+			.catch((err) => {});
 		modalStore.closeModal();
 	};
 }

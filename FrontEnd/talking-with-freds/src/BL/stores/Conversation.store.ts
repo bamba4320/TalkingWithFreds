@@ -92,6 +92,27 @@ export default class ConversationStore {
 						this.currentUserConversations = tempConversationsArray;
 					}
 				}
+
+				// for user profile update
+				if (event.event === events.userProfileUpdate) {
+					// find the conversation and change the name
+					const convIndex = this.currentUserConversations.findIndex((conv) => {
+						if (!isNullOrUndefined(conv) && !isNullOrUndefined(event.data.convId)) {
+							return conv.convId == event.data.convId;
+						} else {
+							return false;
+						}
+					});
+					// change the name in founded index
+					if (convIndex !== -1 && !this.currentUserConversations[convIndex].isGroup) {
+						const tempConversationsArray = this.currentUserConversations;
+						const tempConversation = tempConversationsArray[convIndex];
+						tempConversation.convName = event.data.newName;
+						tempConversation.profileImg = imagePreURL + event.data.imagePath;
+						tempConversationsArray.splice(convIndex, 1, tempConversation);
+						this.currentUserConversations = tempConversationsArray;
+					}
+				}
 			}
 		);
 

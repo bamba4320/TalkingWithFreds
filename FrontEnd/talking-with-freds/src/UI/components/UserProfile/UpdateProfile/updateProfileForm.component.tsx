@@ -4,6 +4,7 @@ import rootStores from '../../../../BL/stores';
 import {CURRENT_USER_STORE} from '../../../../BL/stores/storesKeys';
 import {isNullOrUndefined} from 'util';
 import './updateProfileForm.component.scss';
+import ProfileImageSelectionDisplayContainer from '../../../containers/ProfileImagesSelectionDisplay/ProfileImagesSelectionDisplay.container';
 
 interface IProps {
 	onSubmit: any;
@@ -11,6 +12,7 @@ interface IProps {
 }
 interface IState {
 	username: string;
+	selectedImageNumber: number;
 }
 
 const currentUserStore = rootStores[CURRENT_USER_STORE];
@@ -21,13 +23,14 @@ export default class UpdateProfileFormComponent extends React.Component<IProps, 
 			username: !isNullOrUndefined(currentUserStore.getCurrentUserUsername)
 				? currentUserStore.getCurrentUserUsername
 				: '',
+			selectedImageNumber: 0,
 		};
 	}
 
 	public render() {
 		return (
 			<Form className='form-wrapper'>
-				<Form.Field >
+				<Form.Field>
 					<Form.Input
 						type='text'
 						placeholder='Username'
@@ -36,7 +39,12 @@ export default class UpdateProfileFormComponent extends React.Component<IProps, 
 							this.setState({username: e.target.value});
 						}}
 					/>
-					<Form.Input type='file' accept='.jpg,.jpeg,.png,.jfif' />
+					<ProfileImageSelectionDisplayContainer
+						isUser={true}
+						onSelect={(selectedNumber: number) => {
+							this.setState({selectedImageNumber: selectedNumber});
+						}}
+					/>
 					<Button
 						inverted
 						color='purple'
@@ -51,7 +59,7 @@ export default class UpdateProfileFormComponent extends React.Component<IProps, 
 					type='submit'
 					content='Submit'
 					onClick={() => {
-						this.props.onSubmit(this.state.username, 9);
+						this.props.onSubmit(this.state.username, this.state.selectedImageNumber);
 					}}
 				/>
 			</Form>

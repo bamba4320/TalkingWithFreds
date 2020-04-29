@@ -53,6 +53,11 @@ export default class WebSocketStore {
 			this.socketEventsObserver = {event: events.conversationImageChange, data};
 		});
 
+		this.socket.on(events.userProfileUpdate, (data: any) => {
+			console.debug('on user profile update in websocket store');
+			this.socketEventsObserver = {event: events.userProfileUpdate, data};
+		});
+
 		return () => {
 			console.debug('disconnecting from socket');
 			this.socket.disconnect();
