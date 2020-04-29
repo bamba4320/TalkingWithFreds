@@ -76,9 +76,9 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 				}
 			});
 			let found = false;
-			showConv.forEach((conv)=>{
+			showConv.forEach((conv) => {
 				found = !isNullOrUndefined(conv) || found;
-			})
+			});
 			if (!found) {
 				// if no conversation at all for user or
 				// no conversation fitting the filter
@@ -89,7 +89,7 @@ export default class ConversationsListContainer extends React.Component<IProps, 
 		} else {
 			// if no conversation at all for user or
 			// no conversation fitting the filter
-			return <div>No conversations found</div>;
+			return <div className='not-found-message'>No conversations found</div>;
 		}
 	}
 

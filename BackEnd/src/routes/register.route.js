@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	try {
 		userController
-			.addNewUser(req.body.username, req.body.email, req.body.password)
+			.addNewUser(req.body.username, req.body.email, req.body.password, req.body.selectedImageNumber)
 			.then(() => {
 				res.sendStatus(200);
 			})

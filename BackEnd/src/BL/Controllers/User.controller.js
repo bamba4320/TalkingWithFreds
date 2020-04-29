@@ -69,7 +69,7 @@ class UserController {
 	 * @param {string} email
 	 * @param {string} password
 	 */
-	async addNewUser(username, email, password) {
+	async addNewUser(username, email, password, selectedImageNumber) {
 		try {
 			// Generate new salt for the user
 			const salt = await encryptionUtils.generateNewSalt();
@@ -81,6 +81,7 @@ class UserController {
 				salt: salt,
 				passwordHash: passwordHash,
 				token: '',
+				profileImage: profileImageUtils.getImagePath(selectedImageNumber),
 			});
 			newUser.save();
 		} catch (err) {
@@ -233,7 +234,6 @@ class UserController {
 					user.save().then(() => {
 						const mailBody = `Hello there ${user.username}!\nOur services recieved your rquest for a new password.\nYour new password is:\n${newPassword}\n\n\nGo on, login with it!\n REMEMBER! to keep your accound secured hurry up and change your password!!`;
 						mailUtils.sendMail([user.email], mailBody);
-						
 					});
 				});
 			});

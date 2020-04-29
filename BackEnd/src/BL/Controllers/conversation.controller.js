@@ -3,6 +3,7 @@ const jwtUtils = require('../../Infrustructure/utils/jwt.utils');
 const userController = require('./User.controller');
 const socketManager = require('../../socket/socketManager');
 const messagesController = require('./messages.controller');
+const profileImageUtils = require('../../Infrustructure/utils/profileImage.utils');
 
 class ConversationController {
 	// find all the conversations thats the user is part of

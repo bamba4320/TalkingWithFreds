@@ -8,6 +8,7 @@ const registerRoute = require('./routes/register.route');
 const userRouter = require('./routes/user.route');
 const conversationRouter = require('./routes/conversation.route');
 const messagesRouter = require('./routes/messages.router');
+const imagesRouter = require('./routes/images.router');
 
 // body parser is used to decode http/s post body.
 const bodyParser = require('body-parser');
@@ -33,6 +34,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api/login', loginRoute);
 // register route
 app.use('/api/register', registerRoute);
+// images router
+app.use('/api/images', imagesRouter);
 // user route
 // * protected by token verification
 app.use('/api/user', verifyToken, userRouter);

@@ -1,9 +1,13 @@
 import React from 'react';
-import {Button, Form} from 'semantic-ui-react';
+import {Button, Form, Image} from 'semantic-ui-react';
 import './RegistrationFormComponent.scss';
 import {emailRegex} from '../../../common/generalConsts';
 import AlertUtils from '../../../Infrastructure/Utils/AlertUtils/AlertUtils';
 import Swal from 'sweetalert2';
+import ImageModel from '../../../common/models/Image.model';
+import ProfileImageSelectionComponent from '../ProfileImageSelection/ProfileImageSelection.component';
+import {observer} from 'mobx-react';
+import ProfileImageSelectionDisplayContainer from '../../containers/ProfileImagesSelectionDisplay/ProfileImagesSelectionDisplay.container';
 
 interface IProps {
 	onSubmit: any;
@@ -13,8 +17,10 @@ interface IState {
 	username: string;
 	password: string;
 	confirmPassword: string;
+	selectedImageNumber: number;
 }
 
+@observer
 export default class RegistrationFormComponent extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
@@ -23,6 +29,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 			username: '',
 			password: '',
 			confirmPassword: '',
+			selectedImageNumber: 0,
 		};
 	}
 
@@ -39,7 +46,9 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 							placeholder='Email'
 							onChange={(e) => this.setState({email: e.target.value})}
 						/>
-						{!this.isValidEmail() && this.state.email.trim() !== '' && <div className='error-text'>Invalid email format!</div>}
+						{!this.isValidEmail() && this.state.email.trim() !== '' && (
+							<div className='error-text'>Invalid email format!</div>
+						)}
 					</div>
 					<div className='form-field-wrapper'>
 						<Form.Input
@@ -70,6 +79,12 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 						{!this.isValidPasswordConfirmed() && <div className='error-text'>Passwords do not match!</div>}
 					</div>
 				</Form>
+				<ProfileImageSelectionDisplayContainer
+					isUser={true}
+					onSelect={(imageNumber: number) => {
+						this.setState({selectedImageNumber: imageNumber});
+					}}
+				/>
 				<div className='submit-btn-wrapper'>
 					<Button
 						type='button'
@@ -92,7 +107,7 @@ export default class RegistrationFormComponent extends React.Component<IProps, I
 				// if cancel - do nothing
 			} else {
 				// if confirmed
-				this.props.onSubmit(this.state.email.trim(), this.state.username.trim(), this.state.password.trim());
+				this.props.onSubmit(this.state.email.trim(), this.state.username.trim(), this.state.password.trim(), this.state.selectedImageNumber);
 			}
 		});
 	};

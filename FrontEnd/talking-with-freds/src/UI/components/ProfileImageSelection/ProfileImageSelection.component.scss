@@ -1,0 +1,15 @@
+.image-wrapper {
+	display: inline;
+	.ui.avatar {
+		object-fit: contain;
+		margin: 0.5em;
+		width: 6em;
+		height: 6em;
+	}
+
+	&.selected {
+		.ui.avatar {
+			border: solid 3px #8dc8f8;
+		}
+	}
+}

@@ -93,5 +93,4 @@ router.post('/changeName/:convId', (req, res) => {
 		errorController.sendError(res, err);
 	}
 });
-
 module.exports = router;
