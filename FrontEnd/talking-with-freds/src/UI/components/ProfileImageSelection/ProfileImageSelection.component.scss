@@ -1,5 +1,6 @@
 .image-wrapper {
-	display: inline;
+	display: inline-flex;
+
 	.ui.avatar {
 		object-fit: contain;
 		margin: 0.5em;

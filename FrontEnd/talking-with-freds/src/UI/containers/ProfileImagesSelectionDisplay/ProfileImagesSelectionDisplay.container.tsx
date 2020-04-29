@@ -34,7 +34,12 @@ export default class ProfileImageSelectionDisplayContainer extends React.Compone
 	}
 
 	public render() {
-		return <div className='images-wrapper'>{this.renderImages()}</div>;
+		return (
+			<div className='image-selection-wrapper'>
+				<div className='title-text'>{this.props.isUser ? 'Select Profile Picture:' : 'Select Group Picture:'}</div>
+				<div className='images-wrapper'>{this.renderImages()}</div>
+			</div>
+		);
 	}
 
 	private renderImages() {
