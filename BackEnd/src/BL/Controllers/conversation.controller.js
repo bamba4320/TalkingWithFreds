@@ -1,8 +1,8 @@
 const ConversationSchema = require('../../common/models/conversation.model');
+const MessageSchema = require('../../common/models/message.model');
 const jwtUtils = require('../../Infrustructure/utils/jwt.utils');
 const userController = require('./User.controller');
 const socketManager = require('../../socket/socketManager');
-const messagesController = require('./messages.controller');
 const profileImageUtils = require('../../Infrustructure/utils/profileImage.utils');
 
 class ConversationController {
@@ -267,7 +267,8 @@ class ConversationController {
 					// delete conversation and all messages
 					if (!toDeleteConv.isGroup) {
 						await ConversationSchema.deleteOne({_id: convId});
-						messagesController.deleteMessages(convId);
+						MessageSchema.deleteMany({convId: convId});
+
 					} else {
 						// if group, remove user from participants array
 
@@ -284,7 +285,7 @@ class ConversationController {
 							// if true, delete cobversation and messages
 							if (tempParticipants.length === 0) {
 								await ConversationSchema.deleteOne({_id: convId});
-								messagesController.deleteMessages(convId);
+								MessageSchema.deleteMany({convId: convId});
 							} else {
 								// if false, just remove the user
 								toDeleteConv.participants = tempParticipants;
